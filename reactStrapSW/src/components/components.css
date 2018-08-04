@@ -1,0 +1,62 @@
+.ListItem {
+  display: flex;
+  height: 2.2em;
+  box-sizing: content-box;
+}
+
+.ListItem-content {
+  font-family: "Droid Sans", arial, verdana, sans-serif;
+  font-size: 1.1em;
+  margin: auto;
+}
+
+.GridList {
+  overflow-y: auto;
+}
+
+.Film-GridList {
+  height: 13em;
+  padding: 1em;
+}
+
+.People-GridList {
+  height: 9em;
+  padding: 1em;
+}
+
+.Planet-GridList {
+  height: 9em;
+  padding: 1em;
+}
+
+.Specie-GridList {
+  height: 9em;
+  padding: 1em;
+}
+
+.Starship-GridList {
+  height: 9em;
+  padding: 1em;
+}
+
+.Vehicle-GridList {
+  height: 9em;
+  padding: 1em;
+}
+
+.DetailsContainer {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid lightgray;
+}
+
+.Loading {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.Loading-progress {
+  margin: 10px;
+}

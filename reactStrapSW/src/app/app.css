@@ -1,0 +1,49 @@
+.header {
+  background-color: #000;
+}
+
+.header__title-h1 {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.header__image {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.app__header {
+  padding: 20px;
+}
+
+.navbar .navbar-nav>li>a {
+  color: #ff6;
+}
+.navbar .navbar-nav>li>a:hover {
+  color: #ff6;
+  background-color: rgb(55, 55, 55)
+}
+.navbar .navbar-nav>li>a:active {
+  color: #ff6;
+}
+.navbar .navbar-nav>li>a:focus {
+  color: #ff6;
+}
+.navbar .navbar-nav>.active>a {
+  color: #ff6;
+  font-weight: bold;
+  background-color: rgb(0, 0, 0)
+}
+.navbar .navbar-nav>.active>a:hover {
+  color: #ff6;
+  font-weight: bold;
+}
+.navbar .navbar-nav>.active>a:focus {
+  color: #ff6;
+  font-weight: bold;
+  background-color: rgb(0, 0, 0)
+}
+.navbar .navbar-nav>.active>a:active {
+  color: #ff6;
+  background-color: rgb(0, 0, 0)
+}
