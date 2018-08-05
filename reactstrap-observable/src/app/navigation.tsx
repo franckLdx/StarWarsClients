@@ -43,8 +43,8 @@ const Item: React.StatelessComponent<IItemProps> = ({ label }) => (
   </NavItem>
 );
 
-interface INavHeader { onToggle: () => void };
-const Header: React.StatelessComponent<INavHeader> = ({ onToggle }) => (
+interface IHeader { onToggle: () => void };
+const Header: React.StatelessComponent<IHeader> = ({ onToggle }) => (
   <>
     <NavbarBrand href="/"><h4>Star wars</h4></NavbarBrand>
     <NavbarToggler onClick={onToggle} />
