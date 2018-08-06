@@ -1,13 +1,20 @@
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 import { applyMiddleware, compose, createStore } from 'redux'
+import { createEpicMiddleware } from 'redux-observable';
+import { combineEpics } from 'redux-observable';
+import { onLoad } from './epics';
 
 const reducers = (state: any) => state;
 
 export const history = createBrowserHistory();
 const rootReducer = connectRouter(history)(reducers);
+
+const rootEpic = combineEpics(onLoad);
+const epicMiddleware = createEpicMiddleware();
+
 const rootMiddleware = applyMiddleware(
-  routerMiddleware(history),
+  routerMiddleware(history), epicMiddleware
 );
 
 // tslint:disable-next-line:no-string-literal
@@ -15,3 +22,5 @@ const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compo
 const enhancer = composeEnhancers(rootMiddleware);
 
 export const store = createStore(rootReducer, {}, enhancer);
+
+epicMiddleware.run(rootEpic);
