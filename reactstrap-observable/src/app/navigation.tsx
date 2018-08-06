@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom'
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { URL_FILMS, URL_PEOPLE, URL_PLANETS, URL_SPACESHIPS, URL_SPECIES, URL_VEHICLES } from './routes';
 
@@ -44,7 +45,7 @@ interface IItemProps {
 }
 const Item: React.StatelessComponent<IItemProps> = ({ label, href }) => (
   <NavItem>
-    <NavLink href={href}>{label}</NavLink>
+    <NavLink tag={Link} to={href}>{label}</NavLink>
   </NavItem>
 );
 
