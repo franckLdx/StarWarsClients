@@ -4,7 +4,7 @@ import {
   MiddlewareAPI,
 } from 'redux'
 import { mapUrlToResource } from '../resources';
-import { loadResource } from './actions';
+import { loadResource } from './resources/actions';
 
 export const loggerMiddleware: Middleware = (store: MiddlewareAPI) => (next: Dispatch) => action => {
   if (action.type !== '@@router/LOCATION_CHANGE') {

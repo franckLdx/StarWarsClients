@@ -2,9 +2,9 @@ import { routerMiddleware } from 'connected-react-router'
 import { applyMiddleware, compose, createStore } from 'redux'
 import { createEpicMiddleware } from 'redux-observable';
 import { combineEpics } from 'redux-observable';
-import { onLoad } from './loadResources';
 import { loggerMiddleware } from './middelware';
 import { history, reducer } from './reducers';
+import { onLoad } from './resources/load';
 
 const rootEpic = combineEpics(onLoad);
 const epicMiddleware = createEpicMiddleware();
