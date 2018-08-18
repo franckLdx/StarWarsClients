@@ -6,12 +6,12 @@ import { AppActions } from "./actions";
 import { IFilmsState } from "./state/films";
 import { IPeopleState } from "./state/people";
 
-type ResourceType = IFilmsState | IPeopleState;
+type ResourceState = IFilmsState | IPeopleState;
 
-const createResourceReducer = <T extends ResourceType>(resource: Resources) => {
+const createResourceReducer = <T extends ResourceState>(resource: Resources) => {
   return (state: T, action: AppActions): T => {
-    if (action.resource && action.resource !== 'films') {
-      return state;
+    if (action.resource !== resource) {
+      return state || { status: 'LOADING' } as T;;
     }
     switch (action.type) {
       case 'LOAD_RESOURCE':
@@ -20,8 +20,6 @@ const createResourceReducer = <T extends ResourceType>(resource: Resources) => {
         return state;
       case 'RESOURCE_LOADED':
         return state;
-      default:
-        return { status: 'LOADING' } as T;
     }
   }
 };
