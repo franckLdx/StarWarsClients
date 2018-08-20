@@ -1,5 +1,7 @@
+import { tag as FilmTag } from './films';
+import { tag as PeopleTag } from './people';
 
-export type Resources = 'films' | 'people' | 'species' | 'planets' | 'spaceships' | 'Vehicles';
+export type Resources = FilmTag | PeopleTag | 'species' | 'planets' | 'spaceships' | 'Vehicles';
 
 export const mapResourceToUrl = (resource: Resources) => `/${resource}`;
 

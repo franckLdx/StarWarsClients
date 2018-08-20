@@ -1,4 +1,4 @@
 
 export interface IFilmsState {
-  status: 'LOADING';
+  status: Status;
 }

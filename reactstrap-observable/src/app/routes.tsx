@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Films from '../films';
+import { mapResourceToUrl } from '../model';
 import People from '../people';
-import { mapResourceToUrl } from '../resources';
 
 export const URL_FILMS = mapResourceToUrl('films');
 export const URL_PEOPLE = mapResourceToUrl('people');

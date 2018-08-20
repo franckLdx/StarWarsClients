@@ -3,11 +3,11 @@ import { ofType } from "redux-observable";
 import { Observable } from "rxjs";
 import { map, mergeMap, startWith } from "rxjs/operators";
 import { fetchResoures } from "../../api";
-import { Resources } from "../../resources";
+import { Resources } from "../../model";
 import { ILoadResource, loadingResource, resourceLoaded } from "./actions";
 
 const fetchResouresStream$ = (resource: Resources) => fetchResoures(resource).pipe(
-  map(payload => resourceLoaded(resource, {})),
+  map(payload => resourceLoaded(resource, payload)),
   startWith(loadingResource('films')),
 );
 

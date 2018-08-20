@@ -3,7 +3,7 @@ import {
   Middleware,
   MiddlewareAPI,
 } from 'redux'
-import { mapUrlToResource } from '../resources';
+import { mapUrlToResource } from '../model';
 import { loadResource } from './resources/actions';
 
 export const loggerMiddleware: Middleware = (store: MiddlewareAPI) => (next: Dispatch) => action => {

@@ -1,4 +1,4 @@
 
 export interface IPeopleState {
-  status: 'LOADING';
+  status: Status;
 }

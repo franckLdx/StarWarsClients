@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { Resources } from "../../resources";
+import { Resources } from "../../model";
 import { IFilmsState } from "../state/films";
 import { IPeopleState } from "../state/people";
 import { AppActions } from "./actions";
@@ -9,16 +9,19 @@ type ResourceState = IFilmsState | IPeopleState;
 const createResourceReducer = <T extends ResourceState>(resource: Resources) => {
   return (state: T, action: AppActions): T => {
     if (action.resource !== resource) {
-      return state || { status: 'LOADING' } as T;;
+      return state || { status: 'NOT_LOADED' };
     }
     switch (action.type) {
-      case '@@ressource/LOAD':
-        return state;
-      case '@@ressource/LOADING':
-        return state;
-      case '@@ressource/LOADED':
-        return state;
+      case '@@ressource/LOADING': {
+        const foo: any = state;
+        return { ...foo, status: 'LOADING' };
+      }
+      case '@@ressource/LOADED': {
+        const foo: any = state;
+        return { ...foo, status: 'LOADED', content: action.content };
+      }
     }
+    return state;
   }
 };
 

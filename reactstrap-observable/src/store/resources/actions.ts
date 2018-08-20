@@ -1,6 +1,7 @@
-import { Resources } from "../../resources";
+import { Resources } from "../../model";
+import { IFilm } from "../../model/films";
 
-export type AppActions = ILoadResource | ILoadingResource | IResourceLoaded;
+export type AppActions = ILoadResource | ILoadingResource | IResourceLoaded<IFilm>;
 
 export interface ILoadResource {
   type: '@@ressource/LOAD',
@@ -14,9 +15,9 @@ export interface ILoadingResource {
 }
 export const loadingResource = (resource: Resources) => ({ type: '@@ressource/LOADING', resource });
 
-export interface IResourceLoaded {
+export interface IResourceLoaded<T> {
   type: '@@ressource/LOADED';
   resource: Resources;
-  content: any;
+  content: T;
 }
-export const resourceLoaded = (resource: Resources, content: any): IResourceLoaded => ({ type: '@@ressource/LOADED', resource, content });
+export const resourceLoaded = <T>(resource: Resources, content: T): IResourceLoaded<T> => ({ type: '@@ressource/LOADED', resource, content });
