@@ -1,17 +1,17 @@
 
 import { ajax } from 'rxjs/ajax';
 import { map } from 'rxjs/operators';
-import { Resources } from './model';
+import { ResourcesType } from './model';
 import { IFilm } from './model/films';
 
 const URL = 'https://swapi.co/api';
 
-export const fetchResoures = (resource: Resources) => {
+export const fetchResoures = (resource: ResourcesType) => {
   const mapper = getMapper(resource);
   return ajax.getJSON(`${URL}/${resource}/`).pipe(map(mapper));
 }
 
-const getMapper = (resource: Resources) => {
+const getMapper = (resource: ResourcesType) => {
   switch (resource) {
     case 'films':
       return filmsMapper;

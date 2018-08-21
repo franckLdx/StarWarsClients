@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Films from '../films';
+import { FilmList } from '../components/filmList';
 import { mapResourceToUrl } from '../model';
 import People from '../people';
 
@@ -13,7 +13,7 @@ export const URL_VEHICLES = mapResourceToUrl('Vehicles');
 
 const Routes: React.StatelessComponent<{}> = () => (
   <Switch>
-    <Route path={URL_FILMS} component={Films} />
+    <Route path={URL_FILMS} component={FilmList} />
     <Route path={URL_PEOPLE} component={People} />
     <Route path={URL_SPECIES} />
     <Route path={URL_PLANETS} />
