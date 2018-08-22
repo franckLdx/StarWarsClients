@@ -1,7 +1,8 @@
 import { IFilm, tag as FilmTag } from './films';
 import { IPeople, tag as PeopleTag } from './people';
 
-export type ResourcesType = FilmTag | PeopleTag | 'species' | 'planets' | 'spaceships' | 'Vehicles';
+export type ResourcesType = FilmTag | PeopleTag | 'species' | 'planets' | 'starships' | 'vehicles';
+const resources = ['films', 'people', 'species', 'planets', 'starships', 'vehicles'];
 
 export type ResourceData = IFilm | IPeople;
 
@@ -16,5 +17,5 @@ export const mapUrlToResource = (url: string): ResourcesType => {
 };
 
 export function isResource(resource: string): resource is ResourcesType {
-  return ['films', 'people', 'species', 'planets', 'spaceships', 'Vehicles'].indexOf(resource) !== -1;
+  return resources.indexOf(resource) !== -1;
 }

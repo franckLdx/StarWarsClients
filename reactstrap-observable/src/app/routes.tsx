@@ -8,8 +8,8 @@ export const URL_FILMS = mapResourceToUrl('films');
 export const URL_PEOPLE = mapResourceToUrl('people');
 export const URL_SPECIES = mapResourceToUrl('species');
 export const URL_PLANETS = mapResourceToUrl('planets');
-export const URL_SPACESHIPS = mapResourceToUrl('spaceships');
-export const URL_VEHICLES = mapResourceToUrl('Vehicles');
+export const URL_STARSHIPS = mapResourceToUrl('starships');
+export const URL_VEHICLES = mapResourceToUrl('vehicles');
 
 const Routes: React.StatelessComponent<{}> = () => (
   <Switch>
@@ -17,7 +17,7 @@ const Routes: React.StatelessComponent<{}> = () => (
     <Route path={URL_PEOPLE} component={People} />
     <Route path={URL_SPECIES} />
     <Route path={URL_PLANETS} />
-    <Route path={URL_SPACESHIPS} />
+    <Route path={URL_STARSHIPS} />
     <Route path={URL_VEHICLES} />
   </Switch>
 );
