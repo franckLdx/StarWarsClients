@@ -1,6 +1,6 @@
 import { IPeople } from "../../model/people";
 
 export interface IPeopleState {
-  status: Status;
+  status: LoadingStatus;
   content: IPeople[];
 }

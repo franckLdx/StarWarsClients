@@ -29,11 +29,11 @@ const Item: React.StatelessComponent<IFilmProps> = ({ film }) =>
   </Card>
 
 
-const mapFilmsStateToProps = (state: IAppState): IFilmListProps => {
+const mapStateToProps = (state: IAppState): IFilmListProps => {
   const films = state.films.content || [];
   return { films: films.sort((film1, film2) => film1.episodeId - film2.episodeId) };
 }
 
 export const FilmList = connect(
-  mapFilmsStateToProps,
+  mapStateToProps,
 )(List);

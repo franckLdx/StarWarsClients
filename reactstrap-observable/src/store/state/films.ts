@@ -1,6 +1,6 @@
 import { IFilm } from "../../model/films";
 
 export interface IFilmsState {
-  status: Status;
+  status: LoadingStatus;
   content: IFilm[];
 }

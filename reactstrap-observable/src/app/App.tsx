@@ -9,7 +9,7 @@ class App extends React.Component {
     return <Container fluid={true}>
       <Navigation />
       <Routes />
-    </Container>;
+    </Container >;
   }
 }
 
