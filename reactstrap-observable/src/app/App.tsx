@@ -6,10 +6,12 @@ import Routes from './routes';
 
 class App extends React.Component {
   public render() {
-    return <Container fluid={true}>
-      <Navigation />
-      <Routes />
-    </Container >;
+    return (
+      <Container fluid={true}>
+        <Navigation />
+        <Routes />
+      </Container>
+    );
   }
 }
 

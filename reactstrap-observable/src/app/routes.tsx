@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { FilmList } from '../components/filmList';
-import { PeopleList } from '../components/peopleList';
+import { FilmList, PeopleList } from '../components';
 import { mapResourceToUrl } from '../model';
 
 export const URL_FILMS = mapResourceToUrl('films');

@@ -8,13 +8,15 @@ import { IAppState } from '../store/state';
 interface IPeopleListProps { peopleList: IPeople[] };
 
 const List: React.StatelessComponent<IPeopleListProps> = ({ peopleList }) => {
-  return <Row>
-    {peopleList.map((people) =>
-      <Col key={String(people.name)} lg="4" className="mb-3">
-        <Item people={people} />
-      </Col>
-    )}
-  </Row>;
+  return (
+    <Row>
+      {peopleList.map((people) =>
+        <Col key={String(people.name)} lg="4" className="mb-3">
+          <Item people={people} />
+        </Col>
+      )}
+    </Row>
+  );
 }
 
 
