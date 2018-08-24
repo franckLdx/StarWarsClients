@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { ResourcesType } from './model';
 import { IFilm } from './model/films';
 import { IPeople } from './model/people';
+import { ISpecies } from './model/species';
 
 const URL = 'https://swapi.co/api';
 
@@ -18,6 +19,8 @@ const getMapper = (resource: ResourcesType) => {
       return filmsMapper;
     case 'people':
       return peopleMapper;
+    case 'species':
+      return speciesMapper;
     default:
       return (payload: any) => ({ ...payload });
   }
@@ -45,6 +48,22 @@ const peopleMapper = (payload: any): IPeople[] => {
     mass: people.mass,
     name: people.name,
     skinColor: people.skin_color,
+  });
+  return payload.results.map(mapper);
+};
+
+const speciesMapper = (payload: any): ISpecies[] => {
+  const mapper = (specie: any) => ({
+    averageHeight: specie.average_height,
+    averageLifespan: specie.average_lifespan,
+    classification: specie.classification,
+    created: specie.created,
+    designation: specie.designation,
+    edited: specie.edited,
+    eyeColors: specie.eye_colors,
+    hairColors: specie.hair_colors,
+    language: specie.language,
+    name: specie.name,
   });
   return payload.results.map(mapper);
 };
