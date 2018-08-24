@@ -1,21 +1,5 @@
-import { IFilm, tag as FilmTag } from './films';
-import { IPeople, tag as PeopleTag } from './people';
-
-export type ResourcesType = FilmTag | PeopleTag | 'species' | 'planets' | 'starships' | 'vehicles';
-const resources = ['films', 'people', 'species', 'planets', 'starships', 'vehicles'];
-
-export type ResourceData = IFilm | IPeople;
-
-export const mapResourceToUrl = (resource: ResourcesType) => `/${resource}`;
-
-export const mapUrlToResource = (url: string): ResourcesType => {
-  const resource = url.split('/').pop();
-  if (resource && isResource(resource)) {
-    return resource;
-  }
-  throw new Error(`Unvalid URL: ${url}`);
-};
-
-export function isResource(resource: string): resource is ResourcesType {
-  return resources.indexOf(resource) !== -1;
-}
+export * from './films';
+export * from './people';
+export * from './planets';
+export * from './species';
+export * from './tools';

@@ -1,4 +1,4 @@
-export type tag = 'films';
+export type FilmTag = 'films';
 
 export interface IFilm {
   title: string,

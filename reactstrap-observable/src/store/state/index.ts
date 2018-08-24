@@ -1,9 +1,8 @@
-import { IFilmsState } from './films';
-import { IPeopleState } from './people';
-import { ISpeciesState } from './species';
+import { IFilmsState, IPeopleState, IPlanetState, ISpeciesState } from '../resources/state';
 
 export interface IAppState {
   films: IFilmsState,
   people: IPeopleState,
-  species: ISpeciesState
+  species: ISpeciesState,
+  planets: IPlanetState,
 }

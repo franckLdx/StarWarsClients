@@ -1,11 +1,9 @@
 import { combineReducers } from "redux";
 import { ResourcesType } from "../../model";
-import { IFilmsState } from "../state/films";
-import { IPeopleState } from "../state/people";
-import { ISpeciesState } from "../state/species";
 import { AppActions } from "./actions";
+import { IFilmsState, IPeopleState, IPlanetState, ISpeciesState } from "./state";
 
-type ResourceState = IFilmsState | IPeopleState | ISpeciesState;
+type ResourceState = IFilmsState | IPeopleState | ISpeciesState | IPlanetState;
 
 const createResourceReducer = <T extends ResourceState>(resource: ResourcesType) => {
   return (state: T, action: AppActions): T => {
@@ -29,5 +27,6 @@ const createResourceReducer = <T extends ResourceState>(resource: ResourcesType)
 const films = createResourceReducer<IFilmsState>('films');
 const people = createResourceReducer<IPeopleState>('people');
 const species = createResourceReducer<ISpeciesState>('species');
+const planets = createResourceReducer<IPlanetState>('planets');
 
-export default combineReducers({ films, people, species });
+export default combineReducers({ films, people, species, planets });

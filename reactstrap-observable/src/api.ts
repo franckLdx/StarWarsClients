@@ -1,10 +1,7 @@
 
 import { ajax } from 'rxjs/ajax';
 import { map } from 'rxjs/operators';
-import { ResourcesType } from './model';
-import { IFilm } from './model/films';
-import { IPeople } from './model/people';
-import { ISpecies } from './model/species';
+import { IFilm, IPeople, IPlanets, ISpecies, ResourcesType } from './model';
 
 const URL = 'https://swapi.co/api';
 
@@ -21,6 +18,8 @@ const getMapper = (resource: ResourcesType) => {
       return peopleMapper;
     case 'species':
       return speciesMapper;
+    case 'planets':
+      return planetsMapper;
     default:
       return (payload: any) => ({ ...payload });
   }
@@ -64,6 +63,21 @@ const speciesMapper = (payload: any): ISpecies[] => {
     hairColors: specie.hair_colors,
     language: specie.language,
     name: specie.name,
+  });
+  return payload.results.map(mapper);
+};
+
+const planetsMapper = (payload: any): IPlanets[] => {
+  const mapper = (specie: any) => ({
+    climate: specie.climate,
+    diameter: specie.diameter,
+    gravity: specie.gravity,
+    name: specie.name,
+    orbitalPeriod: specie.orbital_period,
+    population: specie.population,
+    rotationPeriod: specie.rotation_period,
+    surfaceWater: specie.surface_water,
+    terrain: specie.terrain,
   });
   return payload.results.map(mapper);
 };

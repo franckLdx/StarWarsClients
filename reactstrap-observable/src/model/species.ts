@@ -1,4 +1,4 @@
-export type tag = 'species';
+export type SpecieTag = 'species';
 
 export interface ISpecies {
   average_height: string,

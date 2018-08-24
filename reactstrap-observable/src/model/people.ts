@@ -1,4 +1,4 @@
-export type tag = 'people';
+export type PeopleTag = 'people';
 
 export interface IPeople {
   name: string,
