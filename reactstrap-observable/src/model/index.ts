@@ -1,4 +1,4 @@
-export * from './films';
+export * from './film';
 export * from './people';
 export * from './planet';
 export * from './specie';

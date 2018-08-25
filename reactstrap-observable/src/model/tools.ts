@@ -1,9 +1,6 @@
-import { FilmTag, IFilm } from './films';
-import { IPeople, PeopleTag } from './people';
-import { IPlanets, PlanetTag } from './planet';
-import { ISpecies, SpecieTag } from './specie';
+import { FilmTag, IFilm, IPeople, IPlanets, ISpecies, PeopleTag, PlanetTag, SpecieTag, StarshipTag, VehicleTag } from './resources';
 
-export type ResourcesType = FilmTag | PeopleTag | SpecieTag | PlanetTag | 'starships' | 'vehicles';
+export type ResourcesType = FilmTag | PeopleTag | SpecieTag | PlanetTag | StarshipTag | VehicleTag;
 const resources = ['films', 'people', 'species', 'planets', 'starships', 'vehicles'];
 
 export type ResourceData = IFilm | IPeople | ISpecies | IPlanets;

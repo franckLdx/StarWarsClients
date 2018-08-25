@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
-import { IPeople } from '../model/people';
+import { IPeople } from '../model/resources';
 import { IAppState } from '../store/state';
 
 interface IPeopleListProps { peopleList: IPeople[] };

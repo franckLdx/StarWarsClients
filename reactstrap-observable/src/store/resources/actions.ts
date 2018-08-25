@@ -1,7 +1,4 @@
 import { ResourcesType } from "../../model";
-import { IFilm } from "../../model/films";
-
-export type AppActions = ILoadResource | ILoadingResource | IResourceLoaded<IFilm>;
 
 export interface ILoadResource {
   type: '@@ressource/LOAD',

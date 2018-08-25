@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
-import { IFilm } from '../model/films';
+import { IFilm } from '../model/resources';
 import { IAppState } from '../store/state';
 
 interface IFilmListProps { films: IFilm[] };
