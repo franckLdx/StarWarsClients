@@ -1,7 +1,7 @@
 
 import { ajax } from 'rxjs/ajax';
 import { map } from 'rxjs/operators';
-import { IFilm, IPeople, IPlanets, ISpecies, ResourcesType } from './model';
+import { IFilm, IPeople, IPlanets, ISpecies, IStarship, IVehicle, ResourcesType } from './model';
 
 const URL = 'https://swapi.co/api';
 
@@ -20,6 +20,10 @@ const getMapper = (resource: ResourcesType) => {
       return speciesMapper;
     case 'planets':
       return planetsMapper;
+    case 'starships':
+      return starshipMapper;
+    case 'vehicles':
+      return vehicleMapper;
     default:
       return (payload: any) => ({ ...payload });
   }
@@ -78,6 +82,42 @@ const planetsMapper = (payload: any): IPlanets[] => {
     rotationPeriod: specie.rotation_period,
     surfaceWater: specie.surface_water,
     terrain: specie.terrain,
+  });
+  return payload.results.map(mapper);
+};
+
+const starshipMapper = (payload: any): IStarship[] => {
+  const mapper = (starship: any) => ({
+    cargoCapacity: starship.cargo_capacity,
+    consumables: starship.consumables,
+    costInCredits: starship.cost_in_credits,
+    crew: starship.crew,
+    hyperdriveRating: starship.hyperdrive_rating,
+    length: starship.length,
+    manufacturer: starship.manufacturer,
+    maxAtmospheringSpeed: starship.max_atmosphering_speed,
+    mglt: starship.MGLT,
+    model: starship.model,
+    name: starship.name,
+    passengers: starship.passengers,
+    starshipSlass: starship.starship_class,
+  });
+  return payload.results.map(mapper);
+};
+
+const vehicleMapper = (payload: any): IVehicle[] => {
+  const mapper = (vehicle: any) => ({
+    cargoCapacity: vehicle.cargo_capacity,
+    consumables: vehicle.consumables,
+    costInCredits: vehicle.costInCredits,
+    crew: vehicle.crew,
+    length: vehicle.length,
+    manufacturer: vehicle.manufacturer,
+    maxAtmospheringSpeed: vehicle.max_atmosphering_speed,
+    model: vehicle.model,
+    name: vehicle.name,
+    passengers: vehicle.passengers,
+    vehicleClass: vehicle.vehicle_class,
   });
   return payload.results.map(mapper);
 };

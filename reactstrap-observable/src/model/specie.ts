@@ -1,14 +1,14 @@
 export type SpecieTag = 'species';
 
 export interface ISpecies {
-  average_height: string,
-  average_lifespan: string,
+  averageHeight: string,
+  averageLifespan: string,
   classification: string,
   created: string,
   designation: string,
   edited: string,
-  eye_colors: string,
-  hair_colors: string,
+  eyeColors: string,
+  hairColors: string,
   language: string,
   name: string,
 }
