@@ -1,4 +1,4 @@
-import { IFilm, IPeople, IPlanet, ISpecies, IStarship, IVehicle } from "../../model";
+import { IFilm, IPeople, IPlanet, ISpecie, IStarship, IVehicle } from "../../model";
 
 interface IResourceState<T> {
   status: LoadingStatus;
@@ -6,7 +6,7 @@ interface IResourceState<T> {
 }
 
 export type IFilmsState = IResourceState<IFilm>;
-export type ISpeciesState = IResourceState<ISpecies>;
+export type ISpeciesState = IResourceState<ISpecie>;
 export type IPeopleState = IResourceState<IPeople>;
 export type IPlanetState = IResourceState<IPlanet>;
 export type IStarshipState = IResourceState<IStarship>;

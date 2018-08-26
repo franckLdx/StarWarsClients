@@ -1,7 +1,7 @@
 
 import { ajax } from 'rxjs/ajax';
 import { map } from 'rxjs/operators';
-import { IFilm, IPeople, IPlanet, ISpecies, IStarship, IVehicle, ResourcesType } from './model';
+import { IFilm, IPeople, IPlanet, ISpecie, IStarship, IVehicle, ResourcesType } from './model';
 
 const URL = 'https://swapi.co/api';
 
@@ -55,7 +55,7 @@ const peopleMapper = (payload: any): IPeople[] => {
   return payload.results.map(mapper);
 };
 
-const speciesMapper = (payload: any): ISpecies[] => {
+const speciesMapper = (payload: any): ISpecie[] => {
   const mapper = (specie: any) => ({
     averageHeight: specie.average_height,
     averageLifespan: specie.average_lifespan,

@@ -38,13 +38,11 @@ export interface IPlanet {
 
 export type SpecieTag = 'species';
 
-export interface ISpecies {
+export interface ISpecie {
   averageHeight: string,
   averageLifespan: string,
   classification: string,
-  created: string,
   designation: string,
-  edited: string,
   eyeColors: string,
   hairColors: string,
   language: string,

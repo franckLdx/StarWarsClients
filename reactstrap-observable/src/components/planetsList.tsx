@@ -26,7 +26,6 @@ const Item: React.StatelessComponent<IPlanetProps> = ({ planet }) =>
   <Card className="bg-light">
     <CardHeader>{planet.name}</CardHeader>
     <CardBody >
-      <CardText>Name: {planet.name}</CardText>
       <CardText>Population: {planet.population}</CardText>
       <CardText>Terrain: {planet.terrain}</CardText>
       <CardText>Surface water: {planet.surfaceWater}</CardText>
