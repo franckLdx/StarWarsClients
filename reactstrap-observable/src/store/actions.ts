@@ -1,4 +1,4 @@
-import { IFilm, IPeople, IPlanets, ISpecies, IStarship, IVehicle } from "../model";
+import { IFilm, IPeople, IPlanet, ISpecies, IStarship, IVehicle } from "../model";
 import { ILoadingResource, ILoadResource, IResourceLoaded } from "./resources/actions";
 
 type AppAction = ILoadingResource
@@ -6,7 +6,7 @@ type AppAction = ILoadingResource
   | IResourceLoaded<IFilm>
   | IResourceLoaded<IPeople>
   | IResourceLoaded<ISpecies>
-  | IResourceLoaded<IPlanets>
+  | IResourceLoaded<IPlanet>
   | IResourceLoaded<IStarship>
   | IResourceLoaded<IVehicle>
 

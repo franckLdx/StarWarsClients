@@ -24,7 +24,7 @@ export interface IPeople {
 
 export type PlanetTag = 'planets';
 
-export interface IPlanets {
+export interface IPlanet {
   climate: string,
   diameter: number,
   gravity: string,

@@ -1,9 +1,9 @@
-import { FilmTag, IFilm, IPeople, IPlanets, ISpecies, PeopleTag, PlanetTag, SpecieTag, StarshipTag, VehicleTag } from './resources';
+import { FilmTag, IFilm, IPeople, IPlanet, ISpecies, PeopleTag, PlanetTag, SpecieTag, StarshipTag, VehicleTag } from './resources';
 
 export type ResourcesType = FilmTag | PeopleTag | SpecieTag | PlanetTag | StarshipTag | VehicleTag;
 const resources = ['films', 'people', 'species', 'planets', 'starships', 'vehicles'];
 
-export type ResourceData = IFilm | IPeople | ISpecies | IPlanets;
+export type ResourceData = IFilm | IPeople | ISpecies | IPlanet;
 
 export const mapResourceToUrl = (resource: ResourcesType) => `/${resource}`;
 
