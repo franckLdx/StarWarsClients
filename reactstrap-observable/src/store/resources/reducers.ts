@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import { ResourcesType } from "../../model";
-import { AppActions } from "./actions";
+import AppAction from "../actions";
 import { IFilmsState, IPeopleState, IPlanetState, ISpeciesState, IStarshipState, IVehiclesState } from "./state";
 
 type ResourceState = IFilmsState | IPeopleState | ISpeciesState | IPlanetState | IStarshipState | IVehiclesState;
 
 const createResourceReducer = <T extends ResourceState>(resource: ResourcesType) => {
-  return (state: T, action: AppActions): T => {
+  return (state: T, action: AppAction): T => {
     if (action.resource !== resource) {
       return state || { status: 'NOT_LOADED', content: [] };
     }

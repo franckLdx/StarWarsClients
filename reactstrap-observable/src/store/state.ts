@@ -1,4 +1,11 @@
-import { IFilmsState, IPeopleState, IPlanetState, ISpeciesState, IStarshipState, IVehiclesState } from '../resources/state';
+import {
+  IFilmsState,
+  IPeopleState,
+  IPlanetState,
+  ISpeciesState,
+  IStarshipState,
+  IVehiclesState
+} from './resources/state';
 
 export interface IAppState {
   films: IFilmsState,

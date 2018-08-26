@@ -69,7 +69,7 @@ export interface IStarship {
   starshipClass: string,
 }
 
-export type VehicleTag = 'vehicle';
+export type VehicleTag = 'vehicles';
 
 export interface IVehicle {
   name: string,

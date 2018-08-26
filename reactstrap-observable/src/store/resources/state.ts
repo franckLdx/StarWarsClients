@@ -1,5 +1,4 @@
-import { IFilm, IPeople, IPlanets, ISpecies, IVehicle } from "../../model";
-import { IStarship } from "../../model/starship";
+import { IFilm, IPeople, IPlanets, ISpecies, IStarship, IVehicle } from "../../model";
 
 interface IResourceState<T> {
   status: LoadingStatus;
