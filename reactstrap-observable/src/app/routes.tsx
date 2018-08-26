@@ -5,7 +5,8 @@ import {
   PeopleList,
   PlanetsList,
   SpeciesList,
-  StarshipsList
+  StarshipsList,
+  VehiclesList
 } from '../components';
 import { mapResourceToUrl } from '../model';
 
@@ -23,7 +24,7 @@ const Routes: React.StatelessComponent<{}> = () => (
     <Route path={URL_SPECIES} component={SpeciesList} />
     <Route path={URL_PLANETS} component={PlanetsList} />
     <Route path={URL_STARSHIPS} component={StarshipsList} />
-    <Route path={URL_VEHICLES} />
+    <Route path={URL_VEHICLES} component={VehiclesList} />
   </Switch>
 );
 

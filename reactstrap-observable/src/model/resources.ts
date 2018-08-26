@@ -78,7 +78,7 @@ export interface IVehicle {
   max_atmosphering_speed: number,
   crew: number,
   passengers: number,
-  cargo_capacity: number,
+  cargoCapacity: number,
   consumables: string,
   vehicle_class: string,
 }
