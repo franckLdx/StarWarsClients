@@ -10,7 +10,7 @@ import { canLoad } from "./selectors";
 
 const fetchResouresStream$ = (resource: ResourcesType) => fetchResoures(resource).pipe(
   map(payload => resourceLoaded(resource, payload)),
-  startWith(loadingResource('films')),
+  startWith(loadingResource(resource)),
 );
 
 export const onLoad = (action$: Observable<Action>, state$: StateObservable<IAppState>): Observable<Action> => {
