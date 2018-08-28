@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IVehicle } from '../model/resources';
+import { getVehiclessPageContent } from '../store/resources/selectors';
 import { IAppState } from '../store/state';
 
 interface IVehiclesListProps { vehiclesList: IVehicle[] };
@@ -41,7 +42,7 @@ const Item: React.StatelessComponent<IVehicleProps> = ({ vehicle }) =>
 
 
 const mapStateToProps = (state: IAppState): IVehiclesListProps => {
-  const vehicles = state.vehicles.content || [];
+  const vehicles = getVehiclessPageContent(state, 0);
   return { vehiclesList: vehicles.sort((vehicle1, vehicle2) => vehicle1.name < vehicle2.name ? -1 : 1) };
 }
 

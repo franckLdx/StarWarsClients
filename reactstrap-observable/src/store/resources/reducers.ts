@@ -1,28 +1,44 @@
 import { combineReducers } from "redux";
 import { ResourcesType } from "../../model";
 import AppAction from "../actions";
-import { IFilmsState, IPeopleState, IPlanetState, ISpeciesState, IStarshipState, IVehiclesState } from "./state";
+import {
+  IFilmsState,
+  initialPageState,
+  IPeopleState,
+  IPlanetState,
+  ISpeciesState,
+  IStarshipState,
+  IVehiclesState
+} from "./state";
 
 type ResourceState = IFilmsState | IPeopleState | ISpeciesState | IPlanetState | IStarshipState | IVehiclesState;
 
 const createResourceReducer = <T extends ResourceState>(resource: ResourcesType) => {
   return (state: T, action: AppAction): T => {
     if (action.resource !== resource) {
-      return state || { status: 'NOT_LOADED', content: [] };
+      return state || initialPageState;
     }
 
+    const page = state[action.pageNumber] || initialPageState;
+    let newPage: any | undefined;
     switch (action.type) {
       case '@@ressource/LOADING':
-        return { ...(state as any), status: 'LOADING' };
+        newPage = { ...page, status: 'LOADING' };
+        break;
       case '@@ressource/LOADED':
-        return {
-          ...(state as any), content: action.content, status: 'LOADED',
-        }
+        newPage = { ...page, content: action.content, status: 'LOADED' };
+        break;
+    }
+
+    if (newPage !== undefined) {
+      const newState = { ...state as any };
+      newState[action.pageNumber] = newPage;
+      return newState;
     }
 
     return state;
-  }
-};
+  };
+}
 
 const films = createResourceReducer<IFilmsState>('films');
 const people = createResourceReducer<IPeopleState>('people');

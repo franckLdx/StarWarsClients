@@ -12,6 +12,6 @@ export interface IAppState {
   people: IPeopleState,
   species: ISpeciesState,
   planets: IPlanetState,
-  starships: IStarshipState
-  vehicles: IVehiclesState
+  starships: IStarshipState,
+  vehicles: IVehiclesState,
 }

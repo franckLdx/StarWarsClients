@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { ISpecie } from '../model/resources';
+import { getSpeciesPageContent } from '../store/resources/selectors';
 import { IAppState } from '../store/state';
 
 interface ISpeciesListProps { speciesList: ISpecie[] };
@@ -38,7 +39,7 @@ const Item: React.StatelessComponent<ISpecieProps> = ({ specie }) =>
 
 
 const mapStateToProps = (state: IAppState): ISpeciesListProps => {
-  const species = state.species.content || [];
+  const species = getSpeciesPageContent(state, 0);
   return { speciesList: species.sort((specie1, specie2) => specie1.name < specie2.name ? -1 : 1) };
 }
 

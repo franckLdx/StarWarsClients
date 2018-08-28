@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IStarship } from '../model/resources';
+import { getStarshipsPageContent } from '../store/resources/selectors';
 import { IAppState } from '../store/state';
 
 interface IStarshipsListProps { starshipList: IStarship[] };
@@ -43,7 +44,7 @@ const Item: React.StatelessComponent<IStarshipProps> = ({ starship }) =>
 
 
 const mapStateToProps = (state: IAppState): IStarshipsListProps => {
-  const starships = state.starships.content || [];
+  const starships = getStarshipsPageContent(state, 0);
   return { starshipList: starships.sort((starship1, starship2) => starship1.name < starship2.name ? -1 : 1) };
 }
 

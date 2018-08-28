@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IPeople } from '../model/resources';
+import { getPeoplePageContent } from '../store/resources/selectors';
 import { IAppState } from '../store/state';
 
 interface IPeopleListProps { peopleList: IPeople[] };
@@ -38,7 +39,7 @@ const Item: React.StatelessComponent<IPeopleProps> = ({ people }) =>
 
 
 const mapStateToProps = (state: IAppState): IPeopleListProps => {
-  const people = state.people.content || [];
+  const people = getPeoplePageContent(state, 0);
   return { peopleList: people.sort((people1, people2) => people1.name < people2.name ? -1 : 1) };
 }
 

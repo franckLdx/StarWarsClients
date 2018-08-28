@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IFilm } from '../model/resources';
+import { getFilmsPageContent } from '../store/resources/selectors';
 import { IAppState } from '../store/state';
 
 interface IFilmListProps { films: IFilm[] };
@@ -30,7 +31,7 @@ const Item: React.StatelessComponent<IFilmProps> = ({ film }) =>
 
 
 const mapStateToProps = (state: IAppState): IFilmListProps => {
-  const films = state.films.content || [];
+  const films = getFilmsPageContent(state, 0);
   return { films: films.sort((film1, film2) => film1.episodeId - film2.episodeId) };
 }
 
