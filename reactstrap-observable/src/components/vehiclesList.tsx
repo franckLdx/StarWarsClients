@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IVehicle } from '../model/resources';
-import { getVehiclesPageContent, getVehiclesPageCount } from '../store/resources/selectors';
-import { IAppState } from '../store/state';
+import {
+  defaultPageNumber,
+  getVehiclesPageContent,
+  getVehiclesPageCount,
+  IAppState
+} from '../store';
 import { Pages } from './pages';
 
 interface IVehiclesListProps {
@@ -49,7 +53,7 @@ const Item: React.StatelessComponent<IVehicleProps> = ({ vehicle }) =>
 
 
 const mapStateToProps = (state: IAppState): IVehiclesListProps => {
-  const vehicles = getVehiclesPageContent(state, 0);
+  const vehicles = getVehiclesPageContent(state, defaultPageNumber);
   const pagesCount = getVehiclesPageCount(state);
   return {
     pagesCount,

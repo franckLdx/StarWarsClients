@@ -5,9 +5,10 @@ import { IFilm, IPeople, IPlanet, ISpecie, IStarship, IVehicle, ResourcesType } 
 
 const URL = 'https://swapi.co/api';
 
-export const fetchResoures = (resource: ResourcesType) => {
+export const fetchResoures = (resource: ResourcesType, pageNumber: number) => {
   const mapper = getMapper(resource);
-  return ajax.getJSON(`${URL}/${resource}/`).pipe(map(mapper));
+  const url = `${URL}/${resource}/${pageNumber !== undefined ? `?page=${pageNumber}` : ''}`;
+  return ajax.getJSON(url).pipe(map(mapper));
 }
 
 const getMapper = (resource: ResourcesType) => {

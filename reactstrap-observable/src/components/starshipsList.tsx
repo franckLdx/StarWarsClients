@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IStarship } from '../model/resources';
-import { getStarshipsPageContent, getStarshipsPageCount } from '../store/resources/selectors';
-import { IAppState } from '../store/state';
+import {
+  defaultPageNumber,
+  getStarshipsPageContent,
+  getStarshipsPageCount,
+  IAppState
+} from '../store';
 import { Pages } from './pages';
 
 interface IStarshipsListProps {
@@ -51,7 +55,7 @@ const Item: React.StatelessComponent<IStarshipProps> = ({ starship }) =>
 
 
 const mapStateToProps = (state: IAppState): IStarshipsListProps => {
-  const starships = getStarshipsPageContent(state, 0);
+  const starships = getStarshipsPageContent(state, defaultPageNumber);
   const pagesCount = getStarshipsPageCount(state);
   return {
     pagesCount,

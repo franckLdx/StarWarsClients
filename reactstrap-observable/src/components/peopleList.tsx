@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IPeople } from '../model/resources';
-import { getPeoplePageContent, getPeoplePagesCount } from '../store/resources/selectors';
-import { IAppState } from '../store/state';
+import {
+  defaultPageNumber,
+  getPeoplePageContent,
+  getPeoplePagesCount,
+  IAppState
+} from '../store';
 import { Pages } from './pages';
 
 interface IPeopleListProps {
@@ -45,7 +49,7 @@ const Item: React.StatelessComponent<IPeopleProps> = ({ people }) =>
 
 
 const mapStateToProps = (state: IAppState): IPeopleListProps => {
-  const people = getPeoplePageContent(state, 0);
+  const people = getPeoplePageContent(state, defaultPageNumber);
   const pagesCount = getPeoplePagesCount(state);
   return {
     pagesCount,

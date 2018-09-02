@@ -1,10 +1,11 @@
 import {
+  defaultPageNumber,
   IFilmsState,
   IPeopleState,
   IPlanetState,
   ISpeciesState,
   IStarshipState,
-  IVehiclesState
+  IVehiclesState,
 } from './resources/state';
 
 export interface IAppState {
@@ -15,3 +16,5 @@ export interface IAppState {
   starships: IStarshipState,
   vehicles: IVehiclesState,
 }
+
+export { defaultPageNumber }

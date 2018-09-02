@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IPlanet } from '../model/resources';
-import { getPlanetsPageContent, getPlanetsPageCount } from '../store/resources/selectors';
-import { IAppState } from '../store/state';
+import {
+  defaultPageNumber,
+  getPlanetsPageContent,
+  getPlanetsPageCount,
+  IAppState
+} from '../store';
 import { Pages } from './pages';
 
 interface IPlanetsListProps {
@@ -47,7 +51,7 @@ const Item: React.StatelessComponent<IPlanetProps> = ({ planet }) =>
 
 
 const mapStateToProps = (state: IAppState): IPlanetsListProps => {
-  const planets = getPlanetsPageContent(state, 0);
+  const planets = getPlanetsPageContent(state, defaultPageNumber);
   const pagesCount = getPlanetsPageCount(state);
   return {
     pagesCount,

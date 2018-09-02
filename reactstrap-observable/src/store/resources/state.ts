@@ -1,5 +1,7 @@
 import { IFilm, IPeople, IPlanet, ISpecie, IStarship, IVehicle } from "../../model";
 
+export const defaultPageNumber = 1;
+
 export interface IPageResourceState<T> {
   status: LoadingStatus;
   content: T[];
@@ -12,10 +14,10 @@ export interface IResourceState<T> {
 
 export const initialPageState: IResourceState<any> = {
   pagesCount: undefined,
-  0: {
-    content: [],
-    status: 'NOT_LOADED',
-  }
+};
+initialPageState[defaultPageNumber] = {
+  content: [],
+  status: 'NOT_LOADED',
 };
 
 export type IFilmsState = IResourceState<IFilm>;

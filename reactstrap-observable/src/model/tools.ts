@@ -21,7 +21,7 @@ export function isResource(resource: string): resource is ResourcesType {
 
 export const mapHashToPageNumber = (hash: string | undefined): number => {
   if (!hash) {
-    return 0;
+    return 1;
   }
   const pageNumber = parseInt(hash.slice(1), 10);
   if (pageNumber) {

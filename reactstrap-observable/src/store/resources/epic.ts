@@ -9,10 +9,11 @@ import { IAppState } from "../state";
 import { ILoadResource, loadingResource, resourceLoaded } from "./actions";
 import { canLoadResourcePage } from "./selectors";
 
-const fetchResouresStream$ = (resource: ResourcesType, pageNumber: number): Observable<AppAction> => fetchResoures(resource).pipe(
-  map(response => resourceLoaded(resource, response.pageCount, pageNumber, response.pageContent)),
-  startWith(loadingResource(resource, pageNumber)),
-);
+const fetchResouresStream$ = (resource: ResourcesType, pageNumber: number): Observable<AppAction> =>
+  fetchResoures(resource, pageNumber).pipe(
+    map(response => resourceLoaded(resource, response.pageCount, pageNumber, response.pageContent)),
+    startWith(loadingResource(resource, pageNumber)),
+  );
 
 export const onLoad = (action$: Observable<Action>, state$: StateObservable<IAppState>): Observable<AppAction> => {
   return action$.pipe(
