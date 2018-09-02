@@ -8,7 +8,7 @@ import {
   IPlanetState,
   ISpeciesState,
   IStarshipState,
-  IVehiclesState
+  IVehiclesState,
 } from "./state";
 
 type ResourceState = IFilmsState | IPeopleState | ISpeciesState | IPlanetState | IStarshipState | IVehiclesState;
@@ -19,26 +19,34 @@ const createResourceReducer = <T extends ResourceState>(resource: ResourcesType)
       return state || initialPageState;
     }
 
-    const page = state[action.pageNumber] || initialPageState;
-    let newPage: any | undefined;
     switch (action.type) {
-      case '@@ressource/LOADING':
-        newPage = { ...page, status: 'LOADING' };
-        break;
-      case '@@ressource/LOADED':
-        newPage = { ...page, content: action.content, status: 'LOADED' };
-        break;
-    }
-
-    if (newPage !== undefined) {
-      const newState = { ...state as any };
-      newState[action.pageNumber] = newPage;
-      return newState;
+      case '@@ressource/LOADING': {
+        const { pageNumber } = action;
+        const oldPage = getPage(state, pageNumber);
+        const newPage = { ...oldPage, status: 'LOADING' };
+        return setNewState(state, newPage, pageNumber);
+      };
+      case '@@ressource/LOADED': {
+        const { pageNumber, pagesCount, content } = action;
+        const oldPage = getPage(state, pageNumber);
+        const newPage = { ...oldPage, content, status: 'LOADED' };
+        const newState = setNewState(state, newPage, pageNumber);
+        return { ...newState, pagesCount };
+      }
     }
 
     return state;
   };
 }
+
+const setNewState = (state: any, newPage: any, pageNumber: number): any => {
+  const newState = { ...state as any };
+  newState[pageNumber] = newPage;
+  return newState;
+}
+
+const getPage = (state: any, pageNumber: number): any => state[pageNumber] || initialPageState;
+
 
 const films = createResourceReducer<IFilmsState>('films');
 const people = createResourceReducer<IPeopleState>('people');

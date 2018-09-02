@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IFilm } from '../model/resources';
-import { getFilmsPageContent } from '../store/resources/selectors';
+import { getFilmPagesCount, getFilmsPageContent } from '../store/resources/selectors';
 import { IAppState } from '../store/state';
+import { Pages } from './pages';
 
-interface IFilmListProps { films: IFilm[] };
+interface IFilmListProps { pagesCount: number | undefined, films: IFilm[] };
 
-const List: React.StatelessComponent<IFilmListProps> = ({ films }) => {
+const List: React.StatelessComponent<IFilmListProps> = ({ pagesCount, films }) => {
   return <Row>
+    <Pages pagesCount={pagesCount} />
     {films.map((film) =>
       <Col key={String(film.episodeId)} lg="4" className="mb-3">
         <Item film={film} />
@@ -32,7 +34,8 @@ const Item: React.StatelessComponent<IFilmProps> = ({ film }) =>
 
 const mapStateToProps = (state: IAppState): IFilmListProps => {
   const films = getFilmsPageContent(state, 0);
-  return { films: films.sort((film1, film2) => film1.episodeId - film2.episodeId) };
+  const pagesCount = getFilmPagesCount(state);
+  return { pagesCount, films: films.sort((film1, film2) => film1.episodeId - film2.episodeId) };
 }
 
 export const FilmList = connect(

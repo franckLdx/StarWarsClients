@@ -3,20 +3,27 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IPlanet } from '../model/resources';
-import { getPlanetsPageContent } from '../store/resources/selectors';
+import { getPlanetsPageContent, getPlanetsPageCount } from '../store/resources/selectors';
 import { IAppState } from '../store/state';
+import { Pages } from './pages';
 
-interface IPlanetsListProps { planetsList: IPlanet[] };
+interface IPlanetsListProps {
+  pagesCount: number | undefined
+  planetsList: IPlanet[],
+};
 
-const List: React.StatelessComponent<IPlanetsListProps> = ({ planetsList }) => {
+const List: React.StatelessComponent<IPlanetsListProps> = ({ planetsList, pagesCount }) => {
   return (
-    <Row>
-      {planetsList.map((planet) =>
-        <Col key={String(planet.name)} lg="4" className="mb-3">
-          <Item planet={planet} />
-        </Col>
-      )}
-    </Row>
+    <>
+      <Pages pagesCount={pagesCount} />
+      <Row>
+        {planetsList.map((planet) =>
+          <Col key={String(planet.name)} lg="4" className="mb-3">
+            <Item planet={planet} />
+          </Col>
+        )}
+      </Row>
+    </>
   );
 }
 
@@ -41,7 +48,11 @@ const Item: React.StatelessComponent<IPlanetProps> = ({ planet }) =>
 
 const mapStateToProps = (state: IAppState): IPlanetsListProps => {
   const planets = getPlanetsPageContent(state, 0);
-  return { planetsList: planets.sort((planet1, planet2) => planet1.name < planet2.name ? -1 : 1) };
+  const pagesCount = getPlanetsPageCount(state);
+  return {
+    pagesCount,
+    planetsList: planets.sort((planet1, planet2) => planet1.name < planet2.name ? -1 : 1),
+  };
 }
 
 export const PlanetsList = connect(

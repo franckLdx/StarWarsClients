@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
-interface IPageProps { pagesCount: number }
+interface IPageProps { pagesCount: number | undefined }
 
 export const Pages: React.StatelessComponent<IPageProps> = ({ pagesCount }) => {
-  if (pagesCount === 1) {
+  if (pagesCount === 1 || pagesCount === undefined) {
     return null;
   }
   const numbers = new Array(pagesCount);

@@ -3,20 +3,27 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IVehicle } from '../model/resources';
-import { getVehiclessPageContent } from '../store/resources/selectors';
+import { getVehiclesPageContent, getVehiclesPageCount } from '../store/resources/selectors';
 import { IAppState } from '../store/state';
+import { Pages } from './pages';
 
-interface IVehiclesListProps { vehiclesList: IVehicle[] };
+interface IVehiclesListProps {
+  vehiclesList: IVehicle[]
+  pagesCount: number | undefined,
+};
 
-const List: React.StatelessComponent<IVehiclesListProps> = ({ vehiclesList }) => {
+const List: React.StatelessComponent<IVehiclesListProps> = ({ vehiclesList, pagesCount }) => {
   return (
-    <Row>
-      {vehiclesList.map((vehicle) =>
-        <Col key={String(vehicle.name)} lg="4" className="mb-3">
-          <Item vehicle={vehicle} />
-        </Col>
-      )}
-    </Row>
+    <>
+      <Pages pagesCount={pagesCount} />
+      <Row>
+        {vehiclesList.map((vehicle) =>
+          <Col key={String(vehicle.name)} lg="4" className="mb-3">
+            <Item vehicle={vehicle} />
+          </Col>
+        )}
+      </Row>
+    </>
   );
 }
 
@@ -42,8 +49,12 @@ const Item: React.StatelessComponent<IVehicleProps> = ({ vehicle }) =>
 
 
 const mapStateToProps = (state: IAppState): IVehiclesListProps => {
-  const vehicles = getVehiclessPageContent(state, 0);
-  return { vehiclesList: vehicles.sort((vehicle1, vehicle2) => vehicle1.name < vehicle2.name ? -1 : 1) };
+  const vehicles = getVehiclesPageContent(state, 0);
+  const pagesCount = getVehiclesPageCount(state);
+  return {
+    pagesCount,
+    vehiclesList: vehicles.sort((vehicle1, vehicle2) => vehicle1.name < vehicle2.name ? -1 : 1),
+  };
 }
 
 export const VehiclesList = connect(

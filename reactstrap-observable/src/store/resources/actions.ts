@@ -19,8 +19,9 @@ export const loadingResource = (resource: ResourcesType, pageNumber: number): IL
 export interface IResourceLoaded<T> {
   type: '@@ressource/LOADED',
   resource: ResourcesType,
+  pagesCount: number,
   pageNumber: number,
   content: T,
 }
-export const resourceLoaded = <T>(resource: ResourcesType, pageNumber: number, content: T): IResourceLoaded<T> =>
-  ({ type: '@@ressource/LOADED', resource, pageNumber, content });
+export const resourceLoaded = <T>(resource: ResourcesType, pagesCount: number, pageNumber: number, content: T): IResourceLoaded<T> =>
+  ({ type: '@@ressource/LOADED', resource, pagesCount, pageNumber, content });

@@ -3,20 +3,27 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IStarship } from '../model/resources';
-import { getStarshipsPageContent } from '../store/resources/selectors';
+import { getStarshipsPageContent, getStarshipsPageCount } from '../store/resources/selectors';
 import { IAppState } from '../store/state';
+import { Pages } from './pages';
 
-interface IStarshipsListProps { starshipList: IStarship[] };
+interface IStarshipsListProps {
+  starshipList: IStarship[],
+  pagesCount: number | undefined,
+};
 
-const List: React.StatelessComponent<IStarshipsListProps> = ({ starshipList }) => {
+const List: React.StatelessComponent<IStarshipsListProps> = ({ pagesCount, starshipList }) => {
   return (
-    <Row>
-      {starshipList.map((starship) =>
-        <Col key={String(starship.name)} lg="4" className="mb-3">
-          <Item starship={starship} />
-        </Col>
-      )}
-    </Row>
+    <>
+      <Pages pagesCount={pagesCount} />
+      <Row>
+        {starshipList.map((starship) =>
+          <Col key={String(starship.name)} lg="4" className="mb-3">
+            <Item starship={starship} />
+          </Col>
+        )}
+      </Row>
+    </>
   );
 }
 
@@ -45,7 +52,11 @@ const Item: React.StatelessComponent<IStarshipProps> = ({ starship }) =>
 
 const mapStateToProps = (state: IAppState): IStarshipsListProps => {
   const starships = getStarshipsPageContent(state, 0);
-  return { starshipList: starships.sort((starship1, starship2) => starship1.name < starship2.name ? -1 : 1) };
+  const pagesCount = getStarshipsPageCount(state);
+  return {
+    pagesCount,
+    starshipList: starships.sort((starship1, starship2) => starship1.name < starship2.name ? -1 : 1)
+  };
 }
 
 export const StarshipsList = connect(

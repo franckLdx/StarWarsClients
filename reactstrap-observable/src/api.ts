@@ -11,6 +11,14 @@ export const fetchResoures = (resource: ResourcesType) => {
 }
 
 const getMapper = (resource: ResourcesType) => {
+  const payloadMapper = getPayloadMapper(resource);
+  return (payload: any) => ({
+    pageContent: payloadMapper(payload),
+    pageCount: Math.ceil(payload.count / payload.results.length),
+  })
+};
+
+const getPayloadMapper = (resource: ResourcesType) => {
   switch (resource) {
     case 'films':
       return filmsMapper;

@@ -9,10 +9,22 @@ const getResourcePageContent = <T>(state: IAppState, resource: ResourcesType, pa
   return getResourcePage(state, resource, pageNumber).content as any as T[];
 }
 export const canLoadResourcePage = (state: IAppState, resource: ResourcesType, pageNumber: number) => getResourcePageStatus(state, resource, 0) === 'NOT_LOADED'
+export const getResourcePagesCount = (state: IAppState, resource: ResourcesType) => getResource(state, resource).pagesCount;
 
 export const getFilmsPageContent = (state: IAppState, pageNumber: number): IFilm[] => getResourcePageContent<IFilm>(state, 'films', pageNumber);
+export const getFilmPagesCount = (state: IAppState): number | undefined => getResourcePagesCount(state, 'films');
+
 export const getPeoplePageContent = (state: IAppState, pageNumber: number): IPeople[] => getResourcePageContent<IPeople>(state, 'people', pageNumber);
+export const getPeoplePagesCount = (state: IAppState): number | undefined => getResourcePagesCount(state, 'people');
+
 export const getPlanetsPageContent = (state: IAppState, pageNumber: number): IPlanet[] => getResourcePageContent<IPlanet>(state, 'planets', pageNumber);
+export const getPlanetsPageCount = (state: IAppState): number | undefined => getResourcePagesCount(state, 'planets');
+
 export const getSpeciesPageContent = (state: IAppState, pageNumber: number): ISpecie[] => getResourcePageContent<ISpecie>(state, 'species', pageNumber);
+export const getSpeciesPageCount = (state: IAppState): number | undefined => getResourcePagesCount(state, 'species');
+
 export const getStarshipsPageContent = (state: IAppState, pageNumber: number): IStarship[] => getResourcePageContent<IStarship>(state, 'starships', pageNumber);
-export const getVehiclessPageContent = (state: IAppState, pageNumber: number): IVehicle[] => getResourcePageContent<IVehicle>(state, 'vehicles', pageNumber);
+export const getStarshipsPageCount = (state: IAppState): number | undefined => getResourcePagesCount(state, 'starships');
+
+export const getVehiclesPageContent = (state: IAppState, pageNumber: number): IVehicle[] => getResourcePageContent<IVehicle>(state, 'vehicles', pageNumber);
+export const getVehiclesPageCount = (state: IAppState): number | undefined => getResourcePagesCount(state, 'vehicles');

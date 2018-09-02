@@ -3,20 +3,27 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { ISpecie } from '../model/resources';
-import { getSpeciesPageContent } from '../store/resources/selectors';
+import { getSpeciesPageContent, getSpeciesPageCount } from '../store/resources/selectors';
 import { IAppState } from '../store/state';
+import { Pages } from './pages';
 
-interface ISpeciesListProps { speciesList: ISpecie[] };
+interface ISpeciesListProps {
+  pagesCount: number | undefined,
+  speciesList: ISpecie[]
+};
 
-const List: React.StatelessComponent<ISpeciesListProps> = ({ speciesList }) => {
+const List: React.StatelessComponent<ISpeciesListProps> = ({ pagesCount, speciesList }) => {
   return (
-    <Row>
-      {speciesList.map((species) =>
-        <Col key={String(species.name)} lg="4" className="mb-3">
-          <Item specie={species} />
-        </Col>
-      )}
-    </Row>
+    <>
+      <Pages pagesCount={pagesCount} />
+      <Row>
+        {speciesList.map((species) =>
+          <Col key={String(species.name)} lg="4" className="mb-3">
+            <Item specie={species} />
+          </Col>
+        )}
+      </Row>
+    </>
   );
 }
 
@@ -40,7 +47,11 @@ const Item: React.StatelessComponent<ISpecieProps> = ({ specie }) =>
 
 const mapStateToProps = (state: IAppState): ISpeciesListProps => {
   const species = getSpeciesPageContent(state, 0);
-  return { speciesList: species.sort((specie1, specie2) => specie1.name < specie2.name ? -1 : 1) };
+  const pagesCount = getSpeciesPageCount(state);
+  return {
+    pagesCount,
+    speciesList: species.sort((specie1, specie2) => specie1.name < specie2.name ? -1 : 1)
+  };
 }
 
 export const SpeciesList = connect(

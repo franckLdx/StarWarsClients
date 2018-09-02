@@ -1,15 +1,17 @@
 import { IFilm, IPeople, IPlanet, ISpecie, IStarship, IVehicle } from "../../model";
 
-interface IPageResourceState<T> {
+export interface IPageResourceState<T> {
   status: LoadingStatus;
   content: T[];
 }
 
-interface IResourceState<T> {
-  [pageNumber: string]: IPageResourceState<T>
+export interface IResourceState<T> {
+  pagesCount: number | undefined;
+  [pageNumber: number]: IPageResourceState<T>
 };
 
 export const initialPageState: IResourceState<any> = {
+  pagesCount: undefined,
   0: {
     content: [],
     status: 'NOT_LOADED',

@@ -18,3 +18,14 @@ export const mapUrlToResource = (url: string): ResourcesType => {
 export function isResource(resource: string): resource is ResourcesType {
   return resources.indexOf(resource) !== -1;
 }
+
+export const mapHashToPageNumber = (hash: string | undefined): number => {
+  if (!hash) {
+    return 0;
+  }
+  const pageNumber = parseInt(hash.slice(1), 10);
+  if (pageNumber) {
+    return pageNumber;
+  }
+  throw new Error(`Unvalid hash: ${hash}`);
+}
