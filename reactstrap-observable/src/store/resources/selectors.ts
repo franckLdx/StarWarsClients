@@ -3,10 +3,11 @@ import {
   defaultPageNumber,
   IAppState
 } from "../state";
+import { defaultInitialPageState } from "./state";
 
 export const getResource = (state: IAppState, resource: ResourcesType) => state[resource]
 
-export const getResourcePage = (state: IAppState, resource: ResourcesType, pageNumber: number) => state[resource][pageNumber];
+export const getResourcePage = (state: IAppState, resource: ResourcesType, pageNumber: number) => state[resource][pageNumber] || defaultInitialPageState;
 export const getResourcePageStatus = (state: IAppState, resource: ResourcesType, pageNumber: number) => getResourcePage(state, resource, pageNumber).status;
 const getResourcePageContent = <T>(state: IAppState, resource: ResourcesType, pageNumber: number): T[] => {
   return getResourcePage(state, resource, pageNumber).content as any as T[];

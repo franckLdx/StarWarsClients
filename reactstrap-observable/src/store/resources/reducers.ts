@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { ResourcesType } from "../../model";
 import AppAction from "../actions";
 import {
+  defaultInitialPageState,
   IFilmsState,
   initialPageState,
   IPeopleState,
@@ -45,7 +46,7 @@ const setNewState = (state: any, newPage: any, pageNumber: number): any => {
   return newState;
 }
 
-const getPage = (state: any, pageNumber: number): any => state[pageNumber] || initialPageState;
+const getPage = (state: any, pageNumber: number): any => state[pageNumber] || defaultInitialPageState;
 
 
 const films = createResourceReducer<IFilmsState>('films');

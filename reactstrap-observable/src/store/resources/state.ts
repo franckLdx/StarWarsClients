@@ -12,13 +12,15 @@ export interface IResourceState<T> {
   [pageNumber: number]: IPageResourceState<T>
 };
 
-export const initialPageState: IResourceState<any> = {
-  pagesCount: undefined,
-};
-initialPageState[defaultPageNumber] = {
+export const defaultInitialPageState: IPageResourceState<any> = {
   content: [],
   status: 'NOT_LOADED',
 };
+
+export const initialPageState: IResourceState<any> = {
+  pagesCount: undefined,
+};
+initialPageState[defaultPageNumber] = defaultInitialPageState
 
 export type IFilmsState = IResourceState<IFilm>;
 export type ISpeciesState = IResourceState<ISpecie>;

@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { mapResourceToUrl } from './tools';
+
 import {
   FilmList,
-  PeopleList,
   PlanetsList,
   SpeciesList,
   StarshipsList,
   VehiclesList
-} from '../components';
-import { mapResourceToUrl } from '../model';
+} from '../../components';
+import { PeopleRouter } from '../../components/subRoutes';
 
 export const URL_FILMS = mapResourceToUrl('films');
 export const URL_PEOPLE = mapResourceToUrl('people');
@@ -17,15 +18,14 @@ export const URL_PLANETS = mapResourceToUrl('planets');
 export const URL_STARSHIPS = mapResourceToUrl('starships');
 export const URL_VEHICLES = mapResourceToUrl('vehicles');
 
-const Routes: React.StatelessComponent<{}> = () => (
+export const Routes: React.StatelessComponent<{}> = () => (
   <Switch>
     <Route path={URL_FILMS} component={FilmList} />
-    <Route path={URL_PEOPLE} component={PeopleList} />
+    {/* <Route path={URL_PEOPLE} component={PeopleList} /> */}
+    <Route path={`${URL_PEOPLE}`} component={PeopleRouter} />
     <Route path={URL_SPECIES} component={SpeciesList} />
     <Route path={URL_PLANETS} component={PlanetsList} />
     <Route path={URL_STARSHIPS} component={StarshipsList} />
     <Route path={URL_VEHICLES} component={VehiclesList} />
   </Switch>
 );
-
-export default Routes;

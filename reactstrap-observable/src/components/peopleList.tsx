@@ -13,6 +13,7 @@ import { Pages } from './pages';
 
 interface IPeopleListProps {
   pagesCount: number | undefined,
+  pageNumber: number,
   peopleList: IPeople[]
 };
 
@@ -48,10 +49,16 @@ const Item: React.StatelessComponent<IPeopleProps> = ({ people }) =>
   </Card >
 
 
-const mapStateToProps = (state: IAppState): IPeopleListProps => {
-  const people = getPeoplePageContent(state, defaultPageNumber);
+interface IPeopleListOwnProps {
+  pageNumber: number | undefined,
+}
+
+const mapStateToProps = (state: IAppState, { pageNumber }: IPeopleListOwnProps): IPeopleListProps => {
+  const actualPageNumber = pageNumber || defaultPageNumber;
+  const people = getPeoplePageContent(state, actualPageNumber);
   const pagesCount = getPeoplePagesCount(state);
   return {
+    pageNumber: actualPageNumber,
     pagesCount,
     peopleList: people.sort((people1, people2) => people1.name < people2.name ? -1 : 1)
   };
