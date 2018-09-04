@@ -16,10 +16,10 @@ interface IStarshipsListProps {
   pagesCount: number | undefined,
 };
 
-const List: React.StatelessComponent<IStarshipsListProps> = ({ pagesCount, starshipList }) => {
+const List: React.StatelessComponent<IStarshipsListProps> = ({ pageNumber, pagesCount, starshipList }) => {
   return (
     <>
-      <Pages pagesCount={pagesCount} />
+      <Pages activePageNumber={pageNumber} pagesCount={pagesCount} />
       <Row>
         {starshipList.map((starship) =>
           <Col key={String(starship.name)} lg="4" className="mb-3">

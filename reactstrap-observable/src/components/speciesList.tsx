@@ -13,10 +13,10 @@ interface ISpeciesListProps {
   speciesList: ISpecie[]
 };
 
-const List: React.StatelessComponent<ISpeciesListProps> = ({ pagesCount, speciesList }) => {
+const List: React.StatelessComponent<ISpeciesListProps> = ({ pageNumber, pagesCount, speciesList }) => {
   return (
     <>
-      <Pages pagesCount={pagesCount} />
+      <Pages activePageNumber={pageNumber} pagesCount={pagesCount} />
       <Row>
         {speciesList.map((species) =>
           <Col key={String(species.name)} lg="4" className="mb-3">

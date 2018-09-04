@@ -16,10 +16,10 @@ interface IPlanetsListProps {
   planetsList: IPlanet[],
 };
 
-const List: React.StatelessComponent<IPlanetsListProps> = ({ planetsList, pagesCount }) => {
+const List: React.StatelessComponent<IPlanetsListProps> = ({ planetsList, pageNumber, pagesCount }) => {
   return (
     <>
-      <Pages pagesCount={pagesCount} />
+      <Pages activePageNumber={pageNumber} pagesCount={pagesCount} />
       <Row>
         {planetsList.map((planet) =>
           <Col key={String(planet.name)} lg="4" className="mb-3">

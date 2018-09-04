@@ -7,11 +7,15 @@ import { getFilmPagesCount, getFilmsPageContent } from '../store/resources/selec
 import { IAppState } from '../store/state';
 import { Pages } from './pages';
 
-interface IFilmListProps { pagesCount: number | undefined, films: IFilm[] };
+interface IFilmListProps {
+  pageNumber: number,
+  pagesCount: number | undefined,
+  films: IFilm[]
+};
 
-const List: React.StatelessComponent<IFilmListProps> = ({ pagesCount, films }) => {
+const List: React.StatelessComponent<IFilmListProps> = ({ pageNumber, pagesCount, films }) => {
   return <Row>
-    <Pages pagesCount={pagesCount} />
+    <Pages activePageNumber={pageNumber} pagesCount={pagesCount} />
     {films.map((film) =>
       <Col key={String(film.episodeId)} lg="4" className="mb-3">
         <Item film={film} />
@@ -39,7 +43,11 @@ interface IFilmsListOwnProps {
 const mapStateToProps = (state: IAppState, { pageNumber }: IFilmsListOwnProps): IFilmListProps => {
   const films = getFilmsPageContent(state, pageNumber);
   const pagesCount = getFilmPagesCount(state);
-  return { pagesCount, films: films.sort((film1, film2) => film1.episodeId - film2.episodeId) };
+  return {
+    films: films.sort((film1, film2) => film1.episodeId - film2.episodeId),
+    pageNumber,
+    pagesCount,
+  };
 }
 
 export const FilmList = connect(

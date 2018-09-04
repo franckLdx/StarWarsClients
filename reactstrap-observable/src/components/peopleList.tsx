@@ -16,10 +16,10 @@ interface IPeopleListProps {
   peopleList: IPeople[]
 };
 
-const List: React.StatelessComponent<IPeopleListProps> = ({ peopleList, pagesCount }) => {
+const List: React.StatelessComponent<IPeopleListProps> = ({ peopleList, pageNumber, pagesCount }) => {
   return (
     <>
-      <Pages pagesCount={pagesCount} />
+      <Pages activePageNumber={pageNumber} pagesCount={pagesCount} />
       <Row>
         {peopleList.map((people) =>
           <Col key={String(people.name)} lg="4" className="mb-3">

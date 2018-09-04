@@ -16,10 +16,10 @@ interface IVehiclesListProps {
   pageNumber: number,
 };
 
-const List: React.StatelessComponent<IVehiclesListProps> = ({ vehiclesList, pagesCount }) => {
+const List: React.StatelessComponent<IVehiclesListProps> = ({ pageNumber, vehiclesList, pagesCount }) => {
   return (
     <>
-      <Pages pagesCount={pagesCount} />
+      <Pages activePageNumber={pageNumber} pagesCount={pagesCount} />
       <Row>
         {vehiclesList.map((vehicle) =>
           <Col key={String(vehicle.name)} lg="4" className="mb-3">
