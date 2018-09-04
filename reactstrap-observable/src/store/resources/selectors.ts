@@ -1,6 +1,5 @@
 import { IFilm, IPeople, IPlanet, ISpecie, IStarship, IVehicle, ResourceType } from "../../model";
 import {
-  defaultPageNumber,
   IAppState
 } from "../state";
 import { defaultInitialPageState } from "./state";
@@ -12,7 +11,7 @@ export const getResourcePageStatus = (state: IAppState, resource: ResourceType, 
 const getResourcePageContent = <T>(state: IAppState, resource: ResourceType, pageNumber: number): T[] => {
   return getResourcePage(state, resource, pageNumber).content as any as T[];
 }
-export const canLoadResourcePage = (state: IAppState, resource: ResourceType, pageNumber: number) => getResourcePageStatus(state, resource, defaultPageNumber) === 'NOT_LOADED'
+export const canLoadResourcePage = (state: IAppState, resource: ResourceType, pageNumber: number) => getResourcePageStatus(state, resource, pageNumber) === 'NOT_LOADED'
 export const getResourcePagesCount = (state: IAppState, resource: ResourceType) => getResource(state, resource).pagesCount;
 
 export const getFilmsPageContent = (state: IAppState, pageNumber: number): IFilm[] => getResourcePageContent<IFilm>(state, 'films', pageNumber);

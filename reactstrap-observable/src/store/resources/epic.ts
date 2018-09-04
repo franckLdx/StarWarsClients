@@ -1,7 +1,8 @@
 import { Action } from "redux";
 import { ofType, StateObservable, } from "redux-observable";
 import { Observable } from "rxjs";
-import { map, mergeMap, startWith, withLatestFrom } from "rxjs/operators";
+import { filter, map, mergeMap, startWith, withLatestFrom } from "rxjs/operators";
+import { canLoadResourcePage } from "..";
 import { fetchResoures } from "../../api";
 import { ResourceType } from "../../model";
 import AppAction from "../actions";
@@ -18,6 +19,6 @@ export const onLoad = (action$: Observable<Action>, state$: StateObservable<IApp
   return action$.pipe(
     ofType<ILoadResource>('@@ressource/LOAD'),
     withLatestFrom(state$),
-    // filter(([action, state]) => canLoadResourcePage(state, action.resource, action.pageNumber)),
+    filter(([action, state]) => canLoadResourcePage(state, action.resource, action.pageNumber)),
     mergeMap(([action, state]) => fetchResouresStream$(action.resource, action.pageNumber)));
 };
