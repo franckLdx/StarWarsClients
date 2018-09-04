@@ -4,7 +4,6 @@ import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IFilm } from '../model/resources';
 import { getFilmPagesCount, getFilmsPageContent } from '../store/resources/selectors';
-import { defaultPageNumber } from '../store/resources/state';
 import { IAppState } from '../store/state';
 import { Pages } from './pages';
 
@@ -33,8 +32,12 @@ const Item: React.StatelessComponent<IFilmProps> = ({ film }) =>
   </Card>
 
 
-const mapStateToProps = (state: IAppState): IFilmListProps => {
-  const films = getFilmsPageContent(state, defaultPageNumber);
+interface IFilmsListOwnProps {
+  pageNumber: number,
+}
+
+const mapStateToProps = (state: IAppState, { pageNumber }: IFilmsListOwnProps): IFilmListProps => {
+  const films = getFilmsPageContent(state, pageNumber);
   const pagesCount = getFilmPagesCount(state);
   return { pagesCount, films: films.sort((film1, film2) => film1.episodeId - film2.episodeId) };
 }

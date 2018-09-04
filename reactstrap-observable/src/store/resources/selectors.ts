@@ -1,19 +1,19 @@
-import { IFilm, IPeople, IPlanet, ISpecie, IStarship, IVehicle, ResourcesType } from "../../model";
+import { IFilm, IPeople, IPlanet, ISpecie, IStarship, IVehicle, ResourceType } from "../../model";
 import {
   defaultPageNumber,
   IAppState
 } from "../state";
 import { defaultInitialPageState } from "./state";
 
-export const getResource = (state: IAppState, resource: ResourcesType) => state[resource]
+export const getResource = (state: IAppState, resource: ResourceType) => state[resource]
 
-export const getResourcePage = (state: IAppState, resource: ResourcesType, pageNumber: number) => state[resource][pageNumber] || defaultInitialPageState;
-export const getResourcePageStatus = (state: IAppState, resource: ResourcesType, pageNumber: number) => getResourcePage(state, resource, pageNumber).status;
-const getResourcePageContent = <T>(state: IAppState, resource: ResourcesType, pageNumber: number): T[] => {
+export const getResourcePage = (state: IAppState, resource: ResourceType, pageNumber: number) => state[resource][pageNumber] || defaultInitialPageState;
+export const getResourcePageStatus = (state: IAppState, resource: ResourceType, pageNumber: number) => getResourcePage(state, resource, pageNumber).status;
+const getResourcePageContent = <T>(state: IAppState, resource: ResourceType, pageNumber: number): T[] => {
   return getResourcePage(state, resource, pageNumber).content as any as T[];
 }
-export const canLoadResourcePage = (state: IAppState, resource: ResourcesType, pageNumber: number) => getResourcePageStatus(state, resource, defaultPageNumber) === 'NOT_LOADED'
-export const getResourcePagesCount = (state: IAppState, resource: ResourcesType) => getResource(state, resource).pagesCount;
+export const canLoadResourcePage = (state: IAppState, resource: ResourceType, pageNumber: number) => getResourcePageStatus(state, resource, defaultPageNumber) === 'NOT_LOADED'
+export const getResourcePagesCount = (state: IAppState, resource: ResourceType) => getResource(state, resource).pagesCount;
 
 export const getFilmsPageContent = (state: IAppState, pageNumber: number): IFilm[] => getResourcePageContent<IFilm>(state, 'films', pageNumber);
 export const getFilmPagesCount = (state: IAppState): number | undefined => getResourcePagesCount(state, 'films');

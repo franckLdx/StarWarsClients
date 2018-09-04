@@ -4,11 +4,12 @@ import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { ISpecie } from '../model/resources';
 import { getSpeciesPageContent, getSpeciesPageCount } from '../store/resources/selectors';
-import { defaultPageNumber, IAppState } from '../store/state';
+import { IAppState } from '../store/state';
 import { Pages } from './pages';
 
 interface ISpeciesListProps {
   pagesCount: number | undefined,
+  pageNumber: number,
   speciesList: ISpecie[]
 };
 
@@ -45,10 +46,15 @@ const Item: React.StatelessComponent<ISpecieProps> = ({ specie }) =>
   </Card >
 
 
-const mapStateToProps = (state: IAppState): ISpeciesListProps => {
-  const species = getSpeciesPageContent(state, defaultPageNumber);
+interface ISpeciesListOwnProps {
+  pageNumber: number
+}
+
+const mapStateToProps = (state: IAppState, { pageNumber }: ISpeciesListOwnProps): ISpeciesListProps => {
+  const species = getSpeciesPageContent(state, pageNumber);
   const pagesCount = getSpeciesPageCount(state);
   return {
+    pageNumber,
     pagesCount,
     speciesList: species.sort((specie1, specie2) => specie1.name < specie2.name ? -1 : 1)
   };

@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { ResourcesType } from "../../model";
+import { ResourceType } from "../../model";
 import AppAction from "../actions";
 import {
   defaultInitialPageState,
@@ -14,7 +14,7 @@ import {
 
 type ResourceState = IFilmsState | IPeopleState | ISpeciesState | IPlanetState | IStarshipState | IVehiclesState;
 
-const createResourceReducer = <T extends ResourceState>(resource: ResourcesType) => {
+const createResourceReducer = <T extends ResourceState>(resource: ResourceType) => {
   return (state: T, action: AppAction): T => {
     if (action.resource !== resource) {
       return state || initialPageState;

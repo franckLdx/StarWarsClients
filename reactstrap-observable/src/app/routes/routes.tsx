@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { mapResourceToUrl } from './tools';
+import { mapHashToPageNumber, mapResourceToUrl } from './tools';
 
 import {
   FilmList,
+  PeopleList,
   PlanetsList,
   SpeciesList,
   StarshipsList,
   VehiclesList
 } from '../../components';
-import { PeopleRouter } from '../../components/subRoutes';
+import { defaultPageNumber } from '../../store';
 
 export const URL_FILMS = mapResourceToUrl('films');
 export const URL_PEOPLE = mapResourceToUrl('people');
@@ -20,12 +21,27 @@ export const URL_VEHICLES = mapResourceToUrl('vehicles');
 
 export const Routes: React.StatelessComponent<{}> = () => (
   <Switch>
-    <Route path={URL_FILMS} component={FilmList} />
-    {/* <Route path={URL_PEOPLE} component={PeopleList} /> */}
-    <Route path={`${URL_PEOPLE}`} component={PeopleRouter} />
-    <Route path={URL_SPECIES} component={SpeciesList} />
-    <Route path={URL_PLANETS} component={PlanetsList} />
-    <Route path={URL_STARSHIPS} component={StarshipsList} />
-    <Route path={URL_VEHICLES} component={VehiclesList} />
+    <Route path={URL_FILMS} render={FilmsRender} />
+    <Route path={URL_PEOPLE} render={PeopleRender} />
+    <Route path={URL_SPECIES} render={SpeciesRender} />
+    <Route path={URL_PLANETS} render={PlanetsRender} />
+    <Route path={URL_STARSHIPS} render={StarshipsRender} />
+    <Route path={URL_VEHICLES} render={VehiclesRender} />
   </Switch>
 );
+
+interface IWithPageNumber { pageNumber: number }
+const makeRenderPageComponent = (Component: React.ComponentType<IWithPageNumber>) => {
+  return (params: any) => {
+    const { hash } = params.location;
+    const pageNumber = mapHashToPageNumber(hash) || defaultPageNumber;
+    return <Component pageNumber={pageNumber} />;
+  }
+}
+
+const FilmsRender = makeRenderPageComponent(FilmList);
+const PeopleRender = makeRenderPageComponent(PeopleList);
+const SpeciesRender = makeRenderPageComponent(SpeciesList);
+const PlanetsRender = makeRenderPageComponent(PlanetsList);
+const StarshipsRender = makeRenderPageComponent(StarshipsList);
+const VehiclesRender = makeRenderPageComponent(VehiclesList);

@@ -4,7 +4,6 @@ import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IPeople } from '../model/resources';
 import {
-  defaultPageNumber,
   getPeoplePageContent,
   getPeoplePagesCount,
   IAppState
@@ -50,15 +49,14 @@ const Item: React.StatelessComponent<IPeopleProps> = ({ people }) =>
 
 
 interface IPeopleListOwnProps {
-  pageNumber: number | undefined,
+  pageNumber: number
 }
 
 const mapStateToProps = (state: IAppState, { pageNumber }: IPeopleListOwnProps): IPeopleListProps => {
-  const actualPageNumber = pageNumber || defaultPageNumber;
-  const people = getPeoplePageContent(state, actualPageNumber);
+  const people = getPeoplePageContent(state, pageNumber);
   const pagesCount = getPeoplePagesCount(state);
   return {
-    pageNumber: actualPageNumber,
+    pageNumber,
     pagesCount,
     peopleList: people.sort((people1, people2) => people1.name < people2.name ? -1 : 1)
   };

@@ -4,7 +4,6 @@ import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IStarship } from '../model/resources';
 import {
-  defaultPageNumber,
   getStarshipsPageContent,
   getStarshipsPageCount,
   IAppState
@@ -13,6 +12,7 @@ import { Pages } from './pages';
 
 interface IStarshipsListProps {
   starshipList: IStarship[],
+  pageNumber: number,
   pagesCount: number | undefined,
 };
 
@@ -53,11 +53,15 @@ const Item: React.StatelessComponent<IStarshipProps> = ({ starship }) =>
     </CardBody>
   </Card >
 
+interface IStarshipsListOwnProps {
+  pageNumber: number,
+};
 
-const mapStateToProps = (state: IAppState): IStarshipsListProps => {
-  const starships = getStarshipsPageContent(state, defaultPageNumber);
+const mapStateToProps = (state: IAppState, { pageNumber }: IStarshipsListOwnProps): IStarshipsListProps => {
+  const starships = getStarshipsPageContent(state, pageNumber);
   const pagesCount = getStarshipsPageCount(state);
   return {
+    pageNumber,
     pagesCount,
     starshipList: starships.sort((starship1, starship2) => starship1.name < starship2.name ? -1 : 1)
   };

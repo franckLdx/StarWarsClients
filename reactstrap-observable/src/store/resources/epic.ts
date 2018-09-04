@@ -3,12 +3,12 @@ import { ofType, StateObservable, } from "redux-observable";
 import { Observable } from "rxjs";
 import { map, mergeMap, startWith, withLatestFrom } from "rxjs/operators";
 import { fetchResoures } from "../../api";
-import { ResourcesType } from "../../model";
+import { ResourceType } from "../../model";
 import AppAction from "../actions";
 import { IAppState } from "../state";
 import { ILoadResource, loadingResource, resourceLoaded } from "./actions";
 
-const fetchResouresStream$ = (resource: ResourcesType, pageNumber: number): Observable<AppAction> =>
+const fetchResouresStream$ = (resource: ResourceType, pageNumber: number): Observable<AppAction> =>
   fetchResoures(resource, pageNumber).pipe(
     map(response => resourceLoaded(resource, response.pageCount, pageNumber, response.pageContent)),
     startWith(loadingResource(resource, pageNumber)),

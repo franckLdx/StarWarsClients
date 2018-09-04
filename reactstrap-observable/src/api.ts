@@ -1,25 +1,27 @@
 
 import { ajax } from 'rxjs/ajax';
 import { map } from 'rxjs/operators';
-import { IFilm, IPeople, IPlanet, ISpecie, IStarship, IVehicle, ResourcesType } from './model';
+import { IFilm, IPeople, IPlanet, ISpecie, IStarship, IVehicle, ResourceType } from './model';
 
 const URL = 'https://swapi.co/api';
 
-export const fetchResoures = (resource: ResourcesType, pageNumber: number) => {
+export const fetchResoures = (resource: ResourceType, pageNumber: number) => {
   const mapper = getMapper(resource);
   const url = `${URL}/${resource}/${pageNumber !== undefined ? `?page=${pageNumber}` : ''}`;
   return ajax.getJSON(url).pipe(map(mapper));
 }
 
-const getMapper = (resource: ResourcesType) => {
+const getMapper = (resource: ResourceType) => {
   const payloadMapper = getPayloadMapper(resource);
-  return (payload: any) => ({
-    pageContent: payloadMapper(payload),
-    pageCount: Math.ceil(payload.count / payload.results.length),
-  })
+  return (payload: any) => {
+    return {
+      pageContent: payloadMapper(payload),
+      pageCount: Math.ceil(payload.count / 10),
+    }
+  }
 };
 
-const getPayloadMapper = (resource: ResourcesType) => {
+const getPayloadMapper = (resource: ResourceType) => {
   switch (resource) {
     case 'films':
       return filmsMapper;

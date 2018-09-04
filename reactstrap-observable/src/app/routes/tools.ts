@@ -1,9 +1,9 @@
-import { isResource, ResourcesType } from "../../model";
+import { isResource, ResourceType } from "../../model";
 
-export const mapResourceToUrl = (resource: ResourcesType) => `/${resource}`;
+export const mapResourceToUrl = (resource: ResourceType) => `/${resource}`;
 export const mapPageToHash = (pageNumber: number) => `#page=${pageNumber}`;
 
-export const mapUrlToResource = (url: string): ResourcesType => {
+export const mapUrlToResource = (url: string): ResourceType => {
   const resource = url.split('/').pop();
   if (resource && isResource(resource)) {
     return resource;
