@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Card, CardHeader, CardText, Col, Row } from 'reactstrap';
+import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IPeople } from '../model/resources';
 import {
@@ -8,28 +8,7 @@ import {
   getPeoplePagesCount,
   IAppState
 } from '../store';
-import { Pages } from './pages';
-
-interface IPeopleListProps {
-  pagesCount: number | undefined,
-  pageNumber: number,
-  peopleList: IPeople[]
-};
-
-const List: React.StatelessComponent<IPeopleListProps> = ({ peopleList, pageNumber, pagesCount }) => {
-  return (
-    <>
-      <Pages activePageNumber={pageNumber} pagesCount={pagesCount} />
-      <Row>
-        {peopleList.map((people) =>
-          <Col key={String(people.name)} lg="4" className="mb-3">
-            <Item people={people} />
-          </Col>
-        )}
-      </Row>
-    </>
-  );
-}
+import { ResourceList } from './resourcesList';
 
 interface IPeopleProps { people: IPeople }
 
@@ -52,16 +31,21 @@ interface IPeopleListOwnProps {
   pageNumber: number
 }
 
-const mapStateToProps = (state: IAppState, { pageNumber }: IPeopleListOwnProps): IPeopleListProps => {
+const mapStateToProps = (state: IAppState, { pageNumber }: IPeopleListOwnProps) => {
   const people = getPeoplePageContent(state, pageNumber);
   const pagesCount = getPeoplePagesCount(state);
   return {
+    items: people.sort((people1, people2) => people1.name < people2.name ? -1 : 1),
     pageNumber,
     pagesCount,
-    peopleList: people.sort((people1, people2) => people1.name < people2.name ? -1 : 1)
   };
 }
 
+const mapDispatchToProps = () => ({
+  renderItem: (people: IPeople) => <Item people={people} />
+});
+
 export const PeopleList = connect(
   mapStateToProps,
-)(List);
+  mapDispatchToProps
+)(ResourceList);

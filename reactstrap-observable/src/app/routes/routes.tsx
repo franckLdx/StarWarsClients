@@ -10,6 +10,7 @@ import {
   StarshipsList,
   VehiclesList
 } from '../../components';
+
 import { defaultPageNumber } from '../../store';
 
 export const URL_FILMS = mapResourceToUrl('films');
