@@ -8,7 +8,7 @@ import {
   getStarshipsPageCount,
   IAppState
 } from '../store';
-import { ResourceList } from './resourcesList';
+import { IRessourcesListProps, ResourceList } from './resourcesList';
 
 interface IStarshipProps { starship: IStarship }
 
@@ -35,21 +35,17 @@ interface IStarshipsListOwnProps {
   pageNumber: number,
 };
 
-const mapStateToProps = (state: IAppState, { pageNumber }: IStarshipsListOwnProps) => {
+const mapStateToProps = (state: IAppState, { pageNumber }: IStarshipsListOwnProps): IRessourcesListProps<IStarship> => {
   const starships = getStarshipsPageContent(state, pageNumber);
   const pagesCount = getStarshipsPageCount(state);
   return {
     items: starships.sort((starship1, starship2) => starship1.name < starship2.name ? -1 : 1),
     pageNumber,
     pagesCount,
+    renderItem: (starship: IStarship) => <Item starship={starship} />
   };
 }
 
-const mapDispatchToProps = () => ({
-  renderItem: (starship: IStarship) => <Item starship={starship} />
-});
-
 export const StarshipsList = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(ResourceList);

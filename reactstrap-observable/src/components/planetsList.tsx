@@ -8,7 +8,7 @@ import {
   getPlanetsPageCount,
   IAppState
 } from '../store';
-import { ResourceList } from './resourcesList';
+import { IRessourcesListProps, ResourceList } from './resourcesList';
 
 interface IPlanetProps { planet: IPlanet }
 
@@ -30,21 +30,17 @@ const Item: React.StatelessComponent<IPlanetProps> = ({ planet }) =>
 interface IPlanetOwnProps {
   pageNumber: number,
 }
-const mapStateToProps = (state: IAppState, { pageNumber }: IPlanetOwnProps) => {
+const mapStateToProps = (state: IAppState, { pageNumber }: IPlanetOwnProps): IRessourcesListProps<IPlanet> => {
   const planets = getPlanetsPageContent(state, pageNumber);
   const pagesCount = getPlanetsPageCount(state);
   return {
     items: planets.sort((planet1, planet2) => planet1.name < planet2.name ? -1 : 1),
     pageNumber,
     pagesCount,
+    renderItem: (planet: IPlanet) => <Item planet={planet} />
   };
 }
 
-const mapDispatchToProps = () => ({
-  renderItem: (planet: IPlanet) => <Item planet={planet} />
-});
-
 export const PlanetsList = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(ResourceList);

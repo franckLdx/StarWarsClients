@@ -8,7 +8,7 @@ import {
   getPeoplePagesCount,
   IAppState
 } from '../store';
-import { ResourceList } from './resourcesList';
+import { IRessourcesListProps, ResourceList } from './resourcesList';
 
 interface IPeopleProps { people: IPeople }
 
@@ -31,21 +31,17 @@ interface IPeopleListOwnProps {
   pageNumber: number
 }
 
-const mapStateToProps = (state: IAppState, { pageNumber }: IPeopleListOwnProps) => {
+const mapStateToProps = (state: IAppState, { pageNumber }: IPeopleListOwnProps): IRessourcesListProps<IPeople> => {
   const people = getPeoplePageContent(state, pageNumber);
   const pagesCount = getPeoplePagesCount(state);
   return {
     items: people.sort((people1, people2) => people1.name < people2.name ? -1 : 1),
     pageNumber,
     pagesCount,
+    renderItem: (someone: IPeople) => <Item people={someone} />
   };
 }
 
-const mapDispatchToProps = () => ({
-  renderItem: (people: IPeople) => <Item people={people} />
-});
-
 export const PeopleList = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(ResourceList);

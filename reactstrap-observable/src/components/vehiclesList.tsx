@@ -8,7 +8,7 @@ import {
   getVehiclesPageCount,
   IAppState
 } from '../store';
-import { ResourceList } from './resourcesList';
+import { IRessourcesListProps, ResourceList } from './resourcesList';
 
 interface IVehicleProps { vehicle: IVehicle }
 
@@ -34,21 +34,17 @@ interface IVehiclesListOwnProps {
   pageNumber: number,
 };
 
-const mapStateToProps = (state: IAppState, { pageNumber }: IVehiclesListOwnProps) => {
+const mapStateToProps = (state: IAppState, { pageNumber }: IVehiclesListOwnProps): IRessourcesListProps<IVehicle> => {
   const vehicles = getVehiclesPageContent(state, pageNumber);
   const pagesCount = getVehiclesPageCount(state);
   return {
     items: vehicles.sort((vehicle1, vehicle2) => vehicle1.name < vehicle2.name ? -1 : 1),
     pageNumber,
     pagesCount,
+    renderItem: (vehicle: IVehicle) => <Item vehicle={vehicle} />
   };
 }
 
-const mapDispatchToProps = () => ({
-  renderItem: (vehicle: IVehicle) => <Item vehicle={vehicle} />
-});
-
 export const VehiclesList = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(ResourceList);

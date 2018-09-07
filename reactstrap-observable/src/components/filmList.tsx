@@ -5,7 +5,7 @@ import CardBody from 'reactstrap/lib/CardBody';
 import { IFilm } from '../model/resources';
 import { getFilmPagesCount, getFilmsPageContent } from '../store/resources/selectors';
 import { IAppState } from '../store/state';
-import { ResourceList } from './resourcesList';
+import { IRessourcesListProps, ResourceList } from './resourcesList';
 
 interface IFilmProps { film: IFilm }
 
@@ -22,21 +22,18 @@ interface IFilmsListOwnProps {
   pageNumber: number,
 }
 
-const mapStateToProps = (state: IAppState, { pageNumber }: IFilmsListOwnProps) => {
+const mapStateToProps = (state: IAppState, { pageNumber }: IFilmsListOwnProps): IRessourcesListProps<IFilm> => {
   const films = getFilmsPageContent(state, pageNumber);
   const pagesCount = getFilmPagesCount(state);
   return {
     items: films.sort((film1, film2) => film1.episodeId - film2.episodeId),
     pageNumber,
     pagesCount,
+    renderItem: (film: IFilm) => <Item film={film} />
   };
 }
 
-const mapDispatchToProps = () => ({
-  renderItem: (film: IFilm) => <Item film={film} />
-});
 
 export const FilmList = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(ResourceList);
