@@ -1,6 +1,7 @@
 export type FilmTag = 'films';
 
 export interface IFilm {
+  url: string,
   title: string,
   episodeId: number,
   openingCrawl: string,
@@ -12,6 +13,7 @@ export interface IFilm {
 export type PeopleTag = 'people';
 
 export interface IPeople {
+  url: string,
   name: string,
   height: string,
   mass: string,
@@ -25,6 +27,7 @@ export interface IPeople {
 export type PlanetTag = 'planets';
 
 export interface IPlanet {
+  url: string,
   climate: string,
   diameter: number,
   gravity: string,
@@ -39,6 +42,7 @@ export interface IPlanet {
 export type SpecieTag = 'species';
 
 export interface ISpecie {
+  url: string,
   averageHeight: string,
   averageLifespan: string,
   classification: string,
@@ -52,6 +56,7 @@ export interface ISpecie {
 export type StarshipTag = 'starships';
 
 export interface IStarship {
+  url: string,
   name: string,
   model: string,
   manufacturer: string
@@ -70,7 +75,7 @@ export interface IStarship {
 export type VehicleTag = 'vehicles';
 
 export interface IVehicle {
-  name: string,
+  url: string, name: string,
   model: string,
   manufacturer: string,
   cost_in_credits: number

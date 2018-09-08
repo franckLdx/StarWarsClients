@@ -1,17 +1,17 @@
 
 import { ajax } from 'rxjs/ajax';
 import { map } from 'rxjs/operators';
-import { IFilm, IPeople, IPlanet, ISpecie, IStarship, IVehicle, ResourceType } from './model';
+import { IFilm, IPeople, IPlanet, ISpecie, IStarship, IVehicle, ResourceTagType } from './model';
 
 const URL = 'https://swapi.co/api';
 
-export const fetchResoures = (resource: ResourceType, pageNumber: number) => {
+export const fetchResoures = (resource: ResourceTagType, pageNumber: number) => {
   const mapper = getMapper(resource);
   const url = `${URL}/${resource}/${pageNumber !== undefined ? `?page=${pageNumber}` : ''}`;
   return ajax.getJSON(url).pipe(map(mapper));
 }
 
-const getMapper = (resource: ResourceType) => {
+const getMapper = (resource: ResourceTagType) => {
   const payloadMapper = getPayloadMapper(resource);
   return (payload: any) => {
     return {
@@ -21,7 +21,7 @@ const getMapper = (resource: ResourceType) => {
   }
 };
 
-const getPayloadMapper = (resource: ResourceType) => {
+const getPayloadMapper = (resource: ResourceTagType) => {
   switch (resource) {
     case 'films':
       return filmsMapper;
@@ -48,6 +48,7 @@ const filmsMapper = (payload: any): IFilm[] => {
     producer: film.producer,
     releaseDate: film.release_date,
     title: film.title,
+    url: film.url,
   });
   return payload.results.map(mapper);
 };
@@ -62,6 +63,7 @@ const peopleMapper = (payload: any): IPeople[] => {
     mass: people.mass,
     name: people.name,
     skinColor: people.skin_color,
+    url: people.url,
   });
   return payload.results.map(mapper);
 };
@@ -78,6 +80,7 @@ const speciesMapper = (payload: any): ISpecie[] => {
     hairColors: specie.hair_colors,
     language: specie.language,
     name: specie.name,
+    url: specie.url,
   });
   return payload.results.map(mapper);
 };
@@ -93,6 +96,7 @@ const planetsMapper = (payload: any): IPlanet[] => {
     rotationPeriod: specie.rotation_period,
     surfaceWater: specie.surface_water,
     terrain: specie.terrain,
+    url: specie.url,
   });
   return payload.results.map(mapper);
 };
@@ -112,6 +116,7 @@ const starshipMapper = (payload: any): IStarship[] => {
     name: starship.name,
     passengers: starship.passengers,
     starshipSlass: starship.starship_class,
+    url: starship.url,
   });
   return payload.results.map(mapper);
 };
@@ -128,6 +133,7 @@ const vehicleMapper = (payload: any): IVehicle[] => {
     model: vehicle.model,
     name: vehicle.name,
     passengers: vehicle.passengers,
+    url: vehicle.url,
     vehicleClass: vehicle.vehicle_class,
   });
   return payload.results.map(mapper);

@@ -4,12 +4,12 @@ import { Observable } from "rxjs";
 import { filter, map, mergeMap, startWith, withLatestFrom } from "rxjs/operators";
 import { canLoadResourcePage } from "..";
 import { fetchResoures } from "../../api";
-import { ResourceType } from "../../model";
+import { ResourceTagType } from "../../model";
 import AppAction from "../actions";
 import { IAppState } from "../state";
 import { ILoadResource, loadingResource, resourceLoaded } from "./actions";
 
-const fetchResouresStream$ = (resource: ResourceType, pageNumber: number): Observable<AppAction> =>
+const fetchResouresStream$ = (resource: ResourceTagType, pageNumber: number): Observable<AppAction> =>
   fetchResoures(resource, pageNumber).pipe(
     map(response => resourceLoaded(resource, response.pageCount, pageNumber, response.pageContent)),
     startWith(loadingResource(resource, pageNumber)),

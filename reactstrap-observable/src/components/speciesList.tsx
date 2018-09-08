@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { ISpecie } from '../model/resources';
-import { getSpeciesPageContent, getSpeciesPageCount } from '../store/resources/selectors';
+import { getSpeciesPageCount, getSpeciesPageData } from '../store/resources/selectors';
 import { IAppState } from '../store/state';
 import { IRessourcesListProps, ResourceList } from './resourcesList';
 
@@ -29,7 +29,7 @@ interface ISpeciesListOwnProps {
 }
 
 const mapStateToProps = (state: IAppState, { pageNumber }: ISpeciesListOwnProps): IRessourcesListProps<ISpecie> => {
-  const species = getSpeciesPageContent(state, pageNumber);
+  const species = getSpeciesPageData(state, pageNumber);
   const pagesCount = getSpeciesPageCount(state);
   return {
     items: species.sort((specie1, specie2) => specie1.name < specie2.name ? -1 : 1),

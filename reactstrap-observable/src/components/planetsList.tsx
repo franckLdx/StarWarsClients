@@ -4,8 +4,8 @@ import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IPlanet } from '../model/resources';
 import {
-  getPlanetsPageContent,
   getPlanetsPageCount,
+  getPlanetsPageData,
   IAppState
 } from '../store';
 import { IRessourcesListProps, ResourceList } from './resourcesList';
@@ -31,7 +31,7 @@ interface IPlanetOwnProps {
   pageNumber: number,
 }
 const mapStateToProps = (state: IAppState, { pageNumber }: IPlanetOwnProps): IRessourcesListProps<IPlanet> => {
-  const planets = getPlanetsPageContent(state, pageNumber);
+  const planets = getPlanetsPageData(state, pageNumber);
   const pagesCount = getPlanetsPageCount(state);
   return {
     items: planets.sort((planet1, planet2) => planet1.name < planet2.name ? -1 : 1),

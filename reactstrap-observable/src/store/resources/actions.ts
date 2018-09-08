@@ -1,27 +1,27 @@
-import { ResourceType } from "../../model";
+import { ResourceTagType, ResourceType } from "../../model";
 
 export interface ILoadResource {
   type: '@@ressource/LOAD',
-  resource: ResourceType,
+  resource: ResourceTagType,
   pageNumber: number,
 }
-export const loadResource = (resource: ResourceType, pageNumber: number): ILoadResource =>
+export const loadResource = (resource: ResourceTagType, pageNumber: number): ILoadResource =>
   ({ type: '@@ressource/LOAD', resource, pageNumber });
 
 export interface ILoadingResource {
   type: '@@ressource/LOADING',
-  resource: ResourceType,
+  resource: ResourceTagType,
   pageNumber: number,
 }
-export const loadingResource = (resource: ResourceType, pageNumber: number): ILoadingResource =>
+export const loadingResource = (resource: ResourceTagType, pageNumber: number): ILoadingResource =>
   ({ type: '@@ressource/LOADING', resource, pageNumber });
 
-export interface IResourceLoaded<T> {
+export interface IResourceLoaded<T extends ResourceType> {
   type: '@@ressource/LOADED',
-  resource: ResourceType,
+  resource: ResourceTagType,
   pagesCount: number,
   pageNumber: number,
-  content: T,
+  content: ReadonlyArray<T>,
 }
-export const resourceLoaded = <T>(resource: ResourceType, pagesCount: number, pageNumber: number, content: T): IResourceLoaded<T> =>
+export const resourceLoaded = <T extends ResourceType>(resource: ResourceTagType, pagesCount: number, pageNumber: number, content: ReadonlyArray<T>): IResourceLoaded<T> =>
   ({ type: '@@ressource/LOADED', resource, pagesCount, pageNumber, content });

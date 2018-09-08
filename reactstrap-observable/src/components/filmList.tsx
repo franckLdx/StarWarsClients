@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IFilm } from '../model/resources';
-import { getFilmPagesCount, getFilmsPageContent } from '../store/resources/selectors';
+import { getFilmPagesCount, getFilmsPageData } from '../store/resources/selectors';
 import { IAppState } from '../store/state';
 import { IRessourcesListProps, ResourceList } from './resourcesList';
 
@@ -23,7 +23,7 @@ interface IFilmsListOwnProps {
 }
 
 const mapStateToProps = (state: IAppState, { pageNumber }: IFilmsListOwnProps): IRessourcesListProps<IFilm> => {
-  const films = getFilmsPageContent(state, pageNumber);
+  const films = getFilmsPageData(state, pageNumber);
   const pagesCount = getFilmPagesCount(state);
   return {
     items: films.sort((film1, film2) => film1.episodeId - film2.episodeId),

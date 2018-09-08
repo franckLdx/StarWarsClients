@@ -4,8 +4,8 @@ import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IStarship } from '../model/resources';
 import {
-  getStarshipsPageContent,
   getStarshipsPageCount,
+  getStarshipsPageData,
   IAppState
 } from '../store';
 import { IRessourcesListProps, ResourceList } from './resourcesList';
@@ -36,7 +36,7 @@ interface IStarshipsListOwnProps {
 };
 
 const mapStateToProps = (state: IAppState, { pageNumber }: IStarshipsListOwnProps): IRessourcesListProps<IStarship> => {
-  const starships = getStarshipsPageContent(state, pageNumber);
+  const starships = getStarshipsPageData(state, pageNumber);
   const pagesCount = getStarshipsPageCount(state);
   return {
     items: starships.sort((starship1, starship2) => starship1.name < starship2.name ? -1 : 1),

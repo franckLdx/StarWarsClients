@@ -4,7 +4,7 @@ import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IPeople } from '../model/resources';
 import {
-  getPeoplePageContent,
+  getPeoplePageData,
   getPeoplePagesCount,
   IAppState
 } from '../store';
@@ -32,7 +32,7 @@ interface IPeopleListOwnProps {
 }
 
 const mapStateToProps = (state: IAppState, { pageNumber }: IPeopleListOwnProps): IRessourcesListProps<IPeople> => {
-  const people = getPeoplePageContent(state, pageNumber);
+  const people = getPeoplePageData(state, pageNumber);
   const pagesCount = getPeoplePagesCount(state);
   return {
     items: people.sort((people1, people2) => people1.name < people2.name ? -1 : 1),

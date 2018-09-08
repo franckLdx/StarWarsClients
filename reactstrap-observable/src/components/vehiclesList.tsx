@@ -4,8 +4,8 @@ import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IVehicle } from '../model/resources';
 import {
-  getVehiclesPageContent,
   getVehiclesPageCount,
+  getVehiclesPageData,
   IAppState
 } from '../store';
 import { IRessourcesListProps, ResourceList } from './resourcesList';
@@ -35,7 +35,7 @@ interface IVehiclesListOwnProps {
 };
 
 const mapStateToProps = (state: IAppState, { pageNumber }: IVehiclesListOwnProps): IRessourcesListProps<IVehicle> => {
-  const vehicles = getVehiclesPageContent(state, pageNumber);
+  const vehicles = getVehiclesPageData(state, pageNumber);
   const pagesCount = getVehiclesPageCount(state);
   return {
     items: vehicles.sort((vehicle1, vehicle2) => vehicle1.name < vehicle2.name ? -1 : 1),
