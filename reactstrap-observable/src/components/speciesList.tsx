@@ -29,12 +29,10 @@ interface ISpeciesListOwnProps {
 }
 
 const mapStateToProps = (state: IAppState, { pageNumber }: ISpeciesListOwnProps): IRessourcesListProps<ISpecie> => {
-  const species = getSpeciesPageData(state, pageNumber);
-  const pagesCount = getSpeciesPageCount(state);
   return {
-    items: species.sort((specie1, specie2) => specie1.name < specie2.name ? -1 : 1),
+    items: getSpeciesPageData(state, pageNumber),
     pageNumber,
-    pagesCount,
+    pagesCount: getSpeciesPageCount(state),
     renderItem: (specie: ISpecie) => <Item specie={specie} />
   };
 }

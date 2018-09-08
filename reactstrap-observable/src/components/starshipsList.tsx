@@ -36,12 +36,10 @@ interface IStarshipsListOwnProps {
 };
 
 const mapStateToProps = (state: IAppState, { pageNumber }: IStarshipsListOwnProps): IRessourcesListProps<IStarship> => {
-  const starships = getStarshipsPageData(state, pageNumber);
-  const pagesCount = getStarshipsPageCount(state);
   return {
-    items: starships.sort((starship1, starship2) => starship1.name < starship2.name ? -1 : 1),
+    items: getStarshipsPageData(state, pageNumber),
     pageNumber,
-    pagesCount,
+    pagesCount: getStarshipsPageCount(state),
     renderItem: (starship: IStarship) => <Item starship={starship} />
   };
 }

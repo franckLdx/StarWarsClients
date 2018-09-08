@@ -35,12 +35,10 @@ interface IVehiclesListOwnProps {
 };
 
 const mapStateToProps = (state: IAppState, { pageNumber }: IVehiclesListOwnProps): IRessourcesListProps<IVehicle> => {
-  const vehicles = getVehiclesPageData(state, pageNumber);
-  const pagesCount = getVehiclesPageCount(state);
   return {
-    items: vehicles.sort((vehicle1, vehicle2) => vehicle1.name < vehicle2.name ? -1 : 1),
+    items: getVehiclesPageData(state, pageNumber),
     pageNumber,
-    pagesCount,
+    pagesCount: getVehiclesPageCount(state),
     renderItem: (vehicle: IVehicle) => <Item vehicle={vehicle} />
   };
 }

@@ -34,7 +34,7 @@ const mapStateToProps = (state: IAppState, { pageNumber }: IPlanetOwnProps): IRe
   const planets = getPlanetsPageData(state, pageNumber);
   const pagesCount = getPlanetsPageCount(state);
   return {
-    items: planets.sort((planet1, planet2) => planet1.name < planet2.name ? -1 : 1),
+    items: planets,
     pageNumber,
     pagesCount,
     renderItem: (planet: IPlanet) => <Item planet={planet} />

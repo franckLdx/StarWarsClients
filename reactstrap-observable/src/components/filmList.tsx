@@ -23,12 +23,10 @@ interface IFilmsListOwnProps {
 }
 
 const mapStateToProps = (state: IAppState, { pageNumber }: IFilmsListOwnProps): IRessourcesListProps<IFilm> => {
-  const films = getFilmsPageData(state, pageNumber);
-  const pagesCount = getFilmPagesCount(state);
   return {
-    items: films.sort((film1, film2) => film1.episodeId - film2.episodeId),
+    items: getFilmsPageData(state, pageNumber),
     pageNumber,
-    pagesCount,
+    pagesCount: getFilmPagesCount(state),
     renderItem: (film: IFilm) => <Item film={film} />
   };
 }

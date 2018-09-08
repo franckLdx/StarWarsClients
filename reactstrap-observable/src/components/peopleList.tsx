@@ -32,12 +32,10 @@ interface IPeopleListOwnProps {
 }
 
 const mapStateToProps = (state: IAppState, { pageNumber }: IPeopleListOwnProps): IRessourcesListProps<IPeople> => {
-  const people = getPeoplePageData(state, pageNumber);
-  const pagesCount = getPeoplePagesCount(state);
   return {
-    items: people.sort((people1, people2) => people1.name < people2.name ? -1 : 1),
+    items: getPeoplePageData(state, pageNumber),
     pageNumber,
-    pagesCount,
+    pagesCount: getPeoplePagesCount(state),
     renderItem: (someone: IPeople) => <Item people={someone} />
   };
 }
