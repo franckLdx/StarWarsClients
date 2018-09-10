@@ -55,14 +55,14 @@ const getPage = <T extends ResourceState>(state: T, pageNumber: number) =>
 const mapContentToData = <T extends ResourceType>(content: ReadonlyArray<T>) => content.reduce(
   (acc, resource) => {
     const entry: IResourceData<T> = {};
-    entry[resource.url] = resource;
+    entry[resource.id] = resource;
     return { ...acc, ...entry };
   }, {} as IResourceData<T>
 );
 
 
 const mapContentToIds = (content: ReadonlyArray<ResourceType>) =>
-  content.map(resource => resource.url);
+  content.map(resource => resource.id);
 
 const films = createResourceReducer<IFilmsState>('films');
 const people = createResourceReducer<IPeopleState>('people');
