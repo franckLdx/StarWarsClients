@@ -1,15 +1,20 @@
 import { isResource, ResourceTagType } from "../../model";
 
-export const mapResourceToUrl = (resource: ResourceTagType) => `/${resource}`;
-export const mapPageToHash = (pageNumber: number) => `#page=${pageNumber}`;
+export interface IRessourceUrl {
+  baseUrl: string,
+  list: string,
+  record: string,
+}
+export const mapResourceToUrls = (resource: ResourceTagType): IRessourceUrl => {
+  const baseUrl = `/${resource}`;
+  return {
+    baseUrl,
+    list: `${baseUrl}/list`,
+    record: `${baseUrl}/record`,
+  };
+}
 
-export const mapUrlToResource = (url: string): ResourceTagType => {
-  const resource = url.split('/').pop();
-  if (resource && isResource(resource)) {
-    return resource;
-  }
-  throw new Error(`Unvalid URL: ${url}`);
-};
+export const mapPageToHash = (pageNumber: number) => `#page=${pageNumber}`;
 
 export const mapHashToPageNumber = (hash: string | undefined): number | undefined => {
   if (!hash) {
@@ -22,3 +27,10 @@ export const mapHashToPageNumber = (hash: string | undefined): number | undefine
   throw new Error(`Unvalid hash: ${hash}`);
 }
 
+export const mapUrlToResource = (url: string): ResourceTagType => {
+  const resource = url.split('/')[1];
+  if (resource && isResource(resource)) {
+    return resource;
+  }
+  throw new Error(`Unvalid URL: ${url}`);
+};
