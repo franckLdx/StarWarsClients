@@ -1,4 +1,4 @@
-import { mapResourceToUrls } from "./tools";
+import { mapResourceToUrls } from "../app/routes/tools";
 
 export const URL_FILMS = mapResourceToUrls('films');
 export const URL_PEOPLE = mapResourceToUrls('people');

@@ -2,13 +2,13 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
-import { IPeople } from '../model/resources';
+import { IPeople } from '../../model/resources';
 import {
   getPeoplePageData,
   getPeoplePagesCount,
   IAppState
-} from '../store';
-import { IRessourcesListProps, ResourceList } from './resourcesList';
+} from '../../store';
+import { IRessourcesListProps, ResourceList } from '../resourcesList';
 
 interface IPeopleProps { people: IPeople }
 

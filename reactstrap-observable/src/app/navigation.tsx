@@ -8,7 +8,7 @@ import {
   URL_SPECIES,
   URL_STARSHIPS,
   URL_VEHICLES
-} from './routes/routes';
+} from '../model/routes';
 
 interface INavigationState { isOpen: boolean };
 

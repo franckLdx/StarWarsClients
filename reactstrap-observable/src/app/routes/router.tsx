@@ -19,7 +19,7 @@ import {
   URL_SPECIES,
   URL_STARSHIPS,
   URL_VEHICLES
-} from './routes';
+} from '../../model';
 
 export const Routes: React.StatelessComponent<{}> = () => (
   <Switch>
@@ -31,7 +31,6 @@ export const Routes: React.StatelessComponent<{}> = () => (
     <Route path={URL_VEHICLES.baseUrl} render={VehiclesRender} />
   </Switch>
 );
-
 
 const PeopleRender = makeRenderPageComponent(PeopleList);
 const SpeciesRender = makeRenderPageComponent(SpeciesList);

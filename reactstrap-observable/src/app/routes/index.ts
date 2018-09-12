@@ -1,4 +1,4 @@
 export * from './router';
-export * from './routes';
 export * from './tools';
-export { makeRenderPageComponent } from './render';
+export * from './subRouter';
+export * from './render';
