@@ -4,6 +4,7 @@ import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IVehicle } from '../model/resources';
 import {
+  getVehiclesCurrentPage,
   getVehiclesPageCount,
   getVehiclesPageData,
   IAppState
@@ -29,15 +30,11 @@ const Item: React.StatelessComponent<IVehicleProps> = ({ vehicle }) =>
     </CardBody>
   </Card >
 
-
-interface IVehiclesListOwnProps {
-  pageNumber: number,
-};
-
-const mapStateToProps = (state: IAppState, { pageNumber }: IVehiclesListOwnProps): IRessourcesListProps<IVehicle> => {
+const mapStateToProps = (state: IAppState): IRessourcesListProps<IVehicle> => {
+  const currentPage = getVehiclesCurrentPage(state);
   return {
-    items: getVehiclesPageData(state, pageNumber),
-    pageNumber,
+    items: getVehiclesPageData(state, currentPage),
+    pageNumber: currentPage,
     pagesCount: getVehiclesPageCount(state),
     renderItem: (vehicle: IVehicle) => <Item vehicle={vehicle} />
   };

@@ -4,6 +4,7 @@ import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IStarship } from '../model/resources';
 import {
+  getStarshipsCurrentPage,
   getStarshipsPageCount,
   getStarshipsPageData,
   IAppState
@@ -31,14 +32,11 @@ const Item: React.StatelessComponent<IStarshipProps> = ({ starship }) =>
     </CardBody>
   </Card >
 
-interface IStarshipsListOwnProps {
-  pageNumber: number,
-};
-
-const mapStateToProps = (state: IAppState, { pageNumber }: IStarshipsListOwnProps): IRessourcesListProps<IStarship> => {
+const mapStateToProps = (state: IAppState): IRessourcesListProps<IStarship> => {
+  const currentPage = getStarshipsCurrentPage(state);
   return {
-    items: getStarshipsPageData(state, pageNumber),
-    pageNumber,
+    items: getStarshipsPageData(state, currentPage),
+    pageNumber: currentPage,
     pagesCount: getStarshipsPageCount(state),
     renderItem: (starship: IStarship) => <Item starship={starship} />
   };

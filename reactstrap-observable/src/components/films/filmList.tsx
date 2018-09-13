@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IFilm } from '../../model/resources';
-import { getFilmPagesCount, getFilmsPageData } from '../../store/resources/selectors';
+import { getFilmCurrentPage, getFilmPagesCount, getFilmsPageData } from '../../store/resources/selectors';
 import { IAppState } from '../../store/state';
 import { IRessourcesListProps, ResourceList } from '../resourcesList';
 
@@ -21,14 +21,11 @@ const Item: React.StatelessComponent<IFilmProps> = ({ film }) =>
   </Card>
 
 
-interface IFilmsListOwnProps {
-  pageNumber: number,
-}
-
-const mapStateToProps = (state: IAppState, { pageNumber }: IFilmsListOwnProps): IRessourcesListProps<IFilm> => {
+const mapStateToProps = (state: IAppState): IRessourcesListProps<IFilm> => {
+  const currentPage = getFilmCurrentPage(state);
   return {
-    items: getFilmsPageData(state, pageNumber),
-    pageNumber,
+    items: getFilmsPageData(state, currentPage),
+    pageNumber: currentPage,
     pagesCount: getFilmPagesCount(state),
     renderItem: (film: IFilm) => <Item film={film} />
   };

@@ -1,5 +1,4 @@
 import {
-  defaultPageNumber,
   IFilmsState,
   IPeopleState,
   IPlanetState,
@@ -16,5 +15,3 @@ export interface IAppState {
   starships: IStarshipState,
   vehicles: IVehiclesState,
 }
-
-export { defaultPageNumber }

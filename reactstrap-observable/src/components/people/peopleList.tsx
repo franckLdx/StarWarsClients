@@ -4,6 +4,7 @@ import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IPeople } from '../../model/resources';
 import {
+  getPeopleCurrentPage,
   getPeoplePageData,
   getPeoplePagesCount,
   IAppState
@@ -27,14 +28,11 @@ const Item: React.StatelessComponent<IPeopleProps> = ({ people }) =>
   </Card >
 
 
-interface IPeopleListOwnProps {
-  pageNumber: number
-}
-
-const mapStateToProps = (state: IAppState, { pageNumber }: IPeopleListOwnProps): IRessourcesListProps<IPeople> => {
+const mapStateToProps = (state: IAppState): IRessourcesListProps<IPeople> => {
+  const currentPage = getPeopleCurrentPage(state);
   return {
-    items: getPeoplePageData(state, pageNumber),
-    pageNumber,
+    items: getPeoplePageData(state, currentPage),
+    pageNumber: currentPage,
     pagesCount: getPeoplePagesCount(state),
     renderItem: (someone: IPeople) => <Item people={someone} />
   };

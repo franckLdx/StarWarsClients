@@ -4,6 +4,7 @@ import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { IPlanet } from '../model/resources';
 import {
+  getPlanetsCurrentPage,
   getPlanetsPageCount,
   getPlanetsPageData,
   IAppState
@@ -27,15 +28,13 @@ const Item: React.StatelessComponent<IPlanetProps> = ({ planet }) =>
     </CardBody>
   </Card >
 
-interface IPlanetOwnProps {
-  pageNumber: number,
-}
-const mapStateToProps = (state: IAppState, { pageNumber }: IPlanetOwnProps): IRessourcesListProps<IPlanet> => {
-  const planets = getPlanetsPageData(state, pageNumber);
+const mapStateToProps = (state: IAppState): IRessourcesListProps<IPlanet> => {
+  const currentPage = getPlanetsCurrentPage(state);
+  const planets = getPlanetsPageData(state, currentPage);
   const pagesCount = getPlanetsPageCount(state);
   return {
     items: planets,
-    pageNumber,
+    pageNumber: currentPage,
     pagesCount,
     renderItem: (planet: IPlanet) => <Item planet={planet} />
   };

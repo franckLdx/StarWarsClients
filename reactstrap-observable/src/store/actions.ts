@@ -1,5 +1,5 @@
 import { IFilm, IPeople, IPlanet, ISpecie, IStarship, IVehicle } from "../model";
-import { ILoadingResource, ILoadResource, IResourceLoaded } from "./resources/actions";
+import { ILoadingResource, ILoadResource, IResourceLoaded, ISetCurrentPage } from "./resources/actions";
 
 type AppAction = ILoadingResource
   | ILoadResource
@@ -9,5 +9,6 @@ type AppAction = ILoadingResource
   | IResourceLoaded<IPlanet>
   | IResourceLoaded<IStarship>
   | IResourceLoaded<IVehicle>
+  | ISetCurrentPage
 
 export default AppAction;

@@ -1,32 +1,35 @@
 import { IFilm, IPeople, IPlanet, ISpecie, IStarship, IVehicle, ResourceType } from "../../model";
 
-export const defaultPageNumber = 1;
+export const initialCurrentPage = 1;
 
 export interface IPageResourceState<T> {
-  status: LoadingStatus;
   ids: string[];
+  status: LoadingStatus;
 }
 
-export interface IResourceData<T extends ResourceType> {
-  [id: string]: T
-}
-
-export interface IResourceState<T extends ResourceType> {
-  pagesCount: number | undefined
-  [pageNumber: number]: IPageResourceState<T>
-  data: IResourceData<T>
-};
-
-export const defaultInitialPageState: IPageResourceState<any> = {
+export const initialPageResourceState: IPageResourceState<any> = {
   ids: [],
   status: 'NOT_LOADED',
 };
 
-export const initialPageState: IResourceState<any> = {
-  data: {},
+export interface IResourceData<T extends ResourceType> {
+  [id: string]: T
+}
+const initialIResourceData = {};
+
+export interface IResourceState<T extends ResourceType> {
+  pagesCount: number | undefined
+  currentPage: number;
+  [pageNumber: number]: IPageResourceState<T>
+  data: IResourceData<T>
+};
+
+export const initialResourceState: IResourceState<any> = {
+  currentPage: initialCurrentPage,
+  data: initialIResourceData,
   pagesCount: undefined,
 };
-initialPageState[defaultPageNumber] = defaultInitialPageState
+initialResourceState[initialResourceState.currentPage] = initialPageResourceState
 
 export type IFilmsState = IResourceState<IFilm>;
 export type ISpeciesState = IResourceState<ISpecie>;

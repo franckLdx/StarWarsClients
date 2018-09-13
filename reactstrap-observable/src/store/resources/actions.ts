@@ -25,3 +25,11 @@ export interface IResourceLoaded<T extends ResourceType> {
 }
 export const resourceLoaded = <T extends ResourceType>(resource: ResourceTagType, pagesCount: number, pageNumber: number, content: ReadonlyArray<T>): IResourceLoaded<T> =>
   ({ type: '@@ressource/LOADED', resource, pagesCount, pageNumber, content });
+
+export interface ISetCurrentPage {
+  type: '@@ressource/SET_PAGE',
+  resource: ResourceTagType,
+  pageNumber: number,
+}
+export const setCurrentPage = (resource: ResourceTagType, pageNumber: number): ISetCurrentPage =>
+  ({ type: '@@ressource/SET_PAGE', resource, pageNumber });

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
 import { ISpecie } from '../model/resources';
-import { getSpeciesPageCount, getSpeciesPageData } from '../store/resources/selectors';
+import { getSpeciesCurrentPage, getSpeciesPageCount, getSpeciesPageData } from '../store/resources/selectors';
 import { IAppState } from '../store/state';
 import { IRessourcesListProps, ResourceList } from './resourcesList';
 
@@ -24,14 +24,11 @@ const Item: React.StatelessComponent<ISpecieProps> = ({ specie }) =>
   </Card >
 
 
-interface ISpeciesListOwnProps {
-  pageNumber: number
-}
-
-const mapStateToProps = (state: IAppState, { pageNumber }: ISpeciesListOwnProps): IRessourcesListProps<ISpecie> => {
+const mapStateToProps = (state: IAppState): IRessourcesListProps<ISpecie> => {
+  const currentPage = getSpeciesCurrentPage(state);
   return {
-    items: getSpeciesPageData(state, pageNumber),
-    pageNumber,
+    items: getSpeciesPageData(state, currentPage),
+    pageNumber: currentPage,
     pagesCount: getSpeciesPageCount(state),
     renderItem: (specie: ISpecie) => <Item specie={specie} />
   };

@@ -2,9 +2,9 @@ import { combineReducers } from "redux";
 import { ResourceTagType, ResourceType } from "../../model";
 import AppAction from "../actions";
 import {
-  defaultInitialPageState,
   IFilmsState,
-  initialPageState,
+  initialPageResourceState,
+  initialResourceState,
   IPageResourceState,
   IPeopleState,
   IPlanetState,
@@ -19,10 +19,12 @@ type ResourceState = IFilmsState | IPeopleState | ISpeciesState | IPlanetState |
 const createResourceReducer = <T extends ResourceState>(resource: ResourceTagType) => {
   return (state: T, action: AppAction): T => {
     if (action.resource !== resource) {
-      return state || initialPageState;
+      return state || initialResourceState;
     }
 
     switch (action.type) {
+      case '@@ressource/SET_PAGE':
+        return { ...state as any, currentPage: action.pageNumber };
       case '@@ressource/LOADING': {
         const { pageNumber } = action;
         const oldPage = getPage(state, pageNumber);
@@ -50,7 +52,7 @@ const setPage = <T extends ResourceState>(state: T, newPage: any, pageNumber: nu
 }
 
 const getPage = <T extends ResourceState>(state: T, pageNumber: number) =>
-  state[pageNumber] || defaultInitialPageState;
+  state[pageNumber] || initialPageResourceState;
 
 const mapContentToData = <T extends ResourceType>(content: ReadonlyArray<T>) => content.reduce(
   (acc, resource) => {
