@@ -1,28 +1,31 @@
-import { Action } from "redux";
+import { StateObservable } from "redux-observable";
 import { merge, Observable, of } from "rxjs";
-import { filter, mergeMap } from "rxjs/operators";
+import { filter, mergeMap, withLatestFrom } from "rxjs/operators";
 import { mapHashToPageNumber, mapUrlToResource } from "../app/routes";
 import AppAction from "./actions";
 import { loadResource, setCurrentPage } from "./resources/actions";
-import { initialCurrentPage } from "./resources/state";
+import { getResourceCurrentPage } from "./resources/selectors";
+import { IAppState } from "./state";
 
-export const onRoute = (action$: Observable<Action>): Observable<AppAction> => {
+export const onRoute = (action$: Observable<any>, state$: StateObservable<IAppState>): Observable<AppAction> => {
   const load$ = action$.pipe(
     filter(action => action.type === '@@router/LOCATION_CHANGE'),
-    mergeMap((action: any) => {
+    withLatestFrom(state$),
+    mergeMap(([action, state]) => {
       const { pathname, hash } = action.payload.location;
       const resource = mapUrlToResource(pathname);
-      const pageNumber = mapHashToPageNumber(hash) || initialCurrentPage;
+      const pageNumber = mapHashToPageNumber(hash) || getResourceCurrentPage(state, resource);
       return of(loadResource(resource, pageNumber));
     })
   );
 
   const currentPage$ = action$.pipe(
     filter(action => action.type === '@@router/LOCATION_CHANGE'),
-    mergeMap((action: any) => {
+    withLatestFrom(state$),
+    mergeMap(([action, state]) => {
       const { pathname, hash } = action.payload.location;
       const resource = mapUrlToResource(pathname);
-      const pageNumber = mapHashToPageNumber(hash) || initialCurrentPage;
+      const pageNumber = mapHashToPageNumber(hash) || getResourceCurrentPage(state, resource);
       return of(setCurrentPage(resource, pageNumber));
     })
   );

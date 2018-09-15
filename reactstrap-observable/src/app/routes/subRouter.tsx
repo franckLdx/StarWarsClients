@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router';
 
-type RecordProps = (props: RouteComponentProps<any>) => React.ReactNode;
-
-export interface ISubRouterPath { url: string, renderer: RecordProps };
+export interface ISubRouterPath { url: string, renderer: (routeProps: RouteComponentProps<any>) => React.ReactNode };
 
 export interface ISubRouterProps {
   list: ISubRouterPath,
