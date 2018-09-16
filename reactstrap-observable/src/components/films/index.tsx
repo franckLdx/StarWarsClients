@@ -1,4 +1,4 @@
-import { makeRenderListComponent, makeRenderPageComponent } from '../../app/routes/render';
+import { makeRenderListComponent, makeRenderPageComponent } from '../../app/routes/renderer';
 import { ISubRouterPath, SubRouter } from '../../app/routes/subRouter';
 import { URL_FILMS } from '../../model';
 import { FilmList } from './filmList';

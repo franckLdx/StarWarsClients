@@ -1,4 +1,4 @@
 export * from './router';
 export * from './tools';
 export * from './subRouter';
-export * from './render';
+export * from './renderer';

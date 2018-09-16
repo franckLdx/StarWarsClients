@@ -10,7 +10,7 @@ import {
   VehiclesList
 } from '../../components';
 
-import { makeRenderPageComponent } from './render';
+import { makeRenderPageComponent } from './renderer';
 
 import {
   URL_FILMS,
