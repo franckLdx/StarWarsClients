@@ -2,14 +2,14 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
-import { IPlanet } from '../model/resources';
+import { IPlanet } from '../../../model/resources';
 import {
-  getPlanetsCurrentPage,
   getPlanetsPageCount,
   getPlanetsPageData,
   IAppState
-} from '../store';
-import { IRessourcesListProps, ResourceList } from './resourcesList';
+} from '../../../store';
+import { IRessourcesListProps, ResourceList } from '../../resourcesList';
+import { IListProps } from '../../routes';
 
 interface IPlanetProps { planet: IPlanet }
 
@@ -28,18 +28,17 @@ const Item: React.StatelessComponent<IPlanetProps> = ({ planet }) =>
     </CardBody>
   </Card >
 
-const mapStateToProps = (state: IAppState): IRessourcesListProps<IPlanet> => {
-  const currentPage = getPlanetsCurrentPage(state);
-  const planets = getPlanetsPageData(state, currentPage);
+const mapStateToProps = (state: IAppState, { pageNumber }: IListProps): IRessourcesListProps<IPlanet> => {
+  const planets = getPlanetsPageData(state, pageNumber);
   const pagesCount = getPlanetsPageCount(state);
   return {
     items: planets,
-    pageNumber: currentPage,
+    pageNumber,
     pagesCount,
     renderItem: (planet: IPlanet) => <Item planet={planet} />
   };
 }
 
-export const PlanetsList = connect(
+export const List = connect(
   mapStateToProps
 )(ResourceList);

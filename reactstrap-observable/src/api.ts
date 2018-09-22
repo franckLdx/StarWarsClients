@@ -125,13 +125,13 @@ const vehicleMapper = (payload: any): IVehicle[] => {
     consumables: vehicle.consumables,
     costInCredits: vehicle.costInCredits,
     crew: vehicle.crew,
+    id: vehicle.url,
     length: vehicle.length,
     manufacturer: vehicle.manufacturer,
     maxAtmospheringSpeed: vehicle.max_atmosphering_speed,
     model: vehicle.model,
     name: vehicle.name,
     passengers: vehicle.passengers,
-    url: vehicle.url,
     vehicleClass: vehicle.vehicle_class,
   });
   return payload.results.map(mapper);

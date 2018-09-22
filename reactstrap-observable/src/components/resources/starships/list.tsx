@@ -2,14 +2,14 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
-import { IStarship } from '../model/resources';
+import { IStarship } from '../../../model/resources';
 import {
-  getStarshipsCurrentPage,
   getStarshipsPageCount,
   getStarshipsPageData,
   IAppState
-} from '../store';
-import { IRessourcesListProps, ResourceList } from './resourcesList';
+} from '../../../store';
+import { IRessourcesListProps, ResourceList } from '../../resourcesList';
+import { IListProps } from '../../routes';
 
 interface IStarshipProps { starship: IStarship }
 
@@ -32,16 +32,15 @@ const Item: React.StatelessComponent<IStarshipProps> = ({ starship }) =>
     </CardBody>
   </Card >
 
-const mapStateToProps = (state: IAppState): IRessourcesListProps<IStarship> => {
-  const currentPage = getStarshipsCurrentPage(state);
+const mapStateToProps = (state: IAppState, { pageNumber }: IListProps): IRessourcesListProps<IStarship> => {
   return {
-    items: getStarshipsPageData(state, currentPage),
-    pageNumber: currentPage,
+    items: getStarshipsPageData(state, pageNumber),
+    pageNumber,
     pagesCount: getStarshipsPageCount(state),
     renderItem: (starship: IStarship) => <Item starship={starship} />
   };
 }
 
-export const StarshipsList = connect(
+export const List = connect(
   mapStateToProps
 )(ResourceList);

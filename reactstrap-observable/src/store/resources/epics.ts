@@ -15,7 +15,7 @@ const fetchResouresStream$ = (resource: ResourceTagType, pageNumber: number): Ob
     startWith(loadingResource(resource, pageNumber)),
   );
 
-export const onLoad = (action$: Observable<Action>, state$: StateObservable<IAppState>): Observable<AppAction> => {
+export const onLoad$ = (action$: Observable<Action>, state$: StateObservable<IAppState>): Observable<AppAction> => {
   return action$.pipe(
     ofType<ILoadResource>('@@ressource/LOAD'),
     withLatestFrom(state$),

@@ -1,13 +1,21 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom'
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import {
-  URL_FILMS,
-  URL_PEOPLE,
-  URL_PLANETS,
-  URL_SPECIES,
-  URL_STARSHIPS,
-  URL_VEHICLES
+  Collapse,
+  Nav,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+  NavItem,
+  NavLink
+} from 'reactstrap';
+import {
+  ROUTE_FILMS,
+  ROUTE_PEOPLE,
+  ROUTE_PLANETS,
+  ROUTE_SPECIES,
+  ROUTE_STARSHIPS,
+  ROUTE_VEHICLES
 } from '../model/routes';
 
 interface INavigationState { isOpen: boolean };
@@ -35,14 +43,14 @@ export default class Navigation extends React.Component<{}, INavigationState> {
   }
 }
 
-const Content: React.StatelessComponent<{}> = () => (
+const Content: React.StatelessComponent<{}> = (props) => (
   <>
-    <Item label={"Films"} href={URL_FILMS.list} />
-    <Item label={"People"} href={URL_PEOPLE.list} />
-    <Item label={"Species"} href={URL_SPECIES.list} />
-    <Item label={"Planets"} href={URL_PLANETS.list} />
-    <Item label={"Spaceships"} href={URL_STARSHIPS.list} />
-    <Item label={"Vehicles"} href={URL_VEHICLES.list} />
+    <Item label={"Films"} href={ROUTE_FILMS} />
+    <Item label={"People"} href={ROUTE_PEOPLE} />
+    <Item label={"Species"} href={ROUTE_SPECIES} />
+    <Item label={"Planets"} href={ROUTE_PLANETS} />
+    <Item label={"Spaceships"} href={ROUTE_STARSHIPS} />
+    <Item label={"Vehicles"} href={ROUTE_VEHICLES} />
   </>
 );
 

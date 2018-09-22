@@ -2,14 +2,14 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
-import { IPeople } from '../../model/resources';
+import { IPeople } from '../../../model/resources';
 import {
-  getPeopleCurrentPage,
   getPeoplePageData,
   getPeoplePagesCount,
   IAppState
-} from '../../store';
-import { IRessourcesListProps, ResourceList } from '../resourcesList';
+} from '../../../store';
+import { IRessourcesListProps, ResourceList } from '../../resourcesList';
+import { IListProps } from '../../routes';
 
 interface IPeopleProps { people: IPeople }
 
@@ -28,16 +28,15 @@ const Item: React.StatelessComponent<IPeopleProps> = ({ people }) =>
   </Card >
 
 
-const mapStateToProps = (state: IAppState): IRessourcesListProps<IPeople> => {
-  const currentPage = getPeopleCurrentPage(state);
+const mapStateToProps = (state: IAppState, { pageNumber }: IListProps): IRessourcesListProps<IPeople> => {
   return {
-    items: getPeoplePageData(state, currentPage),
-    pageNumber: currentPage,
+    items: getPeoplePageData(state, pageNumber),
+    pageNumber,
     pagesCount: getPeoplePagesCount(state),
     renderItem: (someone: IPeople) => <Item people={someone} />
   };
 }
 
-export const PeopleList = connect(
+export const List = connect(
   mapStateToProps
 )(ResourceList);

@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
-import { IFilm } from '../../model/resources';
-import { getFilmCurrentPage, getFilmPagesCount, getFilmsPageData } from '../../store/resources/selectors';
-import { IAppState } from '../../store/state';
-import { IRessourcesListProps, ResourceList } from '../resourcesList';
+import { IFilm } from '../../../model/resources';
+import { getFilmPagesCount, getFilmsPageData } from '../../../store/resources/selectors';
+import { IAppState } from '../../../store/state';
+import { IRessourcesListProps, ResourceList } from '../../resourcesList';
+import { IListProps } from '../../routes';
 
 interface IFilmProps { film: IFilm }
 
@@ -21,16 +22,15 @@ const Item: React.StatelessComponent<IFilmProps> = ({ film }) =>
   </Card>
 
 
-const mapStateToProps = (state: IAppState): IRessourcesListProps<IFilm> => {
-  const currentPage = getFilmCurrentPage(state);
+const mapStateToProps = (state: IAppState, { pageNumber }: IListProps): IRessourcesListProps<IFilm> => {
   return {
-    items: getFilmsPageData(state, currentPage),
-    pageNumber: currentPage,
+    items: getFilmsPageData(state, pageNumber),
+    pageNumber,
     pagesCount: getFilmPagesCount(state),
     renderItem: (film: IFilm) => <Item film={film} />
   };
 }
 
-export const FilmList = connect(
+export const List = connect(
   mapStateToProps
 )(ResourceList);

@@ -2,10 +2,11 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
-import { ISpecie } from '../model/resources';
-import { getSpeciesCurrentPage, getSpeciesPageCount, getSpeciesPageData } from '../store/resources/selectors';
-import { IAppState } from '../store/state';
-import { IRessourcesListProps, ResourceList } from './resourcesList';
+import { ISpecie } from '../../../model/resources';
+import { getSpeciesPageCount, getSpeciesPageData } from '../../../store/resources/selectors';
+import { IAppState } from '../../../store/state';
+import { IRessourcesListProps, ResourceList } from '../../resourcesList';
+import { IListProps } from '../../routes';
 
 interface ISpecieProps { specie: ISpecie }
 
@@ -24,16 +25,15 @@ const Item: React.StatelessComponent<ISpecieProps> = ({ specie }) =>
   </Card >
 
 
-const mapStateToProps = (state: IAppState): IRessourcesListProps<ISpecie> => {
-  const currentPage = getSpeciesCurrentPage(state);
+const mapStateToProps = (state: IAppState, { pageNumber }: IListProps): IRessourcesListProps<ISpecie> => {
   return {
-    items: getSpeciesPageData(state, currentPage),
-    pageNumber: currentPage,
+    items: getSpeciesPageData(state, pageNumber),
+    pageNumber,
     pagesCount: getSpeciesPageCount(state),
     renderItem: (specie: ISpecie) => <Item specie={specie} />
   };
 }
 
-export const SpeciesList = connect(
+export const List = connect(
   mapStateToProps
 )(ResourceList);

@@ -2,14 +2,14 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
-import { IVehicle } from '../model/resources';
+import { IVehicle } from '../../../model/resources';
 import {
-  getVehiclesCurrentPage,
   getVehiclesPageCount,
   getVehiclesPageData,
   IAppState
-} from '../store';
-import { IRessourcesListProps, ResourceList } from './resourcesList';
+} from '../../../store';
+import { IRessourcesListProps, ResourceList } from '../../resourcesList';
+import { IListProps } from '../../routes';
 
 interface IVehicleProps { vehicle: IVehicle }
 
@@ -30,16 +30,15 @@ const Item: React.StatelessComponent<IVehicleProps> = ({ vehicle }) =>
     </CardBody>
   </Card >
 
-const mapStateToProps = (state: IAppState): IRessourcesListProps<IVehicle> => {
-  const currentPage = getVehiclesCurrentPage(state);
+const mapStateToProps = (state: IAppState, { pageNumber }: IListProps): IRessourcesListProps<IVehicle> => {
   return {
-    items: getVehiclesPageData(state, currentPage),
-    pageNumber: currentPage,
+    items: getVehiclesPageData(state, pageNumber),
+    pageNumber,
     pagesCount: getVehiclesPageCount(state),
     renderItem: (vehicle: IVehicle) => <Item vehicle={vehicle} />
   };
 }
 
-export const VehiclesList = connect(
+export const List = connect(
   mapStateToProps
 )(ResourceList);

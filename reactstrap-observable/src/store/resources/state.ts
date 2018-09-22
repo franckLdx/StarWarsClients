@@ -37,3 +37,12 @@ export type IPeopleState = IResourceState<IPeople>;
 export type IPlanetState = IResourceState<IPlanet>;
 export type IStarshipState = IResourceState<IStarship>;
 export type IVehiclesState = IResourceState<IVehicle>;
+
+export interface IResources {
+  films: IFilmsState,
+  people: IPeopleState,
+  species: ISpeciesState,
+  planets: IPlanetState,
+  starships: IStarshipState,
+  vehicles: IVehiclesState,
+};

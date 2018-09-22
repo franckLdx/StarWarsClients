@@ -1,3 +1,3 @@
 export * from './resources';
-export * from './tools';
 export * from './routes';
+export * from './tools';

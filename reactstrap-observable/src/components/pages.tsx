@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
-import { mapPageToHash } from '../app/routes';
+import { mapPageNumberToHash } from './routes';
 
 interface IPageProps {
   activePageNumber: number | undefined
@@ -38,7 +38,7 @@ export const Pages: React.StatelessComponent<IPageProps> = ({ activePageNumber, 
 const PageIndex: React.StatelessComponent<{ pageNumber: number, active: boolean }> =
   ({ pageNumber, active }) => (
     <PaginationItem active={active}>
-      <PaginationLink href={mapPageToHash(pageNumber)} >{pageNumber}</PaginationLink>
+      <PaginationLink href={mapPageNumberToHash(pageNumber)} >{pageNumber}</PaginationLink>
     </PaginationItem >
   )
 
@@ -50,7 +50,7 @@ const PreviousButton: React.StatelessComponent<IPreviousProps> = ({ activePageNu
   const previousPageNumber = activePageNumber === undefined ? 0 : activePageNumber - 1;
   return (
     <PaginationItem disabled={disabled}>
-      <PaginationLink previous={true} href={mapPageToHash(previousPageNumber)} />
+      <PaginationLink previous={true} href={mapPageNumberToHash(previousPageNumber)} />
     </PaginationItem>
   );
 }
@@ -64,7 +64,7 @@ const NextButton: React.StatelessComponent<INextProps> = ({ activePageNumber, pa
   const nextPageNumber = activePageNumber === undefined ? 0 : activePageNumber + 1;
   return (
     <PaginationItem disabled={disabled}>
-      <PaginationLink next={true} href={mapPageToHash(nextPageNumber)} />
+      <PaginationLink next={true} href={mapPageNumberToHash(nextPageNumber)} />
     </PaginationItem>
   );
 }

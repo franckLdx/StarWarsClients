@@ -23,8 +23,6 @@ const createResourceReducer = <T extends ResourceState>(resource: ResourceTagTyp
     }
 
     switch (action.type) {
-      case '@@ressource/SET_PAGE':
-        return { ...state as any, currentPage: action.pageNumber };
       case '@@ressource/LOADING': {
         const { pageNumber } = action;
         const oldPage = getPage(state, pageNumber);

@@ -3,10 +3,10 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import { createEpicMiddleware } from 'redux-observable';
 import { combineEpics } from 'redux-observable';
 import { history, reducer } from './reducers';
-import { onLoad } from './resources/epics';
-import { onRoute } from './route';
+import { onLoad$ } from './resources/epics';
+import { onRoute$ } from './routes/epics';
 
-const rootEpic = combineEpics(onLoad, onRoute);
+const rootEpic = combineEpics(onRoute$, onLoad$);
 const epicMiddleware = createEpicMiddleware();
 
 const rootMiddleware = applyMiddleware(
