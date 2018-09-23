@@ -31,6 +31,6 @@ const mapStateToProps = (state: IAppState, { pageNumber }: IListProps): IRessour
   };
 }
 
-export const List = connect(
+export const FilmsList = connect(
   mapStateToProps
 )(ResourceList);

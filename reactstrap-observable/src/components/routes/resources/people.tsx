@@ -1,16 +1,15 @@
 import * as React from 'react';
+import { IRouteDef, makeRendererList, makeRendererRecord, makeResourceRouter } from "..";
 import { routeGetListUrl, routeGetRecordtUrl } from "../../../model/routes";
-import { IRouteDef, makeRendererList, makeRendererRecord, makeResourceRouter } from "../../routes";
-import { List } from "./list";
-import { Record } from "./record";
+import { PeopleList, PoepleRecord } from '../../resources';
 
 const listDef: IRouteDef = {
-  renderer: makeRendererList((pageNumber: number) => <List pageNumber={pageNumber} />),
+  renderer: makeRendererList((pageNumber: number) => <PeopleList pageNumber={pageNumber} />),
   url: routeGetListUrl('people'),
 }
 
 const recordDef: IRouteDef = {
-  renderer: makeRendererRecord(Record),
+  renderer: makeRendererRecord(PoepleRecord),
   url: routeGetRecordtUrl('people'),
 }
 

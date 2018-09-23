@@ -39,6 +39,6 @@ const mapStateToProps = (state: IAppState, { pageNumber }: IListProps): IRessour
   };
 }
 
-export const List = connect(
+export const VehiclesList = connect(
   mapStateToProps
 )(ResourceList);

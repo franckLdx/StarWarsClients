@@ -41,6 +41,6 @@ const mapStateToProps = (state: IAppState, { pageNumber }: IListProps): IRessour
   };
 }
 
-export const List = connect(
+export const StarshipsList = connect(
   mapStateToProps
 )(ResourceList);
