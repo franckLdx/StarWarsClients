@@ -9,7 +9,7 @@ const listDef: IRouteDef = {
 }
 
 const recordDef: IRouteDef = {
-  renderer: makeRendererRecord(PoepleRecord),
+  renderer: makeRendererRecord(() => <PoepleRecord />),
   url: routeGetRecordtUrl('people'),
 }
 

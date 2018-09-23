@@ -22,3 +22,4 @@ export const mapUrlToResource = (url: string): ResourceTagType => {
 export type Renderer = (routeProps: RouteComponentProps<any>) => React.ReactNode;
 
 export interface IListProps { pageNumber: number }
+export interface IRecordProps { id: string }

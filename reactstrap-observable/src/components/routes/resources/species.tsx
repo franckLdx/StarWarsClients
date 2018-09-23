@@ -10,7 +10,7 @@ const listDef: IRouteDef = {
 }
 
 const recordDef: IRouteDef = {
-  renderer: makeRendererRecord(SpeciesRecord),
+  renderer: makeRendererRecord(() => <SpeciesRecord />),
   url: routeGetRecordtUrl('species'),
 }
 

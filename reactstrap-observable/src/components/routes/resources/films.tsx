@@ -3,7 +3,6 @@ import { IRouteDef, makeRendererList, makeRendererRecord, makeResourceRouter } f
 import { routeGetListUrl, routeGetRecordtUrl } from "../../../model/routes";
 import { FilmsList, FilmsRecord } from '../../resources';
 
-
 const listDef: IRouteDef = {
   renderer: makeRendererList(
     (pageNumber: number) => <FilmsList pageNumber={pageNumber} />
@@ -12,7 +11,7 @@ const listDef: IRouteDef = {
 }
 
 const recordDef: IRouteDef = {
-  renderer: makeRendererRecord(FilmsRecord),
+  renderer: makeRendererRecord((id: string) => <FilmsRecord id={id} />),
   url: routeGetRecordtUrl('films'),
 }
 

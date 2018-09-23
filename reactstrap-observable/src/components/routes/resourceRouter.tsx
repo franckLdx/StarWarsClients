@@ -12,7 +12,7 @@ export const makeResourceRouter = (listDef: IRouteDef, recordef: IRouteDef): Ren
     return (
       <Switch>
         <Route exact={true} path={listDef.url} render={listDef.renderer} />
-        <Route exact={true} path={recordef.url} render={recordef.renderer} />
+        <Route exact={true} path={`${recordef.url}/:id`} render={recordef.renderer} />
         <Redirect to={listDef.url} push={true} />
       </Switch>
     );

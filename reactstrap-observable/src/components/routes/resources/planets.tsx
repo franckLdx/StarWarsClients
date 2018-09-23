@@ -10,7 +10,7 @@ const listDef: IRouteDef = {
 }
 
 const recordDef: IRouteDef = {
-  renderer: makeRendererRecord(PlanetsRecord),
+  renderer: makeRendererRecord(() => <PlanetsRecord />),
   url: routeGetRecordtUrl('planets'),
 }
 

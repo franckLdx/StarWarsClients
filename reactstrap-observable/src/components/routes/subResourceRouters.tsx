@@ -14,7 +14,8 @@ export const makeRendererList = (listRenderProps: ListRenderProps) =>
     return listRenderProps(pageNumber);
   }
 
-export const makeRendererRecord = (Component: React.ComponentType<{}>) =>
-  (params: any) => {
-    return <Component />;
-  }
+export type RecordRenderProps = (id: string) => React.ReactNode;
+
+export const makeRendererRecord = (recordRenderProps: RecordRenderProps) =>
+  (routeProps: RouteComponentProps<any>) =>
+    recordRenderProps(routeProps.match.params.id);
