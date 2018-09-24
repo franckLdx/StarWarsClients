@@ -1,11 +1,31 @@
 import * as React from 'react';
-import { Button } from 'reactstrap';
+import { connect } from 'react-redux';
+import { Alert } from 'reactstrap';
+import { IFilm } from '../../../model';
+import { getFilmById, IAppState } from '../../../store';
 import { IRecordProps } from '../../routes';
 
-export const FilmsRecord: React.StatelessComponent<IRecordProps> =
-  ({ id }: IRecordProps) => {
+interface IFilmsRecordCmpProps {
+  film: IFilm;
+}
+
+const FilmsRecordCmp: React.StatelessComponent<IFilmsRecordCmpProps> =
+  ({ film }: IFilmsRecordCmpProps) => {
+    if (!film) {
+      return null;
+    }
     return (<>
-      {id}
-      <Button>HELLO Film</Button>
+      <Alert color="dark">
+        <h1>{film.episodeId} - {film.title} ({film.releaseDate})</h1>
+        <hr />
+        <p>{film.openingCrawl}</p>
+        <hr />
+        <p><strong>director:</strong> {film.director} / <strong>producer:</strong> {film.producer}</p>
+      </Alert>
     </>);
   }
+
+const mapStateToProps = (state: IAppState, { id }: IRecordProps): IFilmsRecordCmpProps =>
+  ({ film: getFilmById(state, id) });
+
+export const FilmsRecord = connect(mapStateToProps)(FilmsRecordCmp);

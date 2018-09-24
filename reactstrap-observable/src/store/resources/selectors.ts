@@ -42,6 +42,9 @@ export const getFilmsPageData = (state: IAppState, pageNumber: number): IFilm[] 
 export const getFilmPagesCount = (state: IAppState): number | undefined =>
   getResourcePagesCount(state, 'films');
 
+export const getFilmById = (state: IAppState, id: string): IFilm =>
+  getDataById(state, 'films', id) as IFilm;
+
 export const getPeoplePageData = (state: IAppState, pageNumber: number): IPeople[] =>
   getResourcePageData<IPeople>(state, 'people', pageNumber)
     .sort((people1, people2) => people1.name < people2.name ? -1 : 1);
