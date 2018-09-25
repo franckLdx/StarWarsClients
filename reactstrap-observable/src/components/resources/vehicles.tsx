@@ -2,14 +2,14 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
-import { IVehicle } from '../../../model/resources';
+import { IVehicle } from '../../model/resources';
 import {
   getVehiclesPageCount,
   getVehiclesPageData,
   IAppState
-} from '../../../store';
-import { IRessourcesListProps, ResourceList } from '../../resourcesList';
-import { IListProps } from '../../routes';
+} from '../../store';
+import { IRessourcesListProps, ResourceList } from '../resourcesList';
+import { IListProps } from '../routes';
 
 interface IVehicleProps { vehicle: IVehicle }
 

@@ -2,11 +2,11 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardText } from 'reactstrap';
 import CardBody from 'reactstrap/lib/CardBody';
-import { ISpecie } from '../../../model/resources';
-import { getSpeciesPageCount, getSpeciesPageData } from '../../../store/resources/selectors';
-import { IAppState } from '../../../store/state';
-import { IRessourcesListProps, ResourceList } from '../../resourcesList';
-import { IListProps } from '../../routes';
+import { ISpecie } from '../../model/resources';
+import { getSpeciesPageCount, getSpeciesPageData } from '../../store/resources/selectors';
+import { IAppState } from '../../store/state';
+import { IRessourcesListProps, ResourceList } from '../resourcesList';
+import { IListProps } from '../routes';
 
 interface ISpecieProps { specie: ISpecie }
 

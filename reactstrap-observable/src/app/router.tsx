@@ -2,12 +2,12 @@ import * as React from 'react';
 import { Route, Switch, } from 'react-router-dom';
 
 import {
-  FilmsRouter,
-  PeopleRouter,
-  PlanetsRouter,
+  FilmsRenderer,
+  PeopleRenderer,
+  PlanetsRenderer,
   SpeciesRouter,
-  StarshipsRouter,
-  VehiclesRouter,
+  StarshipsRenderer,
+  VehiclesRenderer,
 } from '../components/routes/resources';
 
 import {
@@ -22,12 +22,12 @@ import {
 export const Router: React.StatelessComponent<{}> = () => {
   return (
     <Switch>
-      <Route path={ROUTE_FILMS} render={FilmsRouter} />
-      <Route path={ROUTE_PEOPLE} render={PeopleRouter} />
+      <Route path={ROUTE_FILMS} render={FilmsRenderer} />
+      <Route path={ROUTE_PEOPLE} render={PeopleRenderer} />
       <Route path={ROUTE_SPECIES} render={SpeciesRouter} />
-      <Route path={ROUTE_PLANETS} render={PlanetsRouter} />
-      <Route path={ROUTE_STARSHIPS} render={StarshipsRouter} />
-      <Route path={ROUTE_VEHICLES} render={VehiclesRouter} />
+      <Route path={ROUTE_PLANETS} render={PlanetsRenderer} />
+      <Route path={ROUTE_STARSHIPS} render={StarshipsRenderer} />
+      <Route path={ROUTE_VEHICLES} render={VehiclesRenderer} />
     </Switch>
   );
 }

@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { IRouteDef, makeRendererList, makeRendererRecord, makeResourceRouter } from "..";
+import { IRouteDef, makeRendererList, makeRendererRecord } from "..";
 import { routeGetListUrl, routeGetRecordtUrl } from "../../../model/routes";
 import { FilmsList, FilmsRecord } from '../../resources';
+import { makeResourceRouter } from '../resourceRouter';
 
 const listDef: IRouteDef = {
   renderer: makeRendererList(
@@ -15,4 +16,4 @@ const recordDef: IRouteDef = {
   url: routeGetRecordtUrl('films'),
 }
 
-export const FilmsRouter = makeResourceRouter(listDef, recordDef);
+export const FilmsRenderer = makeResourceRouter(listDef, recordDef);
