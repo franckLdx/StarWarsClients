@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom'
 import {
-  Collapse,
   Nav,
   Navbar,
   NavbarBrand,
   NavbarToggler,
   NavItem,
-  NavLink
+  NavLink,
+  UncontrolledCollapse
 } from 'reactstrap';
 import {
   ROUTE_FILMS,
@@ -18,29 +18,18 @@ import {
   ROUTE_VEHICLES
 } from '../model/routes';
 
-interface INavigationState { isOpen: boolean };
-
-export default class Navigation extends React.Component<{}, INavigationState> {
-  public state = { isOpen: false };
-
-  public render() {
-    return (
-      <Navbar className="mb-3" color="light" light={true} expand="md">
-        <Header onToggle={this.onToggle} />
-        <Collapse isOpen={this.state.isOpen} navbar={true}>
-          <Nav className="ml-auto" navbar={true}>
-            <Content />
-          </Nav>
-        </Collapse>
-      </Navbar>
-    );
-  }
-
-  private onToggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
+const Navigation: React.SFC<{}> = () => {
+  return (
+    <Navbar className="mb-3" color="light" light={true} expand="md">
+      <NavbarBrand href="/"><h4>Star wars</h4></NavbarBrand>
+      <NavbarToggler id='navBarToggler' />
+      <UncontrolledCollapse toggler='navBarToggler' navbar={true}>
+        <Nav className="ml-auto" navbar={true}>
+          <Content />
+        </Nav>
+      </UncontrolledCollapse>
+    </Navbar>
+  );
 }
 
 const Content: React.StatelessComponent<{}> = (props) => (
@@ -64,10 +53,4 @@ const Item: React.StatelessComponent<IItemProps> = ({ label, href }) => (
   </NavItem>
 );
 
-interface IHeader { onToggle: () => void };
-const Header: React.StatelessComponent<IHeader> = ({ onToggle }) => (
-  <>
-    <NavbarBrand href="/"><h4>Star wars</h4></NavbarBrand>
-    <NavbarToggler onClick={onToggle} />
-  </>
-);
+export default Navigation

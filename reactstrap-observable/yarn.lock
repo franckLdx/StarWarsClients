@@ -103,10 +103,10 @@
   dependencies:
     csstype "^2.2.0"
 
-"@types/reactstrap@^6.0.2":
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/@types/reactstrap/-/reactstrap-6.0.2.tgz#4684f42bb4d0ba11f98bf5fb2699280a09a95d3b"
-  integrity sha512-dSS7KqWmTDI+XAPOF9cMyZ3xM/Bpkf7r6Nki/ilOCw/+l28Jx093J+YcbMB4clxnujhwIf7I4STw03TpgqoyEQ==
+"@types/reactstrap@^6.4.0":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@types/reactstrap/-/reactstrap-6.4.0.tgz#5d3d5f79149a6acca99391d8bb5c01c13a6baebe"
+  integrity sha512-IRdcsIM3c8e6v0LVke4wyuNRte6DZoD6MW/G5f6tTAOvPVeD75pfh+CQJDHnKDHCHTMp4/KgOy6rbGdKdF3/jQ==
   dependencies:
     "@types/react" "*"
     popper.js "^1.14.1"
