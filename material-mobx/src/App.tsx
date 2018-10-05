@@ -1,17 +1,26 @@
-import { IconButton, Toolbar, Typography } from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
-import Button, { ButtonProps } from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Menu from '@material-ui/core/Menu';
-import MenuItem, { MenuItemProps } from '@material-ui/core/MenuItem';
 import * as React from 'react';
-import { Link } from 'react-router-dom'
+
+import { Tabs } from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import HelpIcon from '@material-ui/icons/Help';
+import MovieIcon from '@material-ui/icons/Movie';
+import PersonPinIcon from '@material-ui/icons/PersonPin';
+
 import { BrowserRouter } from 'react-router-dom'
-
-interface ILinkProps { to: string }
-
-const MyLink = (props: ButtonProps & ILinkProps) => <Link to={props.to}>{props.children}</Link>
-const ItemLink = (props: MenuItemProps & ILinkProps) => <MenuItem component={MyLink} {...props} />
+import { AppLinkTab } from './AppLinkTab';
+import {
+  Router,
+  URL_CHARACTERS,
+  URL_MOVIES,
+  URL_PLANETS,
+  URL_SPECIES,
+  URL_STARSHIPS,
+  URL_VEHICLES
+} from './components/Router';
 
 class App extends React.Component {
   public render() {
@@ -19,23 +28,42 @@ class App extends React.Component {
       <>
         <CssBaseline />
         <BrowserRouter>
-          <AppBar>
-            <Toolbar>
-              <IconButton color="inherit" aria-label="Menu">
-                <Menu open={true}>
-                  <ItemLink to='/films'>Films</ItemLink>
-                  <ItemLink to='/Characters'>Characters</ItemLink>
-                </Menu>
-              </IconButton>
-              <Typography variant="title" color="inherit">
-                STAR WARS
-            </Typography>
-            </Toolbar>
-          </AppBar>
+          <>
+            <AppBar position='static' color="default" >
+              <Toolbar>
+                <Header />
+                <TabBar />
+              </Toolbar>
+            </AppBar>
+            <Router />
+          </>
         </BrowserRouter>
       </>
     );
   }
 }
+
+const Header: React.SFC<{}> = () => (
+  <Typography variant="title" color="inherit">
+    STAR WARS
+  </Typography>
+);
+
+const TabBar: React.SFC<{}> = () => (
+  <Tabs
+    value={false}
+    scrollable={true}
+    indicatorColor="primary"
+    textColor="primary"
+  >
+    <AppLinkTab label="Movies" icon={<MovieIcon />} to={URL_MOVIES} />
+    <AppLinkTab label="Characters" icon={<FavoriteIcon />} to={URL_CHARACTERS} />
+    <AppLinkTab label="Species" icon={<FavoriteIcon />} to={URL_SPECIES} />
+    <AppLinkTab label="Planets" icon={<PersonPinIcon />} to={URL_PLANETS} />
+    <AppLinkTab label="Starships" icon={<HelpIcon />} to={URL_STARSHIPS} />
+    <AppLinkTab label="Vehicles" icon={<HelpIcon />} to={URL_VEHICLES} />
+  </Tabs>
+);
+
 
 export default App;
