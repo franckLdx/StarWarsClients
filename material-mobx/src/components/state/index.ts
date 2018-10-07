@@ -1,0 +1,1 @@
+export { movieState, MovieState } from './movies/State';

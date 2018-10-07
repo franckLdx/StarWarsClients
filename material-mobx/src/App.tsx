@@ -6,9 +6,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import HelpIcon from '@material-ui/icons/Help';
-import MovieIcon from '@material-ui/icons/Movie';
-import PersonPinIcon from '@material-ui/icons/PersonPin';
+import MovieIcon from '@material-ui/icons/MovieFilter';
+import PersonPinIcon from '@material-ui/icons/PersonPinSharp';
+import HelpIcon from '@material-ui/icons/Star';
+import { configure } from "mobx";
 
 import { BrowserRouter } from 'react-router-dom'
 import { AppLinkTab } from './AppLinkTab';
@@ -24,6 +25,9 @@ import {
 
 class App extends React.Component {
   public render() {
+    // configure({
+    //   enforceActions: 'always'
+    // });
     return (
       <>
         <CssBaseline />

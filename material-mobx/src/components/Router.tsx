@@ -9,6 +9,10 @@ export const URL_STARSHIPS = '/starships';
 export const URL_SPECIES = '/species';
 export const URL_VEHICLES = '/vehicles'
 
+import Movies from './movies';
+import { movieState } from './state';
+import { Movie } from './state/movies/Movie';
+
 export const Router: React.SFC<{}> = () => (
   <Switch>
     <Route path={URL_MOVIES} render={Movies} />
@@ -20,5 +24,10 @@ export const Router: React.SFC<{}> = () => (
   </Switch>
 );
 
-const Movies = () => 'Movies';
-const Characters = () => 'Characters';
+const Characters = () => {
+  setInterval(
+    () => movieState.addMovie(new Movie('id', 'foo')),
+    10
+  );
+  return 'Characters ' + movieState.report;
+}
