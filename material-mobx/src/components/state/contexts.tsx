@@ -1,5 +1,5 @@
 import * as React from 'react';
 
-import { movieState } from "./movies/State";
+import { movieStore } from "./movies/State";
 
-export default React.createContext(movieState);
+export default React.createContext(movieStore);

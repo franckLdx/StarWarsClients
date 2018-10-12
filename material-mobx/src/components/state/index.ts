@@ -1,1 +1,1 @@
-export { movieState, MovieState } from './movies/State';
+export { movieStore, MovieStore } from './movies/State';

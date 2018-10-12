@@ -10,7 +10,7 @@ export const URL_SPECIES = '/species';
 export const URL_VEHICLES = '/vehicles'
 
 import Movies from './movies';
-import { movieState } from './state';
+import { movieStore } from './state';
 import { Movie } from './state/movies/Movie';
 
 export const Router: React.SFC<{}> = () => (
@@ -26,8 +26,8 @@ export const Router: React.SFC<{}> = () => (
 
 const Characters = () => {
   setInterval(
-    () => movieState.addMovie(new Movie('id', 'foo')),
+    () => movieStore.addMovie(new Movie('id', 'foo')),
     10
   );
-  return 'Characters ' + movieState.report;
+  return 'Characters ' + movieStore.report;
 }

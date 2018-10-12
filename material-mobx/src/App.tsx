@@ -10,6 +10,7 @@ import MovieIcon from '@material-ui/icons/MovieFilter';
 import PersonPinIcon from '@material-ui/icons/PersonPinSharp';
 import HelpIcon from '@material-ui/icons/Star';
 import { configure } from "mobx";
+import { onError } from "mobx-react"
 
 import { BrowserRouter } from 'react-router-dom'
 import { AppLinkTab } from './AppLinkTab';
@@ -24,10 +25,14 @@ import {
 } from './components/Router';
 
 class App extends React.Component {
+  constructor(props: any) {
+    super(props);
+    configure({
+      enforceActions: 'always'
+    });
+  }
+
   public render() {
-    // configure({
-    //   enforceActions: 'always'
-    // });
     return (
       <>
         <CssBaseline />
@@ -69,5 +74,9 @@ const TabBar: React.SFC<{}> = () => (
   </Tabs>
 );
 
+onError(error => {
+  // tslint:disable-next-line:no-console
+  console.log(error)
+})
 
 export default App;

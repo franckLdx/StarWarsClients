@@ -1,9 +1,10 @@
-import { autorun, computed, observable } from 'mobx'
+import { action, autorun, computed, observable } from 'mobx'
 
 import { Movie } from "./Movie";
 
-export class MovieState {
+export class MovieStore {
   @observable public movies: Movie[] = [];
+  // @observable private state: "NOT_LOADED" | "LOADING" | "LOADED" = "NOT_LOADED";
 
   constructor() {
     // tslint:disable-next-line:no-console
@@ -14,9 +15,12 @@ export class MovieState {
     return `movies count: ${this.movies.length}`;
   }
 
+
+  @action
   public addMovie(movie: Movie) {
     this.movies = [...this.movies, movie].sort();
   }
+
 }
 
-export const movieState = new MovieState();
+export const movieStore = new MovieStore();

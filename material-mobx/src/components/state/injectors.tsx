@@ -1,18 +1,18 @@
 import * as React from 'react';
 
-import { movieState, MovieState } from "./movies/State";
+import { movieStore, MovieStore } from "./movies/State";
 
-const StateContext = React.createContext(movieState);
+const StateContext = React.createContext(movieStore);
 
 export interface IWithMovieState {
-  moviesState: MovieState;
+  moviesStore: MovieStore;
 }
 
-export const withMovieState = <P extends IWithMovieState>(Component: React.ComponentType<P>) => {
+export const withMovieStore = <P extends IWithMovieState>(Component: React.ComponentType<P>) => {
   return (props: Pick<P, Exclude<keyof P, keyof IWithMovieState>>) => {
     return (
       <StateContext.Consumer>
-        {(moviesState) => <Component {...props} moviesState={moviesState} />}
+        {(moviesState) => <Component {...props} moviesStore={moviesState} />}
       </StateContext.Consumer>
     )
   }
