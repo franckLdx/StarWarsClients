@@ -1,10 +1,7 @@
-const URL = 'https://swapi.co/api';
+import { Movie } from 'src/model/Movie';
+import { fetchResource } from './fetchResource';
 
-export async function doFetchMovies() {
-  const response = await fetch(`${URL}/films/`);
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  const paylod = await response.json();
-  return paylod.results;
+export async function fetchMovies() {
+  const response = await fetchResource('films');
+  return response.map((item: any) => new Movie(item.url, item.title));
 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { movieStore, MovieStore } from "./movies/State";
+import { movieStore, MovieStore } from "./MoviesStore";
 
 const StateContext = React.createContext(movieStore);
 

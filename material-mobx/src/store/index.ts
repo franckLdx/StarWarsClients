@@ -1,0 +1,1 @@
+export { movieStore, MovieStore } from './MoviesStore';
