@@ -3,20 +3,21 @@ import * as React from 'react';
 import Tab, { TabProps } from '@material-ui/core/Tab';
 import { RouteComponentProps, withRouter } from 'react-router';
 
+
 interface ILinkTabProps extends TabProps, RouteComponentProps<any> {
   to: string;
 }
 
-export interface ILinkTabState {
+interface ILinkTabState {
   tabProps: Exclude<TabProps, 'onClick'>;
   to: string;
   onClick: React.EventHandler<any>;
 }
 
-class InternalTab extends React.PureComponent<ILinkTabProps, ILinkTabState> {
+class LinkTab extends React.PureComponent<ILinkTabProps, ILinkTabState> {
 
   public static getDerivedStateToProps(prevState: ILinkTabState, nextProps: ILinkTabProps): ILinkTabState {
-    return InternalTab.getDerivedState(nextProps);
+    return LinkTab.getDerivedState(nextProps);
   }
 
   private static getDerivedState(props: ILinkTabProps): ILinkTabState {
@@ -32,7 +33,7 @@ class InternalTab extends React.PureComponent<ILinkTabProps, ILinkTabState> {
 
   constructor(props: ILinkTabProps) {
     super(props)
-    this.state = InternalTab.getDerivedState(props);
+    this.state = LinkTab.getDerivedState(props);
   }
 
   public render() {
@@ -41,4 +42,4 @@ class InternalTab extends React.PureComponent<ILinkTabProps, ILinkTabState> {
 
 }
 
-export const AppLinkTab = withRouter(InternalTab);
+export default withRouter(LinkTab);

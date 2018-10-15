@@ -1,10 +1,10 @@
-import { action, autorun, computed, observable } from 'mobx'
+import { action, autorun, computed, observable, runInAction } from 'mobx'
 
 import { fetchMovies } from 'src/api/movies';
-import { Movie } from "../model/Movie";
+import { IMovie } from "../model/Movie";
 
 export class MovieStore {
-  @observable public movies: Movie[] = [];
+  @observable public movies: IMovie[] = [];
   @observable private state: "NOT_LOADED" | "LOADING" | "LOADED" = "NOT_LOADED";
 
   constructor() {
@@ -18,7 +18,7 @@ export class MovieStore {
 
 
   @action
-  public addMovies(...movies: Movie[]) {
+  public addMovies(...movies: IMovie[]) {
     this.movies = [...this.movies, ...movies].sort();
   }
 
@@ -28,7 +28,10 @@ export class MovieStore {
     }
     this.state = 'LOADING';
     const movies = await fetchMovies();
-    this.addMovies(...movies);
+    runInAction(() => {
+      this.state = 'LOADED';
+      this.addMovies(...movies);
+    })
   }
 
 }

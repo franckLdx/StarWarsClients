@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Tabs } from '@material-ui/core';
+import { createStyles, StyledComponentProps, Tabs, Theme, withStyles } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,9 +11,9 @@ import PersonPinIcon from '@material-ui/icons/PersonPinSharp';
 import HelpIcon from '@material-ui/icons/Star';
 import { configure } from "mobx";
 import { onError } from "mobx-react"
-
 import { BrowserRouter } from 'react-router-dom'
-import { AppLinkTab } from './AppLinkTab';
+
+import LinkTab from './components/routes/LinkTab';
 import {
   Router,
   URL_CHARACTERS,
@@ -22,9 +22,17 @@ import {
   URL_SPECIES,
   URL_STARSHIPS,
   URL_VEHICLES
-} from './components/Router';
+} from './components/routes/Router';
 
-class App extends React.Component {
+const AppStyle = (theme: Theme) => createStyles({
+  appBar: {
+    marginBottom: theme.spacing.unit * 3,
+  },
+});
+type AppStyleProps = StyledComponentProps<"appBar">;
+
+
+class App extends React.Component<AppStyleProps> {
   constructor(props: any) {
     super(props);
     configure({
@@ -33,12 +41,13 @@ class App extends React.Component {
   }
 
   public render() {
+    const appBar = this.props.classes!.appBar;
     return (
       <>
         <CssBaseline />
         <BrowserRouter>
           <>
-            <AppBar position='static' color="default" >
+            <AppBar className={appBar} position='static' color="default" >
               <Toolbar>
                 <Header />
                 <TabBar />
@@ -53,7 +62,7 @@ class App extends React.Component {
 }
 
 const Header: React.SFC<{}> = () => (
-  <Typography variant="title" color="inherit">
+  <Typography variant="h5" color="inherit">
     STAR WARS
   </Typography>
 );
@@ -65,12 +74,12 @@ const TabBar: React.SFC<{}> = () => (
     indicatorColor="primary"
     textColor="primary"
   >
-    <AppLinkTab label="Movies" icon={<MovieIcon />} to={URL_MOVIES} />
-    <AppLinkTab label="Characters" icon={<FavoriteIcon />} to={URL_CHARACTERS} />
-    <AppLinkTab label="Species" icon={<FavoriteIcon />} to={URL_SPECIES} />
-    <AppLinkTab label="Planets" icon={<PersonPinIcon />} to={URL_PLANETS} />
-    <AppLinkTab label="Starships" icon={<HelpIcon />} to={URL_STARSHIPS} />
-    <AppLinkTab label="Vehicles" icon={<HelpIcon />} to={URL_VEHICLES} />
+    <LinkTab label="Movies" icon={<MovieIcon />} to={URL_MOVIES} />
+    <LinkTab label="Characters" icon={<FavoriteIcon />} to={URL_CHARACTERS} />
+    <LinkTab label="Species" icon={<FavoriteIcon />} to={URL_SPECIES} />
+    <LinkTab label="Planets" icon={<PersonPinIcon />} to={URL_PLANETS} />
+    <LinkTab label="Starships" icon={<HelpIcon />} to={URL_STARSHIPS} />
+    <LinkTab label="Vehicles" icon={<HelpIcon />} to={URL_VEHICLES} />
   </Tabs>
 );
 
@@ -79,4 +88,4 @@ onError(error => {
   console.log(error)
 })
 
-export default App;
+export default withStyles(AppStyle)(App);
