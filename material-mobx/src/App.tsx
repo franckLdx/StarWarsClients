@@ -74,12 +74,12 @@ const TabBar: React.SFC<{}> = () => (
     indicatorColor="primary"
     textColor="primary"
   >
-    <LinkTab label="Movies" icon={<MovieIcon />} to={URL_MOVIES} />
-    <LinkTab label="Characters" icon={<FavoriteIcon />} to={URL_CHARACTERS} />
-    <LinkTab label="Species" icon={<FavoriteIcon />} to={URL_SPECIES} />
-    <LinkTab label="Planets" icon={<PersonPinIcon />} to={URL_PLANETS} />
-    <LinkTab label="Starships" icon={<HelpIcon />} to={URL_STARSHIPS} />
-    <LinkTab label="Vehicles" icon={<HelpIcon />} to={URL_VEHICLES} />
+    <LinkTab label="Movies" icon={<MovieIcon />} href={URL_MOVIES} />
+    <LinkTab label="Characters" icon={<FavoriteIcon />} href={URL_CHARACTERS} />
+    <LinkTab label="Species" icon={<FavoriteIcon />} href={URL_SPECIES} />
+    <LinkTab label="Planets" icon={<PersonPinIcon />} href={URL_PLANETS} />
+    <LinkTab label="Starships" icon={<HelpIcon />} href={URL_STARSHIPS} />
+    <LinkTab label="Vehicles" icon={<HelpIcon />} href={URL_VEHICLES} />
   </Tabs>
 );
 

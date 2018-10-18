@@ -2,9 +2,11 @@ import * as React from 'react';
 
 import { createStyles, Divider, Grid, StyledComponentProps, Theme, Typography, withStyles } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
+import InfoIcon from '@material-ui/icons/Info';
 import { observer } from 'mobx-react'
 import { IMovie } from 'src/model/Movie';
 import { IWithMovieState, withMovieStore } from '../../store/injectors';
+import LinkIconButton from '../routes/LinkIconButton';
 
 const ListStyle = (theme: Theme) => createStyles({
   item: {
@@ -74,7 +76,12 @@ const MovieItemRaw: React.SFC<IMovieItemStylePropsRaw & MovieItemStylePropsRaw> 
   const { classes, movie } = props;
   return (
     <Paper>
-      <Typography className={classes!.title} variant="h5">{movie.title}</Typography>
+      <Typography className={classes!.title} variant="h5">
+        {movie.title}
+        <LinkIconButton href={`/movies/${movie.episodeId}`}>
+          <InfoIcon />
+        </LinkIconButton>
+      </Typography>
       <Divider className={classes!.divider} />
       <Typography className={classes!.content} variant="subheading">{movie.openingCrawl}</Typography>
     </Paper>

@@ -5,12 +5,12 @@ import { RouteComponentProps, withRouter } from 'react-router';
 
 
 interface ILinkTabProps extends TabProps, RouteComponentProps<any> {
-  to: string;
+  href: string;
 }
 
 interface ILinkTabState {
   tabProps: Exclude<TabProps, 'onClick'>;
-  to: string;
+  href: string;
   onClick: React.EventHandler<any>;
 }
 
@@ -21,14 +21,14 @@ class LinkTab extends React.PureComponent<ILinkTabProps, ILinkTabState> {
   }
 
   private static getDerivedState(props: ILinkTabProps): ILinkTabState {
-    const { to, history,
+    const { href, history,
       location,
       match,
       staticContext,
       ...tabProps
     } = props;
-    const onClick: React.EventHandler<any> = () => props.history.push(to);
-    return { to, tabProps, onClick };
+    const onClick: React.EventHandler<any> = () => props.history.push(href);
+    return { href, tabProps, onClick };
   }
 
   constructor(props: ILinkTabProps) {
