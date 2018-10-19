@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import DevTools from 'mobx-react-devtools';
+
 import { createStyles, StyledComponentProps, Tabs, Theme, withStyles } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,7 +14,6 @@ import HelpIcon from '@material-ui/icons/Star';
 import { configure } from "mobx";
 import { onError } from "mobx-react"
 import { BrowserRouter } from 'react-router-dom'
-
 import LinkTab from './components/routes/LinkTab';
 import {
   Router,
@@ -44,6 +45,7 @@ class App extends React.Component<AppStyleProps> {
     const appBar = this.props.classes!.appBar;
     return (
       <>
+        <DevTools />
         <CssBaseline />
         <BrowserRouter>
           <>
