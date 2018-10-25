@@ -1,6 +1,9 @@
 import * as React from 'react';
 
-import { movieStore, MovieStore } from "./MoviesStore";
+import { MovieFetcher } from 'src/api';
+import { MovieStore } from "./MoviesStore";
+
+const movieStore = new MovieStore(MovieFetcher);
 
 const StateContext = React.createContext(movieStore);
 

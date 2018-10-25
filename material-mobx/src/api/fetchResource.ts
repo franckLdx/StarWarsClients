@@ -1,22 +1,34 @@
 
 const URL = 'https://swapi.co/api/';
 
-export type Resources = 'films';
+type Resources = 'films';
 
-export async function fetchResources(resource: Resources) {
-  const response = await fetch(`${URL}${resource}/`);
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  const paylod = await response.json();
-  return paylod.results;
+export type Mapper<T> = (raw: any) => T;
+
+export interface IFetcher<T> {
+  fetchResource: (id: string) => Promise<T>
+  fetchResources: () => Promise<T[]>
 }
 
-export async function fetchResource(resource: Resources, id: string) {
-  const response = await fetch(`${URL}${resource}/${id}/`);
-  if (!response.ok) {
-    throw Error(response.statusText);
+export const createFetcher = <T>(resource: Resources, mapper: Mapper<T>): IFetcher<T> => {
+  const urlResource = `${URL}${resource}/`;
+
+  const fetcher = async (url: string): Promise<any> => {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return await response.json();
+  };
+
+  return {
+    fetchResource: async (id: string): Promise<T> => {
+      const rawResource = await fetcher(`${urlResource}${id}/`);
+      return mapper(rawResource);
+    },
+    fetchResources: async (): Promise<T[]> => {
+      const rawResources = await fetcher(urlResource);
+      return rawResources.results.map((result: any) => mapper(result));
+    },
   }
-  const paylod = await response.json();
-  return paylod;
-}
+};

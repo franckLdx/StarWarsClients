@@ -1,18 +1,22 @@
 import { action, observable, runInAction } from 'mobx'
 
-import { fetchMovie, fetchMovies } from 'src/api/movies';
+import { IFetcher } from 'src/api';
 import { IMovie } from "../model/Movie";
 
 export class MovieStore {
   @observable public movies: IMovie[] = [];
   @observable private state: "NOT_LOADED" | "LOADING" | "LOADED" = "NOT_LOADED";
 
+  constructor(private fetcher: IFetcher<IMovie>) {
+
+  }
+
   @action public async fetchMovies() {
     if (this.state !== 'NOT_LOADED') {
       return;
     }
     this.state = 'LOADING';
-    const movies = await fetchMovies();
+    const movies = await this.fetcher.fetchResources();
     runInAction(() => {
       this.state = 'LOADED';
       this.addMovies(...movies);
@@ -27,7 +31,7 @@ export class MovieStore {
       return;
     }
     this.state = 'LOADING';
-    const movie = await fetchMovie(id);
+    const movie = await this.fetcher.fetchResource(id);
     runInAction(() => {
       this.addMovies(movie);
     })
@@ -44,5 +48,3 @@ export class MovieStore {
     );
   }
 }
-
-export const movieStore = new MovieStore();

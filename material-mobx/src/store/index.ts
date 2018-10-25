@@ -1,1 +1,1 @@
-export { movieStore, MovieStore } from './MoviesStore';
+export { MovieStore } from './MoviesStore';

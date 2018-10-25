@@ -1,18 +1,8 @@
 import { IMovie } from 'src/model/Movie';
-import { fetchResource, fetchResources } from './fetchResource';
+import { createFetcher, Mapper } from './fetchResource';
 import { urlToId } from './tools';
 
-export async function fetchMovies(): Promise<IMovie[]> {
-  const response = await fetchResources('films');
-  return response.map(itemToMovie);
-}
-
-export async function fetchMovie(id: string): Promise<IMovie> {
-  const response = await fetchResource('films', id);
-  return itemToMovie(response);
-}
-
-const itemToMovie = (item: any): IMovie => ({
+const toMovie: Mapper<IMovie> = (item: any): IMovie => ({
   characters: item.characters,
   director: item.director,
   episodeId: item.episode_id,
@@ -26,3 +16,5 @@ const itemToMovie = (item: any): IMovie => ({
   title: item.title,
   vehicles: item.vehicles,
 });
+
+export const MovieFetcher = createFetcher('films', toMovie);
