@@ -1,4 +1,4 @@
 import { IFetcher } from './fetchResource';
 
-export * from './movies';
+export * from './movie';
 export { IFetcher }

@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import InfoIcon from '@material-ui/icons/Info';
 import { observer } from 'mobx-react'
 import { IMovie } from 'src/model/Movie';
-import { IWithMovieState, withMovieStore } from '../../store/injectors';
+import { IWithMovieStore, withMovieStore } from '../../store/injectors';
 import LinkIconButton from '../routes/LinkIconButton';
 
 const ListStyle = (theme: Theme) => createStyles({
@@ -17,7 +17,7 @@ const ListStyle = (theme: Theme) => createStyles({
 });
 
 type ListStyleProps = StyledComponentProps<"item">;
-type IListProps = IWithMovieState & ListStyleProps;
+type IListProps = IWithMovieStore & ListStyleProps;
 
 @observer
 class List extends React.Component<IListProps, {}> {
@@ -26,11 +26,11 @@ class List extends React.Component<IListProps, {}> {
   }
 
   public componentDidMount() {
-    this.props.moviesStore.fetchMovies();
+    this.props.moviesStore.fetch();
   }
 
   public render() {
-    const movies = this.props.moviesStore.movies;
+    const movies = this.props.moviesStore.orderbyEpisodesId;
     return (
       <Grid container={true} justify="center">
         {movies.map(movie => this.getItem(movie))}
@@ -78,7 +78,7 @@ const MovieItemRaw: React.SFC<IMovieItemStylePropsRaw & MovieItemStylePropsRaw> 
     <Paper>
       <Typography className={classes!.title} variant="h5">
         {movie.title}
-        <LinkIconButton href={`/movies/${movie.episodeId}`}>
+        <LinkIconButton href={`/movies/${movie.id}`}>
           <InfoIcon />
         </LinkIconButton>
       </Typography>

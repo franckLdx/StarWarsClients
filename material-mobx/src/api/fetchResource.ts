@@ -1,7 +1,7 @@
 
 const URL = 'https://swapi.co/api/';
 
-type Resources = 'films';
+type Resources = 'films' | 'people';
 
 export type Mapper<T> = (raw: any) => T;
 

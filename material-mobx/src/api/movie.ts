@@ -3,7 +3,7 @@ import { createFetcher, Mapper } from './fetchResource';
 import { urlToId } from './tools';
 
 const toMovie: Mapper<IMovie> = (item: any): IMovie => ({
-  characters: item.characters,
+  characters: item.characters.map(urlToId),
   director: item.director,
   episodeId: item.episode_id,
   id: urlToId(item.url),
