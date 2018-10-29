@@ -9,7 +9,7 @@ const toCharacter: Mapper<ICharacter> = (item: any): ICharacter => ({
   hairColor: item.hair_color,
   height: item.height,
   homeworld: urlToId(item.homeworld),
-  id: item.id,
+  id: urlToId(item.url),
   mass: item.mass,
   movies: item.films.map(urlToId),
   name: item.name,

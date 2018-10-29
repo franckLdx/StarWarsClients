@@ -9,19 +9,15 @@ type CharactersProps = ICharactersOwnProps & IWithCharacterStore
 
 class Characters extends React.Component<CharactersProps> {
   public componentDidMount() {
-    this.props.charaterStore.fetchByIds(...this.props.charactersId);
+    this.props.charaterStore.setCurrentListById(...this.props.charactersId);
   }
 
   public render() {
-    const charaterStore = this.props.charaterStore;
-    const charaters = this.props.charactersId
-      .map(id => charaterStore.getById(id))
-      .filter(charater => charater !== undefined)
-      .sort((c1, c2) => c1!.name < c2!.name ? -1 : 1);
-    // tslint:disable-next-line:no-console
-    console.log('----->', charaters.length);
-
-    return <div>{this.props.charactersId}<br />{charaters.map(c => c!.name)}</div >;
+    const charaters = this.props.charaterStore.currentList;
+    if (!charaters) {
+      return null;
+    }
+    return <div>{charaters.map(c => c!.name)}</div >;
   }
 }
 

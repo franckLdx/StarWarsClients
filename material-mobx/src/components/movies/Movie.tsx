@@ -34,7 +34,7 @@ type StyleProps = StyledComponentProps<"paper" | "title" | "releaseDate">;
 export class Movie extends React.Component<IItemProps & StyleProps, {}> {
 
   public componentDidMount() {
-    this.props.moviesStore.fetchByIds(this.props.id);
+    this.props.moviesStore.setCurrentById(this.props.id);
   }
 
   public render() {
@@ -48,8 +48,8 @@ export class Movie extends React.Component<IItemProps & StyleProps, {}> {
 
   private getContent() {
     const classes = this.props.classes!;
-    const movie = this.props.moviesStore.getById(this.props.id);
-    if (movie === undefined) {
+    const movie = this.props.moviesStore.current;
+    if (movie === undefined || movie === null) {
       return null;
     }
     return (
