@@ -21,14 +21,23 @@ export const createFetcher = <T>(resource: Resources, mapper: Mapper<T>): IFetch
     return await response.json();
   };
 
+  const fetchAllPages = async (pageUrl: string): Promise<T[]> => {
+    if (!pageUrl) {
+      return [];
+    }
+    const page = await fetcher(pageUrl);
+    const currentPageContent: T[] = page.results.map((result: any) => mapper(result));
+    const nextPageContent = await fetchAllPages(page.next);
+    return currentPageContent.concat(nextPageContent);
+  };
+
   return {
     fetchResource: async (id: string): Promise<T> => {
       const rawResource = await fetcher(`${urlResource}${id}/`);
       return mapper(rawResource);
     },
     fetchResources: async (): Promise<T[]> => {
-      const rawResources = await fetcher(urlResource);
-      return rawResources.results.map((result: any) => mapper(result));
+      return await fetchAllPages(urlResource);
     },
   }
 };

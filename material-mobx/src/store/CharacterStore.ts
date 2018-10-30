@@ -1,7 +1,9 @@
 import {
   action,
+  computed,
   observable,
   ObservableMap,
+  runInAction,
 } from 'mobx';
 
 import { IFetcher } from 'src/api';
@@ -13,6 +15,19 @@ export class CharaterStore {
 
   constructor(private fetcher: IFetcher<ICharacter>) { }
 
+  @action('fetch all characters')
+  public async fetchAll() {
+    if (this.state !== 'NOT_LOADED') {
+      return;
+    }
+    this.state = 'LOADING';
+    const characters = await this.fetcher.fetchResources();
+    runInAction('fetch all movies runInAction', () => {
+      this.state = 'LOADED';
+      this.addCharacters(...characters);
+    })
+  }
+
   @action('fetch some characters')
   public async fetchByIds(...ids: string[]) {
     if (this.state !== 'NOT_LOADED') {
@@ -23,7 +38,11 @@ export class CharaterStore {
         .filter(id => !this.characters.has(id))
         .map(id => this.fetcher.fetchResource(id).then(character => this.addCharacters(character)));
     await Promise.all(fetching);
-    return;
+  }
+
+  @computed
+  public get all() {
+    return Array.from(this.characters.values());
   }
 
   public getById(id: string): ICharacter | undefined {

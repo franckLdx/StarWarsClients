@@ -23,10 +23,6 @@ type IListProps = IWithMovieStore & ListStyleProps;
 @observer
 class List extends React.Component<IListProps, {}> {
 
-  constructor(props: any) {
-    super(props);
-  }
-
   public componentDidMount() {
     this.props.moviesStore.fetchAll();
   }

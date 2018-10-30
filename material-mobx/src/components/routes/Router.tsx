@@ -9,6 +9,7 @@ export const URL_STARSHIPS = '/starships';
 export const URL_SPECIES = '/species';
 export const URL_VEHICLES = '/vehicles'
 
+import Characters from '../characters';
 import Movies from '../movies';
 
 export const Router: React.SFC<{}> = () => (
@@ -22,6 +23,3 @@ export const Router: React.SFC<{}> = () => (
   </Switch>
 );
 
-const Characters = () => {
-  return 'Characters ';
-}
