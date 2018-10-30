@@ -3,8 +3,9 @@ import * as React from 'react';
 import { createStyles, Divider, Grid, StyledComponentProps, Theme, Typography, withStyles } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import InfoIcon from '@material-ui/icons/Info';
+import { computed } from 'mobx';
 import { observer } from 'mobx-react'
-import { IMovie } from 'src/model/Movie';
+import { IMovie, sortByEpisodeId } from 'src/model/Movie';
 import { IWithMovieStore, withMovieStore } from '../../store/injectors';
 import LinkIconButton from '../routes/LinkIconButton';
 
@@ -21,16 +22,17 @@ type IListProps = IWithMovieStore & ListStyleProps;
 
 @observer
 class List extends React.Component<IListProps, {}> {
+
   constructor(props: any) {
     super(props);
   }
 
   public componentDidMount() {
-    this.props.moviesStore.fetch();
+    this.props.moviesStore.fetchAll();
   }
 
   public render() {
-    const movies = this.props.moviesStore.orderbyEpisodesId;
+    const movies = this.byEpisodeId;
     return (
       <Grid container={true} justify="center">
         {movies.map(movie => this.getItem(movie))}
@@ -48,6 +50,11 @@ class List extends React.Component<IListProps, {}> {
       <MovieItem movie={movie} />
     </Grid>
   );
+
+  @computed
+  private get byEpisodeId() {
+    return sortByEpisodeId(this.props.moviesStore.all);
+  }
 }
 
 const MovieStyles = (theme: Theme) => createStyles({

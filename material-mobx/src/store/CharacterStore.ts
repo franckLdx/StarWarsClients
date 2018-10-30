@@ -1,6 +1,5 @@
 import {
   action,
-  computed,
   observable,
   ObservableMap,
 } from 'mobx';
@@ -11,7 +10,6 @@ import { ICharacter } from 'src/model/Characters';
 export class CharaterStore {
   @observable private characters: ObservableMap<string, ICharacter> = observable.map({});
   @observable private state: "NOT_LOADED" | "LOADING" | "LOADED" = "NOT_LOADED";
-  @observable private currentCharactersList: string[] = [];
 
   constructor(private fetcher: IFetcher<ICharacter>) { }
 
@@ -28,18 +26,8 @@ export class CharaterStore {
     this.addCharacters(...chraracters);
   }
 
-  @action('set current characters list')
-  public async setCurrentListById(...ids: string[]) {
-    this.currentCharactersList = ids;
-    await this.fetchByIds(...ids);
-  }
-
-  @computed({ name: 'get current characters list' })
-  public get currentList(): ICharacter[] {
-    const characters: any[] = this.currentCharactersList
-      .map(id => this.characters.get(id))
-      .filter(character => character !== undefined)
-    return characters.sort((c1, c2) => c1!.name < c2!.name ? -1 : 1);
+  public getById(id: string): ICharacter | undefined {
+    return this.characters.get(id);
   }
 
   @action('add characters')

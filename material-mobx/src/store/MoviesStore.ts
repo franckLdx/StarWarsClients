@@ -3,7 +3,7 @@ import {
   computed,
   observable,
   ObservableMap,
-  runInAction
+  runInAction,
 } from 'mobx'
 
 import { IFetcher } from 'src/api';
@@ -12,12 +12,11 @@ import { IMovie } from "../model/Movie";
 export class MovieStore {
   @observable private movies: ObservableMap<string, IMovie> = observable.map({});
   @observable private state: "NOT_LOADED" | "LOADING" | "LOADED" = "NOT_LOADED";
-  @observable private currentMovieId: string | null = null;
 
   constructor(private fetcher: IFetcher<IMovie>) { }
 
   @action('fetch all movies')
-  public async fetch() {
+  public async fetchAll() {
     if (this.state !== 'NOT_LOADED') {
       return;
     }
@@ -43,20 +42,13 @@ export class MovieStore {
     }
   }
 
-  @action('set current movie')
-  public async setCurrentById(id: string | null) {
-    this.currentMovieId = id;
-    if (id !== null && !this.movies.has(id)) {
-      await this.fetchByIds(id);
-    }
+  public getById(id: string) {
+    return this.movies.get(id);
   }
 
-  @computed({ name: 'getByEpisode' })
-  public get orderbyEpisodesId(): IMovie[] {
-    const movies: IMovie[] = Array.from(this.movies.values());
-    return movies.sort(
-      (movie1, movie2) => movie1.episodeId < movie2.episodeId ? -1 : 1
-    );
+  @computed
+  public get all() {
+    return Array.from(this.movies.values());
   }
 
   @action('add movies')
@@ -64,12 +56,4 @@ export class MovieStore {
     movies.forEach(movie => this.movies.set(movie.id, movie));
   }
 
-
-  @computed({ name: 'get current' })
-  public get current(): IMovie | null | undefined {
-    if (this.currentMovieId === null) {
-      return null;
-    }
-    return this.movies.get(this.currentMovieId);
-  }
 }

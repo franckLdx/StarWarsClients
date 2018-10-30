@@ -13,3 +13,9 @@ export interface IMovie {
   starships: string[];
   vehicles: string[];
 }
+
+export const sortByEpisodeId = (movies: IMovie[]) => {
+  return movies.sort(
+    (movie1, movie2) => movie1.episodeId < movie2.episodeId ? -1 : 1
+  );
+}
