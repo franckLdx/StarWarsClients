@@ -21,9 +21,9 @@ export class CharaterStore {
     const fetching =
       ids
         .filter(id => !this.characters.has(id))
-        .map(id => this.fetcher.fetchResource(id));
-    const chraracters = await Promise.all(fetching);
-    this.addCharacters(...chraracters);
+        .map(id => this.fetcher.fetchResource(id).then(character => this.addCharacters(character)));
+    await Promise.all(fetching);
+    return;
   }
 
   public getById(id: string): ICharacter | undefined {

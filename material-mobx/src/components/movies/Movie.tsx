@@ -1,6 +1,13 @@
 import * as React from 'react';
 
-import { createStyles, Paper, StyledComponentProps, Theme, Typography, withStyles } from '@material-ui/core';
+import {
+  createStyles,
+  Paper,
+  StyledComponentProps,
+  Theme,
+  Typography,
+  withStyles
+} from '@material-ui/core';
 import { observer } from 'mobx-react';
 import { IWithMovieStore, withMovieStore } from 'src/store/injectors';
 import Characters from './Characters';
@@ -66,7 +73,9 @@ export class Movie extends React.Component<IItemProps & StyleProps, {}> {
         <Typography variant="subheading">
           {movie.openingCrawl}
         </Typography>
-        <Characters charactersId={movie.characters} />
+        <Paper>
+          <Characters charactersId={movie.characters} />
+        </Paper>
       </>
     );
   }

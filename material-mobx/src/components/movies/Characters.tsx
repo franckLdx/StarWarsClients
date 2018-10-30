@@ -1,3 +1,5 @@
+import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import ItemIcon from '@material-ui/icons/RadioButtonChecked';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import * as React from 'react';
@@ -18,7 +20,15 @@ class Characters extends React.Component<CharactersProps> {
   }
 
   public render() {
-    return <div>{this.characters.map(c => c!.name)}</div >;
+    return <List>
+      {
+        this.characters.map(character =>
+          <ListItem key={character.id}>
+            <ListItemIcon><ItemIcon /></ListItemIcon><ListItemText primary={character.name} />
+          </ListItem>
+        )
+      }
+    </List >;
   }
 
   @computed({ name: 'get characters' })

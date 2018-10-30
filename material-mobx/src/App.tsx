@@ -9,7 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import MovieIcon from '@material-ui/icons/MovieFilter';
-import PersonPinIcon from '@material-ui/icons/PersonPinSharp';
+import PublicIcon from '@material-ui/icons/Public';
 import HelpIcon from '@material-ui/icons/Star';
 import { configure } from "mobx";
 import { onError } from "mobx-react"
@@ -79,7 +79,7 @@ const TabBar: React.SFC<{}> = () => (
     <LinkTab label="Movies" icon={<MovieIcon />} href={URL_MOVIES} />
     <LinkTab label="Characters" icon={<FavoriteIcon />} href={URL_CHARACTERS} />
     <LinkTab label="Species" icon={<FavoriteIcon />} href={URL_SPECIES} />
-    <LinkTab label="Planets" icon={<PersonPinIcon />} href={URL_PLANETS} />
+    <LinkTab label="Planets" icon={<PublicIcon />} href={URL_PLANETS} />
     <LinkTab label="Starships" icon={<HelpIcon />} href={URL_STARSHIPS} />
     <LinkTab label="Vehicles" icon={<HelpIcon />} href={URL_VEHICLES} />
   </Tabs>
