@@ -22,7 +22,7 @@ export class CharaterStore {
     }
     this.state = 'LOADING';
     const characters = await this.fetcher.fetchResources();
-    runInAction('fetch all movies runInAction', () => {
+    runInAction('fetch all characters runInAction', () => {
       this.state = 'LOADED';
       this.addCharacters(...characters);
     })
