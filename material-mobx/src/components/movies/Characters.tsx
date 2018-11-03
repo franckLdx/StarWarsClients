@@ -3,7 +3,7 @@ import ItemIcon from '@material-ui/icons/RadioButtonChecked';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import * as React from 'react';
-import { ICharacter, sortByName } from 'src/model/Characters';
+import { ICharacter, sortByName } from 'src/model';
 import { IWithCharacterStore, withCharactersStore } from 'src/store/injectors';
 
 interface ICharactersOwnProps {
@@ -14,10 +14,6 @@ type CharactersProps = ICharactersOwnProps & IWithCharacterStore
 
 @observer
 class Characters extends React.Component<CharactersProps> {
-
-  public componentDidMount() {
-    this.props.charaterStore.fetchByIds(...this.props.charactersId);
-  }
 
   public render() {
     return <List>

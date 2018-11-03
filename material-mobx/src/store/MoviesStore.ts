@@ -10,7 +10,7 @@ import { IFetcher } from 'src/api';
 import { IMovie } from "../model/Movie";
 
 export class MovieStore {
-  @observable private movies: ObservableMap<string, IMovie> = observable.map({});
+  @observable private moviesMap: ObservableMap<string, IMovie | undefined> = observable.map({});
   @observable private state: "NOT_LOADED" | "LOADING" | "LOADED" = "NOT_LOADED";
 
   constructor(private fetcher: IFetcher<IMovie>) { }
@@ -28,32 +28,34 @@ export class MovieStore {
     })
   }
 
-  @action('fetch particular movies')
-  public async fetchByIds(...ids: string[]) {
-    if (this.state !== 'NOT_LOADED') {
-      return;
+  public getById(id: string): IMovie | undefined {
+    if (!this.moviesMap.has(id)) {
+      runInAction(`Fetching required Movie ${id}`, () => {
+        this.moviesMap.set(id, undefined);
+      });
+      this.fetchById(id);
     }
-    for (const id of ids) {
-      if (this.movies.has(id)) {
-        break;
-      }
-      const movie = await this.fetcher.fetchResource(id);
-      this.addMovies(movie);
-    }
+    return this.moviesMap.get(id);
   }
 
-  public getById(id: string) {
-    return this.movies.get(id);
+  private async fetchById(id: string) {
+    const character = await this.fetcher.fetchResource(id);
+    this.addMovies(character)
   }
 
   @computed
-  public get all() {
-    return Array.from(this.movies.values());
+  public get movies(): IMovie[] {
+    return Array.from(this.moviesMap.values()).filter(c => c !== undefined) as any;
+  }
+
+  @computed
+  public get ids() {
+    return Array.from(this.moviesMap.keys());
   }
 
   @action('add movies')
   private addMovies(...movies: IMovie[]) {
-    movies.forEach(movie => this.movies.set(movie.id, movie));
+    movies.forEach(movie => this.moviesMap.set(movie.id, movie));
   }
 
 }

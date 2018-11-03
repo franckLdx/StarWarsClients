@@ -49,7 +49,7 @@ class List extends React.Component<IListProps, {}> {
 
   @computed
   private get byEpisodeId() {
-    return sortByEpisodeId(this.props.moviesStore.all);
+    return sortByEpisodeId(this.props.moviesStore.movies);
   }
 }
 

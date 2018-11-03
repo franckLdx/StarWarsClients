@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { MovieFetcher } from 'src/api';
-import { CaracterFetcher } from 'src/api/character';
+import { CaracterFetcher, MovieFetcher, SpecieFetcher } from 'src/api';
 import { CharaterStore } from './CharacterStore';
-import { MovieStore } from "./MoviesStore";
+import { MovieStore } from './MoviesStore';
+import { SpecieStore } from './SpecieStore';
 
 const movieStore = new MovieStore(MovieFetcher);
 
@@ -36,6 +36,23 @@ export const withCharactersStore = <P extends IWithCharacterStore>(Component: Re
       <CharacterContext.Consumer>
         {(store) => <Component {...props} charaterStore={store} />}
       </CharacterContext.Consumer>
+    )
+  }
+}
+
+const specieStore = new SpecieStore(SpecieFetcher);
+const SpecieContext = React.createContext(specieStore);
+
+export interface IWithSpecieStore {
+  specieStore: SpecieStore;
+}
+
+export const withSPecieStore = <P extends IWithSpecieStore>(Component: React.ComponentType<P>) => {
+  return (props: Pick<P, Exclude<keyof P, keyof IWithSpecieStore>>) => {
+    return (
+      <SpecieContext.Consumer>
+        {(store) => <Component {...props} specieStore={store} />}
+      </SpecieContext.Consumer>
     )
   }
 }

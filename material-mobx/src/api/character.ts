@@ -1,6 +1,6 @@
-import { ICharacter } from 'src/model/Characters';
-import { createFetcher, Mapper } from "./fetchResource";
-import { urlToId } from './tools';
+import { ICharacter } from 'src/model/Character';
+import { createFetcher, Mapper } from "./FetchResource";
+import { urlToId } from './Tools';
 
 const toCharacter: Mapper<ICharacter> = (item: any): ICharacter => ({
   birthYear: item.birth_year,

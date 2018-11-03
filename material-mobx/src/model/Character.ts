@@ -14,6 +14,3 @@ export interface ICharacter {
   vehicles: string[],
   starships: string[],
 }
-
-export const sortByName = (characters: ICharacter[]): ICharacter[] =>
-  characters.sort((c1, c2) => c1!.name < c2!.name ? -1 : 1);

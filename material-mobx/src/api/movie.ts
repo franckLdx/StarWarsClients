@@ -1,6 +1,6 @@
 import { IMovie } from 'src/model/Movie';
-import { createFetcher, Mapper } from './fetchResource';
-import { urlToId } from './tools';
+import { createFetcher, Mapper } from './FetchResource';
+import { urlToId } from './Tools';
 
 const toMovie: Mapper<IMovie> = (item: any): IMovie => ({
   characters: item.characters.map(urlToId),

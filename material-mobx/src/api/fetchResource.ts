@@ -1,7 +1,7 @@
 
 const URL = 'https://swapi.co/api/';
 
-type Resources = 'films' | 'people';
+type Resources = 'films' | 'people' | 'species';
 
 export type Mapper<T> = (raw: any) => T;
 
@@ -26,9 +26,9 @@ export const createFetcher = <T>(resource: Resources, mapper: Mapper<T>): IFetch
       return [];
     }
     const page = await fetcher(pageUrl);
+    const nextPageContentPromise = fetchAllPages(page.next);
     const currentPageContent: T[] = page.results.map((result: any) => mapper(result));
-    const nextPageContent = await fetchAllPages(page.next);
-    return currentPageContent.concat(nextPageContent);
+    return await nextPageContentPromise.then(nextPageContent => currentPageContent.concat(nextPageContent))
   };
 
   return {

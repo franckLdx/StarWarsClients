@@ -41,7 +41,7 @@ type StyleProps = StyledComponentProps<"paper" | "title" | "releaseDate">;
 export class Movie extends React.Component<IItemProps & StyleProps, {}> {
 
   public componentDidMount() {
-    this.props.moviesStore.fetchByIds(this.props.id);
+    this.props.moviesStore.fetchAll();
   }
 
   public render() {
