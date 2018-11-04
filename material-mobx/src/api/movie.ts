@@ -17,4 +17,4 @@ const toMovie: Mapper<IMovie> = (item: any): IMovie => ({
   vehicles: item.vehicles,
 });
 
-export const MovieFetcher = createFetcher('films', toMovie);
+export const MoviesFetcher = createFetcher('films', toMovie);

@@ -2,14 +2,14 @@ import * as React from 'react';
 
 import { observer } from 'mobx-react';
 import { IMovie } from "src/model";
-import { IWithMovieStore, withMovieStore } from 'src/store/injectors';
+import { IWithMoviesStore, withMovieStore } from 'src/store/injectors';
 import { CellMapper } from './cell';
 
 interface IMovieCellOwnProps {
   ids: string[];
 }
 
-type MovieCellProps = IMovieCellOwnProps & IWithMovieStore;
+type MovieCellProps = IMovieCellOwnProps & IWithMoviesStore;
 
 const movieMapper = (movie: IMovie) => ({ id: movie.id, label: movie.title });
 

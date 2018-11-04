@@ -20,4 +20,4 @@ const toSpecie: Mapper<ISpecie> = (item: any): ISpecie => {
   }
 };
 
-export const SpecieFetcher = createFetcher('species', toSpecie);
+export const SpeciesFetcher = createFetcher('species', toSpecie);

@@ -12,8 +12,8 @@ import { observer } from 'mobx-react';
 import { ICharacter, sortByName } from 'src/model';
 import {
   IWithCharacterStore,
-  withCharactersStore,
-} from 'src/store/injectors';
+  withCharacterStore,
+} from 'src/store';
 import { MovieCell } from './list/MovieCell';
 import { SpecieCell } from './list/SpecieCell';
 
@@ -23,7 +23,7 @@ type IListProps = IWithCharacterStore;
 class List extends React.Component<IListProps, {}> {
 
   public componentDidMount() {
-    this.props.charaterStore.fetchAll();
+    this.props.charatersStore.fetchAll();
   }
 
   public render() {
@@ -56,9 +56,9 @@ class List extends React.Component<IListProps, {}> {
 
   @computed
   private get characters(): ICharacter[] {
-    return sortByName(this.props.charaterStore.values);
+    return sortByName(this.props.charatersStore.values);
   }
 
 }
 
-export default withCharactersStore(List);
+export default withCharacterStore(List);

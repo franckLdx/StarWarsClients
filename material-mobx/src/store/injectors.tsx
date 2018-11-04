@@ -1,64 +1,43 @@
 import * as React from 'react';
 
 import {
-  CaracterFetcher,
-  MovieFetcher,
-  SpecieFetcher
+  CaractersFetcher,
+  MoviesFetcher,
+  SpeciesFetcher
 } from 'src/api';
 import {
-  CharacterStore,
-  MovieStore,
-  SpecieStore,
+  CharactersStore,
+  MoviesStore,
+  SpeciesStore,
   Store
 } from './Store';
 
-const movieStore: MovieStore = new Store(MovieFetcher);
-const MovieContext = React.createContext(movieStore);
-
-export interface IWithMovieStore {
-  moviesStore: MovieStore;
-}
-
-export const withMovieStore = <P extends IWithMovieStore>(Component: React.ComponentType<P>) => {
-  return (props: Pick<P, Exclude<keyof P, keyof IWithMovieStore>>) => {
-    return (
-      <MovieContext.Consumer>
-        {(store) => <Component {...props} moviesStore={store} />}
-      </MovieContext.Consumer>
-    )
+const makeInjector = <S extends {}>(store: Store<any>, storeName: string) => {
+  const injection: any = {};
+  injection[storeName] = store;
+  return <T extends {}>(Component: React.ComponentType<T>) => {
+    type componentOnwProps = Pick<T, Exclude<keyof T, keyof S>>;
+    return (props: componentOnwProps) => {
+      const injectedProps = Object.assign({}, props, injection);
+      return <Component {...injectedProps} />
+    }
   }
 }
 
-const characterStore: CharacterStore = new Store(CaracterFetcher);
-const CharacterContext = React.createContext(characterStore);
+const movieStore: MoviesStore = new Store(MoviesFetcher);
+export interface IWithMoviesStore {
+  moviesStore: MoviesStore;
+}
+export const withMovieStore = makeInjector<IWithMoviesStore>(movieStore, 'moviesStore');
 
+const charactersStore: CharactersStore = new Store(CaractersFetcher);
 export interface IWithCharacterStore {
-  charaterStore: CharacterStore;
+  charatersStore: CharactersStore;
 }
+export const withCharacterStore = makeInjector<IWithCharacterStore>(charactersStore, 'charatersStore');
 
-export const withCharactersStore = <P extends IWithCharacterStore>(Component: React.ComponentType<P>) => {
-  return (props: Pick<P, Exclude<keyof P, keyof IWithCharacterStore>>) => {
-    return (
-      <CharacterContext.Consumer>
-        {(store) => <Component {...props} charaterStore={store} />}
-      </CharacterContext.Consumer>
-    )
-  }
+const speciesStore: SpeciesStore = new Store(SpeciesFetcher);
+export interface IWithSpeciesStore {
+  speciesStore: SpeciesStore;
 }
-
-const specieStore: SpecieStore = new Store(SpecieFetcher);
-const SpecieContext = React.createContext(specieStore);
-
-export interface IWithSpecieStore {
-  specieStore: SpecieStore;
-}
-
-export const withSPecieStore = <P extends IWithSpecieStore>(Component: React.ComponentType<P>) => {
-  return (props: Pick<P, Exclude<keyof P, keyof IWithSpecieStore>>) => {
-    return (
-      <SpecieContext.Consumer>
-        {(store) => <Component {...props} specieStore={store} />}
-      </SpecieContext.Consumer>
-    )
-  }
-}
+export const withSPecieStore = makeInjector<IWithSpeciesStore>(speciesStore, 'speciesStore');

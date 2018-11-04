@@ -9,14 +9,14 @@ import {
   withStyles
 } from '@material-ui/core';
 import { observer } from 'mobx-react';
-import { IWithMovieStore, withMovieStore } from 'src/store/injectors';
+import { IWithMoviesStore, withMovieStore } from 'src/store/injectors';
 import Characters from './Characters';
 
 interface IItemOwnProps {
   id: string
 }
 
-type IItemProps = IWithMovieStore & IItemOwnProps;
+type IItemProps = IWithMoviesStore & IItemOwnProps;
 
 const Style = (theme: Theme) => createStyles({
   paper: {

@@ -6,7 +6,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react'
 import { IMovie, sortByEpisodeId } from 'src/model/Movie';
-import { IWithMovieStore, withMovieStore } from '../../store/injectors';
+import { IWithMoviesStore, withMovieStore } from '../../store/injectors';
 import LinkIconButton from '../routes/LinkIconButton';
 
 const ListStyle = (theme: Theme) => createStyles({
@@ -18,7 +18,7 @@ const ListStyle = (theme: Theme) => createStyles({
 });
 
 type ListStyleProps = StyledComponentProps<"item">;
-type IListProps = IWithMovieStore & ListStyleProps;
+type IListProps = IWithMoviesStore & ListStyleProps;
 
 @observer
 class List extends React.Component<IListProps, {}> {

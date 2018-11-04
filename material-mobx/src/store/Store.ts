@@ -61,6 +61,6 @@ export class Store<T extends IResourceType> {
 
 }
 
-export type MovieStore = Store<IMovie>
-export type CharacterStore = Store<ICharacter>
-export type SpecieStore = Store<ISpecie>
+export type MoviesStore = Store<IMovie>
+export type CharactersStore = Store<ICharacter>
+export type SpeciesStore = Store<ISpecie>

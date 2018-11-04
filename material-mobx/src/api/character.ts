@@ -19,4 +19,4 @@ const toCharacter: Mapper<ICharacter> = (item: any): ICharacter => ({
   vehicles: item.vehicles.map(urlToId),
 });
 
-export const CaracterFetcher = createFetcher('people', toCharacter);
+export const CaractersFetcher = createFetcher('people', toCharacter);

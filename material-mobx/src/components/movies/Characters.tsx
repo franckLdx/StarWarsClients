@@ -4,7 +4,7 @@ import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { ICharacter, sortByName } from 'src/model';
-import { IWithCharacterStore, withCharactersStore } from 'src/store/injectors';
+import { IWithCharacterStore, withCharacterStore } from 'src/store';
 
 interface ICharactersOwnProps {
   charactersId: string[]
@@ -30,7 +30,7 @@ class Characters extends React.Component<CharactersProps> {
   @computed({ name: 'get characters' })
   private get characters(): ICharacter[] {
     const charactersId = this.props.charactersId;
-    const store = this.props.charaterStore;
+    const store = this.props.charatersStore;
     const characters: any = charactersId
       .map(id => store.getById(id))
       .filter(character => character !== undefined);
@@ -39,4 +39,4 @@ class Characters extends React.Component<CharactersProps> {
 
 }
 
-export default withCharactersStore(Characters);
+export default withCharacterStore(Characters);
