@@ -5,7 +5,8 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TableRow
+  TableRow,
+  Typography
 } from '@material-ui/core';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
@@ -46,7 +47,7 @@ class List extends React.Component<IListProps, {}> {
     return (
       <TableRow key={character.id}>
         <TableCell >
-          {character.name}
+          <Typography variant="body1">{character.name}</Typography>
         </TableCell>
         <SpecieCell ids={character.species} />
         <MovieCell ids={character.movies} />

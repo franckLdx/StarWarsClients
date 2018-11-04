@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
+import { URL_MOVIES } from 'src/components/routes/Router';
 import { IMovie } from "src/model";
 import { IWithMoviesStore, withMovieStore } from 'src/store/injectors';
 import { CellMapper } from './cell';
@@ -19,5 +20,6 @@ export const MovieCell = observer(withMovieStore(
       ids={ids}
       store={moviesStore}
       mapper={movieMapper}
+      href={URL_MOVIES}
     />
 ));

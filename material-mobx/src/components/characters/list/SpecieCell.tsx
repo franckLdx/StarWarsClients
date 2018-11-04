@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
+import { URL_SPECIES } from 'src/components/routes/Router';
 import { ISpecie } from "src/model";
 import { IWithSpeciesStore, withSPecieStore } from 'src/store/injectors';
 import { CellMapper } from './cell';
@@ -18,5 +19,6 @@ export const SpecieCell = observer(withSPecieStore(
       ids={ids}
       store={speciesStore}
       mapper={specieMapper}
+      href={URL_SPECIES}
     />
 ));

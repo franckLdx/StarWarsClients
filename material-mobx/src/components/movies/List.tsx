@@ -7,7 +7,7 @@ import { computed } from 'mobx';
 import { observer } from 'mobx-react'
 import { IMovie, sortByEpisodeId } from 'src/model/Movie';
 import { IWithMoviesStore, withMovieStore } from '../../store/injectors';
-import LinkIconButton from '../routes/LinkIconButton';
+import { LinkIconButton } from '../routes/LinkButton';
 
 const ListStyle = (theme: Theme) => createStyles({
   item: {

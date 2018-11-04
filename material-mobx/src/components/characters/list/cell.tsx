@@ -1,36 +1,72 @@
 import * as React from 'react';
 
-import { TableCell } from '@material-ui/core';
+import {
+  createStyles,
+  List,
+  ListItem,
+  StyledComponentProps,
+  TableCell,
+  Theme,
+  withStyles
+} from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
+import { LinkButton } from 'src/components/routes/LinkButton';
 import { IResourceType, Store } from 'src/store/Store';
+
+const Style = (theme: Theme) => createStyles({
+  button: {
+    textTransform: 'none',
+  },
+  item: {
+    padding: '0px',
+  },
+});
+type StyleProps = StyledComponentProps<"item" | "button">;
 
 export interface ICellItem {
   id: string, label: string
 }
 
-export interface ICellProps {
+interface ICellOwnProps {
   items: ICellItem[]
+  href: string
 }
+type ICellProps = ICellOwnProps & StyleProps;
 
-export const Cell: React.SFC<ICellProps> = ({ items }: ICellProps) => (
+const CellRaw: React.SFC<ICellProps> = ({ items, href, classes }: ICellProps) => (
   <TableCell >
-    {
-      items.map(i => i.label).join(', ')
-    }
-  </TableCell>
+    <List>
+      {
+        items.map(item => {
+          const myLink =
+            <LinkButton className={classes!.button} href={`${href}/${item.id}`}>
+              <Typography variant="body1">{item.label}</Typography>
+            </LinkButton>;
+          return (
+            <ListItem className={classes!.item} key={item.id}>
+              {myLink}
+            </ListItem>
+          );
+        })
+      }
+    </List>
+  </TableCell >
 );
+const Cell = withStyles(Style)(CellRaw);
 
 interface ICellMapperProps<T extends IResourceType> {
   ids: string[];
   store: Store<T>
   mapper: (data: any) => ICellItem;
+  href: string;
 }
 
 @observer
 export class CellMapper<T extends IResourceType> extends React.Component<ICellMapperProps<T>, {}> {
   public render() {
-    return <Cell items={this.items} />
+    return <Cell items={this.items} href={this.props.href} />
   }
 
   @computed
