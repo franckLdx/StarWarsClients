@@ -3,8 +3,7 @@ import * as React from 'react';
 import { TableCell } from '@material-ui/core';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
-import { MovieStore } from 'src/store';
-import { SpecieStore } from 'src/store/SpecieStore';
+import { IResourceType, Store } from 'src/store/Store';
 
 export interface ICellItem {
   id: string, label: string
@@ -22,14 +21,14 @@ export const Cell: React.SFC<ICellProps> = ({ items }: ICellProps) => (
   </TableCell>
 );
 
-interface ICellMapperProps {
+interface ICellMapperProps<T extends IResourceType> {
   ids: string[];
-  store: MovieStore | SpecieStore
+  store: Store<T>
   mapper: (data: any) => ICellItem;
 }
 
 @observer
-export class CellMapper extends React.Component<ICellMapperProps, {}> {
+export class CellMapper<T extends IResourceType> extends React.Component<ICellMapperProps<T>, {}> {
   public render() {
     return <Cell items={this.items} />
   }

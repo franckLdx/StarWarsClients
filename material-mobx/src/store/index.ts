@@ -1,2 +1,6 @@
-export { MovieStore } from './MoviesStore';
-export { CharaterStore } from './CharacterStore';
+
+export {
+  MovieStore,
+  CharacterStore,
+  SpecieStore
+} from './Store';

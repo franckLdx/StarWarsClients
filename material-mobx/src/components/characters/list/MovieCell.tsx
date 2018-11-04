@@ -11,20 +11,13 @@ interface IMovieCellOwnProps {
 
 type MovieCellProps = IMovieCellOwnProps & IWithMovieStore;
 
-@observer
-class MovieCellRaw extends React.Component<MovieCellProps, {}> {
+const movieMapper = (movie: IMovie) => ({ id: movie.id, label: movie.title });
 
-  public render() {
-    const { ids, moviesStore } = this.props;
-    return <CellMapper
+export const MovieCell = observer(withMovieStore(
+  ({ ids, moviesStore }: MovieCellProps) =>
+    <CellMapper
       ids={ids}
       store={moviesStore}
       mapper={movieMapper}
     />
-  }
-
-}
-
-const movieMapper = (movie: IMovie) => ({ id: movie.id, label: movie.title });
-
-export const MovieCell = withMovieStore(MovieCellRaw);
+));

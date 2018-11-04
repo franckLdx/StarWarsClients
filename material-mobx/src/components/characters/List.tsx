@@ -56,7 +56,7 @@ class List extends React.Component<IListProps, {}> {
 
   @computed
   private get characters(): ICharacter[] {
-    return sortByName(this.props.charaterStore.characters);
+    return sortByName(this.props.charaterStore.values);
   }
 
 }

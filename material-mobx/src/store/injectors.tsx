@@ -1,12 +1,18 @@
 import * as React from 'react';
 
-import { CaracterFetcher, MovieFetcher, SpecieFetcher } from 'src/api';
-import { CharaterStore } from './CharacterStore';
-import { MovieStore } from './MoviesStore';
-import { SpecieStore } from './SpecieStore';
+import {
+  CaracterFetcher,
+  MovieFetcher,
+  SpecieFetcher
+} from 'src/api';
+import {
+  CharacterStore,
+  MovieStore,
+  SpecieStore,
+  Store
+} from './Store';
 
-const movieStore = new MovieStore(MovieFetcher);
-
+const movieStore: MovieStore = new Store(MovieFetcher);
 const MovieContext = React.createContext(movieStore);
 
 export interface IWithMovieStore {
@@ -23,11 +29,11 @@ export const withMovieStore = <P extends IWithMovieStore>(Component: React.Compo
   }
 }
 
-const characterStore = new CharaterStore(CaracterFetcher);
+const characterStore: CharacterStore = new Store(CaracterFetcher);
 const CharacterContext = React.createContext(characterStore);
 
 export interface IWithCharacterStore {
-  charaterStore: CharaterStore;
+  charaterStore: CharacterStore;
 }
 
 export const withCharactersStore = <P extends IWithCharacterStore>(Component: React.ComponentType<P>) => {
@@ -40,7 +46,7 @@ export const withCharactersStore = <P extends IWithCharacterStore>(Component: Re
   }
 }
 
-const specieStore = new SpecieStore(SpecieFetcher);
+const specieStore: SpecieStore = new Store(SpecieFetcher);
 const SpecieContext = React.createContext(specieStore);
 
 export interface IWithSpecieStore {

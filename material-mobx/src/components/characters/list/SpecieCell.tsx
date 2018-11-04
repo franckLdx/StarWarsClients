@@ -10,20 +10,13 @@ interface ISpecieCellOwnProps {
 };
 type SpecieCellProps = IWithSpecieStore & ISpecieCellOwnProps;
 
-@observer
-class SpecieCellRaw extends React.Component<SpecieCellProps, {}> {
+const specieMapper = (specie: ISpecie) => ({ id: specie.id, label: specie.name });
 
-  public render() {
-    const { ids, specieStore } = this.props;
-    return <CellMapper
+export const SpecieCell = observer(withSPecieStore(
+  ({ ids, specieStore }: SpecieCellProps) =>
+    <CellMapper
       ids={ids}
       store={specieStore}
       mapper={specieMapper}
     />
-  }
-
-}
-
-const specieMapper = (specie: ISpecie) => ({ id: specie.id, label: specie.name });
-
-export const SpecieCell = withSPecieStore(SpecieCellRaw);
+));
