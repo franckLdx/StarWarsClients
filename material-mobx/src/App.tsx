@@ -76,19 +76,27 @@ const Header: React.SFC<{}> = () => (
 );
 
 
-const TabBar: React.SFC<{}> = () => (
+const TabBarStyle = (theme: Theme) => createStyles({
+  linkTab: {
+    alignSelf: 'flex-end',
+    marginTop: theme.spacing.unit,
+  },
+});
+type TabBarStyle = StyledComponentProps<"linkTab">;
+
+const TabBarRaw: React.SFC<TabBarStyle> = ({ classes }) => (
   <Tabs
     value={false}
     scrollable={true}
     indicatorColor="primary"
     textColor="primary"
   >
-    <LinkTab label="Movies" icon={<img src="./tn_Ct3.jpg" />} href={URL_MOVIES} />
-    <LinkTab label="Characters" icon={<img src="./icones/favicon_Boba.ico" />} href={URL_CHARACTERS} />
-    <LinkTab label="Species" icon={<FavoriteIcon />} href={URL_SPECIES} />
-    <LinkTab label="Planets" icon={<PublicIcon />} href={URL_PLANETS} />
-    <LinkTab label="Starships" icon={<HelpIcon />} href={URL_STARSHIPS} />
-    <LinkTab label="Vehicles" icon={<HelpIcon />} href={URL_VEHICLES} />
+    <LinkTab className={classes!.linkTab} label="Movies" icon={<img src="./tn_Ct3.jpg" />} href={URL_MOVIES} />
+    <LinkTab className={classes!.linkTab} label="Characters" icon={<img src="./icones/favicon_Boba.ico" />} href={URL_CHARACTERS} />
+    <LinkTab className={classes!.linkTab} label="Species" icon={<FavoriteIcon />} href={URL_SPECIES} />
+    <LinkTab className={classes!.linkTab} label="Planets" icon={<PublicIcon />} href={URL_PLANETS} />
+    <LinkTab className={classes!.linkTab} label="Starships" icon={<HelpIcon />} href={URL_STARSHIPS} />
+    <LinkTab className={classes!.linkTab} label="Vehicles" icon={<HelpIcon />} href={URL_VEHICLES} />
   </Tabs>
 );
 
@@ -96,5 +104,7 @@ onError(error => {
   // tslint:disable-next-line:no-console
   console.log(error)
 })
+
+const TabBar = withStyles(TabBarStyle)(TabBarRaw);
 
 export default withStyles(AppStyle)(App);
