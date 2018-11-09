@@ -86,7 +86,7 @@ const MovieItemRaw: React.SFC<IMovieItemStylePropsRaw & MovieItemStylePropsRaw> 
         </LinkIconButton>
       </Typography>
       <Divider className={classes!.divider} />
-      <Typography className={classes!.content} variant="subheading">{movie.openingCrawl}</Typography>
+      <Typography className={classes!.content} variant="subtitle1">{movie.openingCrawl}</Typography>
     </Paper>
   );
 };

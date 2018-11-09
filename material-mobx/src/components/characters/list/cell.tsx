@@ -42,7 +42,7 @@ const CellRaw: React.SFC<ICellProps> = ({ items, href, classes }: ICellProps) =>
         items.map(item => {
           const myLink =
             <LinkButton className={classes!.button} href={`${href}/${item.id}`}>
-              <Typography variant="body1">{item.label}</Typography>
+              <Typography variant="subtitle1">{item.label}</Typography>
             </LinkButton>;
           return (
             <ListItem className={classes!.item} key={item.id}>

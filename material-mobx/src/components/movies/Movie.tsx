@@ -8,6 +8,7 @@ import {
   Typography,
   withStyles
 } from '@material-ui/core';
+import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { IWithMoviesStore, withMovieStore } from 'src/store/injectors';
 import Characters from './Characters';
@@ -41,39 +42,35 @@ type StyleProps = StyledComponentProps<"paper" | "title" | "releaseDate">;
 export class Movie extends React.Component<IItemProps & StyleProps, {}> {
 
   public render() {
-    const classes = this.props.classes!;
-    return (
-      <Paper className={classes.paper}>
-        {this.getContent()}
-      </Paper>
-    );
-  }
-
-  private getContent() {
-    const classes = this.props.classes!;
-    const movie = this.props.moviesStore.getById(this.props.id);
+    const movie = this.movie;
     if (movie === undefined) {
       return null;
     }
+    const classes = this.props.classes!;
     return (
-      <>
-        <Typography className={classes.title} variant="headline">
+      <Paper className={classes.paper}>
+        <Typography className={classes.title} variant="h5">
           {movie.title} -- Episode {movie.episodeId}
         </Typography>
-        <Typography className={classes.releaseDate} variant="subheading">
+        <Typography className={classes.releaseDate} variant="subtitle1">
           Released: {movie.releaseDate}
         </Typography>
-        <Typography className={classes.title} variant="subheading">
+        <Typography className={classes.title} variant="subtitle1">
           Director: {movie.director} -- Producer: {movie.producer}
         </Typography>
-        <Typography variant="subheading">
+        <Typography variant="subtitle1">
           {movie.openingCrawl}
         </Typography>
         <Paper>
           <Characters charactersId={movie.characters} />
         </Paper>
-      </>
+      </Paper>
     );
+  }
+
+  @computed
+  private get movie() {
+    return this.props.moviesStore.getById(this.props.id);
   }
 }
 

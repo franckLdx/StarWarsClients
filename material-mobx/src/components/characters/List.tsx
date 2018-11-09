@@ -6,7 +6,7 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Typography
+  Typography,
 } from '@material-ui/core';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
@@ -15,6 +15,7 @@ import {
   IWithCharacterStore,
   withCharacterStore,
 } from 'src/store';
+import { CharacterCell } from './list/CharacterCell';
 import { MovieCell } from './list/MovieCell';
 import { SpecieCell } from './list/SpecieCell';
 
@@ -31,11 +32,13 @@ class List extends React.Component<IListProps, {}> {
     const characters = this.characters;
     return (
       <Table>
-        <TableHead><TableRow>
-          <TableCell>Name</TableCell>
-          <TableCell>Species</TableCell>
-          <TableCell>Movies</TableCell>
-        </TableRow></TableHead>
+        <TableHead>
+          <TableRow>
+            <CellHeader header='Name' />
+            <CellHeader header='Species' />
+            <CellHeader header='Movies' />
+          </TableRow>
+        </TableHead>
         <TableBody>
           {characters.map(character => this.getRow(character))}
         </TableBody>
@@ -46,9 +49,7 @@ class List extends React.Component<IListProps, {}> {
   private getRow = (character: ICharacter) => {
     return (
       <TableRow key={character.id}>
-        <TableCell >
-          <Typography variant="body1">{character.name}</Typography>
-        </TableCell>
+        <CharacterCell ids={[character.id]} />
         <SpecieCell ids={character.species} />
         <MovieCell ids={character.movies} />
       </TableRow >
@@ -61,5 +62,17 @@ class List extends React.Component<IListProps, {}> {
   }
 
 }
+
+interface ICellHeaderProps {
+  header: string;
+}
+const CellHeader: React.SFC<ICellHeaderProps> = ({ header }) =>
+  (
+    <>
+      <TableCell><Typography variant="subtitle1">
+        {header}
+      </Typography></TableCell>
+    </>
+  );
 
 export default withCharacterStore(List);

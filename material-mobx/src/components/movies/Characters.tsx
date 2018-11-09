@@ -1,10 +1,12 @@
-import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import ItemIcon from '@material-ui/icons/RadioButtonChecked';
+import * as React from 'react';
+
+import { List, Typography } from '@material-ui/core';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
-import * as React from 'react';
 import { ICharacter, sortByName } from 'src/model';
 import { IWithCharacterStore, withCharacterStore } from 'src/store';
+import { LinkButton } from '../routes/LinkButton';
+import { URL_CHARACTERS } from '../routes/Router';
 
 interface ICharactersOwnProps {
   charactersId: string[]
@@ -18,11 +20,13 @@ class Characters extends React.Component<CharactersProps> {
   public render() {
     return <List>
       {
-        this.characters.map(character =>
-          <ListItem key={character.id}>
-            <ListItemIcon><ItemIcon /></ListItemIcon><ListItemText primary={character.name} />
-          </ListItem>
-        )
+        this.characters.map(character => {
+          return (
+            <LinkButton key={character.id} href={`${URL_CHARACTERS}/${character.id}`}>
+              <Typography variant="subtitle1">{character.name}</Typography>
+            </LinkButton>
+          );
+        })
       }
     </List >;
   }

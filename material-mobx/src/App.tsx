@@ -2,13 +2,18 @@ import * as React from 'react';
 
 import DevTools from 'mobx-react-devtools';
 
-import { createStyles, StyledComponentProps, Tabs, Theme, withStyles } from '@material-ui/core';
+import {
+  createStyles,
+  StyledComponentProps,
+  Tabs,
+  Theme,
+  withStyles,
+} from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import MovieIcon from '@material-ui/icons/MovieFilter';
 import PublicIcon from '@material-ui/icons/Public';
 import HelpIcon from '@material-ui/icons/Star';
 import { configure } from "mobx";
@@ -24,6 +29,7 @@ import {
   URL_STARSHIPS,
   URL_VEHICLES
 } from './components/routes/Router';
+import * as _ from './Theme';
 
 const AppStyle = (theme: Theme) => createStyles({
   appBar: {
@@ -69,6 +75,7 @@ const Header: React.SFC<{}> = () => (
   </Typography>
 );
 
+
 const TabBar: React.SFC<{}> = () => (
   <Tabs
     value={false}
@@ -76,8 +83,8 @@ const TabBar: React.SFC<{}> = () => (
     indicatorColor="primary"
     textColor="primary"
   >
-    <LinkTab label="Movies" icon={<MovieIcon />} href={URL_MOVIES} />
-    <LinkTab label="Characters" icon={<FavoriteIcon />} href={URL_CHARACTERS} />
+    <LinkTab label="Movies" icon={<img src="./tn_Ct3.jpg" />} href={URL_MOVIES} />
+    <LinkTab label="Characters" icon={<img src="./icones/favicon_Boba.ico" />} href={URL_CHARACTERS} />
     <LinkTab label="Species" icon={<FavoriteIcon />} href={URL_SPECIES} />
     <LinkTab label="Planets" icon={<PublicIcon />} href={URL_PLANETS} />
     <LinkTab label="Starships" icon={<HelpIcon />} href={URL_STARSHIPS} />

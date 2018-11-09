@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
 import { RouterRenderer } from 'src/model/Route';
 import { URL_CHARACTERS } from '../routes/Router';
+import Character from './Character';
 import List from './List';
 
 const router: RouterRenderer = () => (
@@ -14,7 +15,7 @@ const router: RouterRenderer = () => (
 )
 
 const ItemRenderer = (routeParams: RouteComponentProps<any>) => {
-  return null;// <Item id={routeParams.match.params.id} />;
+  return <Character characterId={routeParams.match.params.id} />;
 }
 
 export default router;
