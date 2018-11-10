@@ -5,12 +5,12 @@ import {
   Paper,
   StyledComponentProps,
   Theme,
-  Typography,
   withStyles
 } from '@material-ui/core';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { IWithMoviesStore, withMovieStore } from 'src/store/injectors';
+import { Record, RecordH1, RecordH2, RecordInfo } from '../shared/Record';
 import Characters from './Characters';
 
 interface IItemOwnProps {
@@ -20,23 +20,12 @@ interface IItemOwnProps {
 type IItemProps = IWithMoviesStore & IItemOwnProps;
 
 const Style = (theme: Theme) => createStyles({
-  paper: {
-    marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2,
-    paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit,
-    paddingTop: theme.spacing.unit,
-  },
   releaseDate: {
     fontWeight: 'bold',
   },
-  title: {
-    fontWeight: 'bold',
-    paddingBottom: theme.spacing.unit,
-  },
 });
 
-type StyleProps = StyledComponentProps<"paper" | "title" | "releaseDate">;
+type StyleProps = StyledComponentProps<| "title" | "releaseDate">;
 
 @observer
 export class Movie extends React.Component<IItemProps & StyleProps, {}> {
@@ -46,25 +35,28 @@ export class Movie extends React.Component<IItemProps & StyleProps, {}> {
     if (movie === undefined) {
       return null;
     }
-    const classes = this.props.classes!;
     return (
-      <Paper className={classes.paper}>
-        <Typography className={classes.title} variant="h5">
+      <Record>
+        <RecordH1>
           {movie.title} -- Episode {movie.episodeId}
-        </Typography>
-        <Typography className={classes.releaseDate} variant="subtitle1">
+        </RecordH1>
+        <RecordH2>
           Released: {movie.releaseDate}
-        </Typography>
-        <Typography className={classes.title} variant="subtitle1">
+        </RecordH2>
+        <RecordH2>
           Director: {movie.director} -- Producer: {movie.producer}
-        </Typography>
-        <Typography variant="subtitle1">
+        </RecordH2>
+        <RecordInfo>
           {movie.openingCrawl}
-        </Typography>
+        </RecordInfo>
+        <br />
+        <RecordH2>
+          Characters:
+        </RecordH2>
         <Paper>
           <Characters charactersId={movie.characters} />
         </Paper>
-      </Paper>
+      </Record>
     );
   }
 

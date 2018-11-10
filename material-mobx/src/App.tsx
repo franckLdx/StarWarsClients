@@ -29,7 +29,7 @@ import {
   URL_STARSHIPS,
   URL_VEHICLES
 } from './components/routes/Router';
-import * as _ from './Theme';
+import * as _ from './css/Theme';
 
 const AppStyle = (theme: Theme) => createStyles({
   appBar: {

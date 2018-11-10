@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { URL_SPECIES } from 'src/components/routes/Router';
 import { ISpecie } from "src/model";
 import { IWithSpeciesStore, withSPecieStore } from 'src/store/injectors';
-import { CellMapper } from './cell';
+import { CellMapper } from './Cell';
 
 interface ISpecieCellOwnProps {
   ids: string[]

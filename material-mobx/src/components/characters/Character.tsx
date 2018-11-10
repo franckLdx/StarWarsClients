@@ -1,9 +1,9 @@
 import * as React from 'react'
 
-import Typography from '@material-ui/core/Typography';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { IWithCharacterStore, withCharacterStore } from 'src/store';
+import { Record, RecordH1, RecordInfo } from '../shared/Record';
 
 interface ICharactersOwnProps {
   characterId: string
@@ -20,11 +20,14 @@ class Character extends React.Component<CharactersProps> {
       return null;
     }
     return (
-      <>
-        <Typography variant="h6">{character.name} -- {character.birthYear}</Typography><br />
-        <Typography variant="subtitle1">Gender: {character.gender}</Typography><br />
-        <Typography variant="subtitle1">Height: {character.height}, Mass: {character.mass}, Skin color: {character.skinColor}, Hair color: {character.hairColor}</Typography>
-      </>
+      <Record>
+        <RecordH1>{character.name} -- {character.birthYear}</RecordH1><br />
+        <RecordInfo>Gender: {character.gender}</RecordInfo><br />
+        <RecordInfo>Height: {character.height}</RecordInfo><br />
+        <RecordInfo>Mass: {character.mass}</RecordInfo><br />
+        <RecordInfo>Skin color: {character.skinColor}</RecordInfo><br />
+        <RecordInfo>Hair color: {character.hairColor}</RecordInfo><br />
+      </Record >
     );
   }
 

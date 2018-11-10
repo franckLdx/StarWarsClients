@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { URL_CHARACTERS } from 'src/components/routes/Router';
 import { ICharacter } from 'src/model';
 import { IWithCharacterStore, withCharacterStore } from 'src/store';
-import { CellMapper } from './cell';
+import { CellMapper } from './Cell';
 
 interface ICharacterCellOwnProps {
   ids: string[]
