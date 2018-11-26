@@ -1,9 +1,15 @@
+import { GraphQLClient } from 'graphql-request';
 
 const URL = 'https://swapi.co/api/';
 
 type Resources = 'films' | 'people' | 'species';
 
 export type Mapper<T> = (raw: any) => T;
+
+export function getGraphQLClient(url: string): GraphQLClient {
+  const endpoint = `${url}/API`;
+  return new GraphQLClient(endpoint);
+}
 
 export interface IFetcher<T> {
   fetchResource: (id: string) => Promise<T>
@@ -41,3 +47,5 @@ export const createFetcher = <T>(resource: Resources, mapper: Mapper<T>): IFetch
     },
   }
 };
+
+

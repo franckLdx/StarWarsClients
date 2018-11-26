@@ -51,7 +51,7 @@ export class Store<T extends IResourceType> {
 
   @action('add resources')
   private addResources(...resources: T[]) {
-    resources.forEach(specie => this.resourcesMap.set(specie.id, specie));
+    resources.forEach(resource => this.resourcesMap.set(resource.id.toString(), resource));
   }
 
   private async fetchById(id: string) {

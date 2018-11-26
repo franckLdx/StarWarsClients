@@ -5,7 +5,8 @@ import Paper from '@material-ui/core/Paper';
 import InfoIcon from '@material-ui/icons/Info';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react'
-import { IMovie, sortByEpisodeId } from 'src/model/Movie';
+import { sortById } from 'src/model';
+import { IMovie } from 'src/model/Movie';
 import { IWithMoviesStore, withMovieStore } from '../../store/injectors';
 import { LinkIconButton } from '../routes/LinkButton';
 
@@ -49,7 +50,7 @@ class List extends React.Component<IListProps, {}> {
 
   @computed
   private get byEpisodeId() {
-    return sortByEpisodeId(this.props.moviesStore.values);
+    return sortById(this.props.moviesStore.values);
   }
 }
 
@@ -80,7 +81,7 @@ const MovieItemRaw: React.SFC<IMovieItemStylePropsRaw & MovieItemStylePropsRaw> 
   return (
     <Paper>
       <Typography className={classes!.title} variant="h5">
-        {movie.title}
+        {movie.id} -- {movie.title}
         <LinkIconButton href={`/movies/${movie.id}`}>
           <InfoIcon />
         </LinkIconButton>

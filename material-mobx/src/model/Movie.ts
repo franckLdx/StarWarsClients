@@ -1,21 +1,16 @@
+import { IResourceRef } from './Tools';
 
 export interface IMovie {
   id: string;
-  episodeId: string;
   title: string;
   openingCrawl: string;
   director: string;
-  producer: string[];
+  producers: string[];
   releaseDate: string;
-  planets: string[];
-  characters: string[];
-  species: string[];
-  starships: string[];
-  vehicles: string[];
+  planets: IResourceRef[];
+  characters: IResourceRef[];
+  species: IResourceRef[];
+  starships: IResourceRef[];
+  vehicles: IResourceRef[];
 }
 
-export const sortByEpisodeId = (movies: IMovie[]) => {
-  return movies.sort(
-    (movie1, movie2) => movie1.episodeId < movie2.episodeId ? -1 : 1
-  );
-}

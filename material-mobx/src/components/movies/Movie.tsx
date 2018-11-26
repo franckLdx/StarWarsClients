@@ -38,13 +38,13 @@ export class Movie extends React.Component<IItemProps & StyleProps, {}> {
     return (
       <Record>
         <RecordH1>
-          {movie.title} -- Episode {movie.episodeId}
+          {movie.title} -- Episode {movie.id}
         </RecordH1>
         <RecordH2>
           Released: {movie.releaseDate}
         </RecordH2>
         <RecordH2>
-          Director: {movie.director} -- Producer: {movie.producer}
+          Director: {movie.director} -- Producer: {movie.producers}
         </RecordH2>
         <RecordInfo>
           {movie.openingCrawl}
@@ -54,7 +54,7 @@ export class Movie extends React.Component<IItemProps & StyleProps, {}> {
           Characters:
         </RecordH2>
         <Paper>
-          <Characters charactersId={movie.characters} />
+          <Characters charactersId={movie.characters.map(c => c.id)} />
         </Paper>
       </Record>
     );

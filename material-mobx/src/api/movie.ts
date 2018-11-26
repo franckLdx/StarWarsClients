@@ -1,15 +1,28 @@
-import { IMovie } from 'src/model/Movie';
-import { createFetcher, Mapper } from './FetchResource';
-import { urlToId } from './Tools';
+import { GraphQLClient } from 'graphql-request'
+import { IMovie } from 'src/model';
+import { IFetcher, Mapper } from './FetchResource';
 
-const toMovie: Mapper<IMovie> = (item: any): IMovie => ({
-  characters: item.characters.map(urlToId),
+const fragment = `
+{
+  id, title, opening_crawl,director,producers,release_date
+  characters{id, name},
+  species{id, name},
+  planets{id, name},
+  starships{id, name},
+  starships{id, name},
+  vehicles{id, name},
+}`;
+
+const queryFilms = () => `{ films ${fragment} }`;
+const queryFilm = (id: string) => `{ filmById(id:"${id}") ${fragment} }`;
+
+const movieMapper: Mapper<IMovie> = (item: any): IMovie => ({
+  characters: item.characters,
   director: item.director,
-  episodeId: item.episode_id,
-  id: urlToId(item.url),
+  id: item.id,
   openingCrawl: item.opening_crawl,
   planets: item.planets,
-  producer: item.producer.split(','),
+  producers: item.producers,
   releaseDate: item.release_date,
   species: item.species,
   starships: item.starships,
@@ -17,4 +30,15 @@ const toMovie: Mapper<IMovie> = (item: any): IMovie => ({
   vehicles: item.vehicles,
 });
 
-export const MoviesFetcher = createFetcher('films', toMovie);
+export function getMovieFetcher(graphQLClient: GraphQLClient): IFetcher<IMovie> {
+  return {
+    async fetchResource(id: string) {
+      const payload = await graphQLClient.request<any>(queryFilm(id));
+      return movieMapper(payload.filmById);
+    },
+    async fetchResources() {
+      const payload = await graphQLClient.request<any>(queryFilms());
+      return payload.films;
+    }
+  };
+}
