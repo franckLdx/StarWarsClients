@@ -19,7 +19,7 @@ const queryFilm = (id: string) => `{ filmById(id:"${id}") ${fragment} }`;
 const movieMapper: Mapper<IMovie> = (item: any): IMovie => ({
   characters: item.characters,
   director: item.director,
-  id: item.id,
+  id: `${item.id}`,
   openingCrawl: item.opening_crawl,
   planets: item.planets,
   producers: item.producers,
@@ -38,7 +38,7 @@ export function getMovieFetcher(graphQLClient: GraphQLClient): IFetcher<IMovie> 
     },
     async fetchResources() {
       const payload = await graphQLClient.request<any>(queryFilms());
-      return payload.films;
+      return payload.films.map(movieMapper);
     }
   };
 }
