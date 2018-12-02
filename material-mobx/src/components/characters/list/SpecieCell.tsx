@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { URL_SPECIES } from 'src/components/routes/Router';
+import { URL_SPECIES } from 'src/components/Router';
 import { ISpecie } from "src/model";
 import { IWithSpeciesStore, withSPecieStore } from 'src/store/injectors';
 import { CellMapper } from './Cell';

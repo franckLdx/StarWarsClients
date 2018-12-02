@@ -1,5 +1,5 @@
 import { GraphQLClient } from 'graphql-request'
-import { IMovie, resoureRefCmp } from 'src/model';
+import { IMovie, IResourceRef, resoureRefLabelCmp } from 'src/model';
 import { mapCharacterToRef } from '.';
 import { IFetcher, Mapper } from './FetchResource';
 
@@ -19,7 +19,7 @@ const queryFilm = (id: string) => `{ filmById(id:"${id}") ${fragment} }`;
 
 
 const movieMapper: Mapper<IMovie> = (item: any): IMovie => ({
-  characters: item.characters.map(mapCharacterToRef).sort(resoureRefCmp),
+  characters: item.characters.map(mapCharacterToRef).sort(resoureRefLabelCmp),
   director: item.director,
   id: `${item.id}`,
   openingCrawl: item.opening_crawl,
@@ -44,3 +44,10 @@ export function getMovieFetcher(graphQLClient: GraphQLClient): IFetcher<IMovie> 
     }
   };
 }
+
+export function mapMovieToRef(movie: IMovie): IResourceRef {
+  return {
+    id: movie.id,
+    label: movie.title,
+  }
+};

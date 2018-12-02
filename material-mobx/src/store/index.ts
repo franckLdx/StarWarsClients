@@ -1,9 +1,10 @@
 
 export {
   MoviesStore,
-  CharactersStore,
   SpeciesStore
 } from './Store';
+
+export { CharactersStore } from './Characters';
 
 export {
   IWithMoviesStore,

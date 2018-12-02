@@ -10,8 +10,8 @@ import {
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { IWithMoviesStore, withMovieStore } from 'src/store/injectors';
-import { URL_CHARACTERS } from '../routes/Router';
-import { LinkButtonRef } from '../shared/CellRef';
+import { URL_CHARACTERS } from '../Router';
+import { LinkButtonRef } from '../shared/LinkButtonReftsx';
 import { Record, RecordH1, RecordH2, RecordInfo } from '../shared/Record';
 
 interface IItemOwnProps {

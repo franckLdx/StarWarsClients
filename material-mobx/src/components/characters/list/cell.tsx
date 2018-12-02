@@ -9,10 +9,9 @@ import {
   Theme,
   withStyles
 } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
-import { LinkButton } from 'src/components/routes/LinkButton';
+import { LinkButtonRef } from 'src/components/shared/LinkButtonReftsx';
 import { IResourceRef } from 'src/model';
 import { IResourceType, Store } from 'src/store/Store';
 
@@ -41,13 +40,9 @@ const CellRaw: React.SFC<ICellProps> = ({ items, href, classes }: ICellProps) =>
     <List>
       {
         items.map(item => {
-          const myLink =
-            <LinkButton className={classes!.button} href={`${href}/${item.id}`}>
-              <Typography variant="subtitle1">{item.label}</Typography>
-            </LinkButton>;
           return (
             <ListItem className={classes!.item} key={item.id}>
-              {myLink}
+              <LinkButtonRef resourceRef={item} href={href} />
             </ListItem>
           );
         })

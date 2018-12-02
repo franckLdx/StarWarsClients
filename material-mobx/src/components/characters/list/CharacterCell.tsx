@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react';
-import { URL_CHARACTERS } from 'src/components/routes/Router';
+import { URL_CHARACTERS } from 'src/components/Router';
 import { ICharacter } from 'src/model';
 import { IWithCharacterStore, withCharacterStore } from 'src/store';
 import { CellMapper } from './Cell';

@@ -8,16 +8,25 @@ import {
   TableRow,
   Typography,
 } from '@material-ui/core';
-import { computed } from 'mobx';
-import { observer } from 'mobx-react';
-import { ICharacter, sortByName } from 'src/model';
+import {
+  observer
+} from 'mobx-react';
+import {
+  ICharacter,
+  IResourceRef,
+} from 'src/model';
 import {
   IWithCharacterStore,
   withCharacterStore,
 } from 'src/store';
-import { CharacterCell } from './list/CharacterCell';
-import { MovieCell } from './list/MovieCell';
-import { SpecieCell } from './list/SpecieCell';
+import {
+  URL_CHARACTERS,
+  URL_MOVIES,
+  URL_SPECIES,
+} from '../Router';
+import {
+  TableCellRefs
+} from '../shared/CellRef';
 
 type IListProps = IWithCharacterStore;
 
@@ -29,7 +38,7 @@ class List extends React.Component<IListProps, {}> {
   }
 
   public render() {
-    const characters = this.characters;
+    const characters = this.props.charatersStore.valuesByName;
     return (
       <Table>
         <TableHead>
@@ -40,27 +49,11 @@ class List extends React.Component<IListProps, {}> {
           </TableRow>
         </TableHead>
         <TableBody>
-          {characters.map(character => this.getRow(character))}
+          {characters.map(character => <Row key={character.id} character={character} />)}
         </TableBody>
-      </Table>
+      </Table >
     )
   }
-
-  private getRow = (character: ICharacter) => {
-    return (
-      <TableRow key={character.id}>
-        <CharacterCell ids={[character.id]} />
-        <SpecieCell ids={character.species.map(s => s.id)} />
-        <MovieCell ids={character.movies.map(m => m.id)} />
-      </TableRow >
-    );
-  }
-
-  @computed
-  private get characters(): ICharacter[] {
-    return sortByName(this.props.charatersStore.values);
-  }
-
 }
 
 interface ICellHeaderProps {
@@ -68,11 +61,25 @@ interface ICellHeaderProps {
 }
 const CellHeader: React.SFC<ICellHeaderProps> = ({ header }) =>
   (
-    <>
-      <TableCell><Typography variant="subtitle1">
+    <TableCell>
+      <Typography variant="subtitle1">
         {header}
-      </Typography></TableCell>
-    </>
+      </Typography>
+    </TableCell>
   );
+
+interface IRowProps {
+  character: ICharacter;
+}
+const Row: React.SFC<IRowProps> = ({ character }) => {
+  const ref: IResourceRef = { id: character.id, label: character.name };
+  return (
+    <TableRow key={character.id}>
+      <TableCellRefs resourcesRef={[ref]} href={URL_CHARACTERS} />
+      <TableCellRefs resourcesRef={character.species} href={URL_SPECIES} />
+      <TableCellRefs resourcesRef={character.movies} href={URL_MOVIES} />
+    </TableRow >
+  );
+}
 
 export default withCharacterStore(List);

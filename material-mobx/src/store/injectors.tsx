@@ -5,8 +5,8 @@ import {
   movieFetcher,
   SpeciesFetcher
 } from 'src/api';
+import { CharactersStore } from './Characters';
 import {
-  CharactersStore,
   MoviesStore,
   SpeciesStore,
   Store
@@ -30,7 +30,7 @@ export interface IWithMoviesStore {
 }
 export const withMovieStore = makeInjector<IWithMoviesStore>(movieStore, 'moviesStore');
 
-const charactersStore: CharactersStore = new Store(characterFetcher);
+const charactersStore: CharactersStore = new CharactersStore(characterFetcher);
 export interface IWithCharacterStore {
   charatersStore: CharactersStore;
 }

@@ -1,7 +1,9 @@
 import { GraphQLClient } from 'graphql-request';
-import { IResourceRef } from 'src/model';
+import { IResourceRef, resoureRefLabelId } from 'src/model';
 import { ICharacter } from 'src/model/Character';
+import { mapSpecieToRef } from '.';
 import { IFetcher, Mapper } from './FetchResource';
+import { mapMovieToRef } from './Movie';
 
 const fragment = `
 {
@@ -25,10 +27,10 @@ const characterMapper: Mapper<ICharacter> = (item: any): ICharacter => ({
   homeworld: item.homeworld,
   id: `${item.id}`,
   mass: item.mass,
-  movies: item.films,
+  movies: item.films.map(mapMovieToRef).sort(resoureRefLabelId),
   name: item.name,
   skinColor: item.skin_color,
-  species: item.species,
+  species: item.species.map(mapSpecieToRef),
   starships: item.starships,
   vehicles: item.vehicles,
 });

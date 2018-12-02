@@ -6,7 +6,7 @@ import {
   runInAction,
 } from 'mobx';
 import { IFetcher } from 'src/api';
-import { ICharacter, IMovie, ISpecie } from 'src/model';
+import { IMovie, ISpecie } from 'src/model';
 
 export interface IResourceType { id: string }
 
@@ -64,5 +64,4 @@ export class Store<T extends IResourceType> {
 }
 
 export type MoviesStore = Store<IMovie>
-export type CharactersStore = Store<ICharacter>
 export type SpeciesStore = Store<ISpecie>

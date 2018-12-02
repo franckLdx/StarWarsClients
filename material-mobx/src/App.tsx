@@ -19,7 +19,6 @@ import HelpIcon from '@material-ui/icons/Star';
 import { configure } from "mobx";
 import { onError } from "mobx-react"
 import { BrowserRouter } from 'react-router-dom'
-import LinkTab from './components/routes/LinkTab';
 import {
   Router,
   URL_CHARACTERS,
@@ -28,7 +27,9 @@ import {
   URL_SPECIES,
   URL_STARSHIPS,
   URL_VEHICLES
-} from './components/routes/Router';
+} from './components/Router';
+import LinkTab from './components/shared/routes/LinkTab';
+
 import * as _ from './css/Theme';
 
 const AppStyle = (theme: Theme) => createStyles({

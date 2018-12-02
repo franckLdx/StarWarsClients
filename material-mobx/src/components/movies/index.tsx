@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router';
 import { RouterRenderer } from 'src/model/Route';
-import { URL_MOVIES } from '../routes/Router';
+import { URL_MOVIES } from '../Router';
 import List from './List';
 import Item from './Movie';
 
