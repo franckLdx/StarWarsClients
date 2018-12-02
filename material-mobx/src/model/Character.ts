@@ -1,3 +1,5 @@
+import { IResourceRef } from './Tools';
+
 export interface ICharacter {
   id: string;
   name: string;
@@ -8,9 +10,9 @@ export interface ICharacter {
   eyeColor: string;
   birthYear: string;
   gender: string;
-  homeworld: string,
-  movies: string[],
-  species: string[],
-  vehicles: string[],
-  starships: string[],
+  homeworld: IResourceRef[],
+  movies: IResourceRef[],
+  species: IResourceRef[],
+  vehicles: IResourceRef[],
+  starships: IResourceRef[],
 }

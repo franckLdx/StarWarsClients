@@ -1,10 +1,11 @@
 import { GraphQLClient } from 'graphql-request'
-import { IMovie } from 'src/model';
+import { IMovie, resoureRefCmp } from 'src/model';
+import { mapCharacterToRef } from '.';
 import { IFetcher, Mapper } from './FetchResource';
 
 const fragment = `
 {
-  id, title, opening_crawl,director,producers,release_date
+  id, title, opening_crawl, director, producers, release_date
   characters{id, name},
   species{id, name},
   planets{id, name},
@@ -16,8 +17,9 @@ const fragment = `
 const queryFilms = () => `{ films ${fragment} }`;
 const queryFilm = (id: string) => `{ filmById(id:"${id}") ${fragment} }`;
 
+
 const movieMapper: Mapper<IMovie> = (item: any): IMovie => ({
-  characters: item.characters,
+  characters: item.characters.map(mapCharacterToRef).sort(resoureRefCmp),
   director: item.director,
   id: `${item.id}`,
   openingCrawl: item.opening_crawl,

@@ -50,8 +50,8 @@ class List extends React.Component<IListProps, {}> {
     return (
       <TableRow key={character.id}>
         <CharacterCell ids={[character.id]} />
-        <SpecieCell ids={character.species} />
-        <MovieCell ids={character.movies} />
+        <SpecieCell ids={character.species.map(s => s.id)} />
+        <MovieCell ids={character.movies.map(m => m.id)} />
       </TableRow >
     );
   }

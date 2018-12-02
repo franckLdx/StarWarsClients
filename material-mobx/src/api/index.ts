@@ -1,3 +1,4 @@
+import { getCharacterFetcher } from './Character';
 import { getGraphQLClient } from './FetchResource';
 import { getMovieFetcher } from './Movie';
 
@@ -9,3 +10,4 @@ const graphQLClient = getGraphQLClient(url);
 
 export { IFetcher } from './FetchResource';
 export const movieFetcher = getMovieFetcher(graphQLClient)
+export const characterFetcher = getCharacterFetcher(graphQLClient)

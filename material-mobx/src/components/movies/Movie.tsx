@@ -10,8 +10,9 @@ import {
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { IWithMoviesStore, withMovieStore } from 'src/store/injectors';
+import { URL_CHARACTERS } from '../routes/Router';
+import { LinkButtonRef } from '../shared/CellRef';
 import { Record, RecordH1, RecordH2, RecordInfo } from '../shared/Record';
-import Characters from './Characters';
 
 interface IItemOwnProps {
   id: string
@@ -54,7 +55,9 @@ export class Movie extends React.Component<IItemProps & StyleProps, {}> {
           Characters:
         </RecordH2>
         <Paper>
-          <Characters charactersId={movie.characters.map(c => c.id)} />
+          {movie.characters.map((resource) =>
+            <LinkButtonRef key={resource.id} resourceRef={resource} href={URL_CHARACTERS} />
+          )}
         </Paper>
       </Record>
     );

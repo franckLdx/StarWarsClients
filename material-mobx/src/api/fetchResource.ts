@@ -12,7 +12,7 @@ export function getGraphQLClient(url: string): GraphQLClient {
 }
 
 export interface IFetcher<T> {
-  fetchResource: (id: string) => Promise<T>
+  fetchResource: (id: string) => Promise<T | undefined>
   fetchResources: () => Promise<T[]>
 }
 

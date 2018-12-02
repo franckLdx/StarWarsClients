@@ -1,46 +1,20 @@
 import * as React from 'react';
 
-import { List, Typography } from '@material-ui/core';
-import { computed } from 'mobx';
-import { observer } from 'mobx-react';
-import { ICharacter, sortByName } from 'src/model';
-import { IWithCharacterStore, withCharacterStore } from 'src/store';
-import { LinkButton } from '../routes/LinkButton';
+import { List } from '@material-ui/core';
+import { IResourceRef } from 'src/model';
 import { URL_CHARACTERS } from '../routes/Router';
+import { LinkButtonRef } from '../shared/CellRef';
 
-interface ICharactersOwnProps {
-  charactersId: string[]
+interface ICharactersProps {
+  characters: IResourceRef[]
 }
 
-type CharactersProps = ICharactersOwnProps & IWithCharacterStore
-
-@observer
-class Characters extends React.Component<CharactersProps> {
-
-  public render() {
-    return <List>
-      {
-        this.characters.map(character => {
-          return (
-            <LinkButton key={character.id} href={`${URL_CHARACTERS}/${character.id}`}>
-              <Typography variant="subtitle1">{character.name}</Typography>
-            </LinkButton>
-          );
-        })
-      }
-    </List >;
-  }
-
-  @computed({ name: 'get characters' })
-  private get characters(): ICharacter[] {
-    const charactersId = this.props.charactersId;
-    const store = this.props.charatersStore;
-    const characters: any = charactersId
-      .map(id => store.getById(id))
-      .filter(character => character !== undefined);
-    return sortByName(characters);
-  }
-
-}
-
-export default withCharacterStore(Characters);
+export const Characters: React.SFC<ICharactersProps> = ({ characters }) => (
+  <List>
+    {
+      characters.map(character => (
+        <LinkButtonRef key={character.id} resourceRef={character} href={URL_CHARACTERS} />
+      ))
+    }
+  </List >
+);

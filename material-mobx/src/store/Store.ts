@@ -56,7 +56,9 @@ export class Store<T extends IResourceType> {
 
   private async fetchById(id: string) {
     const specie = await this.fetcher.fetchResource(id);
-    this.addResources(specie);
+    if (specie) {
+      this.addResources(specie);
+    }
   }
 
 }

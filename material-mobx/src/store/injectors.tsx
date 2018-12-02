@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {
-  CaractersFetcher,
+  characterFetcher,
   movieFetcher,
   SpeciesFetcher
 } from 'src/api';
@@ -30,7 +30,7 @@ export interface IWithMoviesStore {
 }
 export const withMovieStore = makeInjector<IWithMoviesStore>(movieStore, 'moviesStore');
 
-const charactersStore: CharactersStore = new Store(CaractersFetcher);
+const charactersStore: CharactersStore = new Store(characterFetcher);
 export interface IWithCharacterStore {
   charatersStore: CharactersStore;
 }

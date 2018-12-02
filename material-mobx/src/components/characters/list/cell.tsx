@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { LinkButton } from 'src/components/routes/LinkButton';
+import { IResourceRef } from 'src/model';
 import { IResourceType, Store } from 'src/store/Store';
 
 const Style = (theme: Theme) => createStyles({
@@ -55,6 +56,10 @@ const CellRaw: React.SFC<ICellProps> = ({ items, href, classes }: ICellProps) =>
   </TableCell >
 );
 const Cell = withStyles(Style)(CellRaw);
+
+export interface ICellRefProps {
+  resourceRef: IResourceRef
+}
 
 interface ICellMapperProps<T extends IResourceType> {
   ids: string[];
