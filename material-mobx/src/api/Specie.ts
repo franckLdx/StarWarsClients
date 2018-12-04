@@ -1,7 +1,7 @@
 import { IResourceRef } from 'src/model';
 import { ISpecie } from "src/model/Specie";
 import { createFetcher, Mapper } from './FetchResource';
-import { urlToId } from './Tools';
+import { mapToRef, urlToId } from './Tools';
 
 const toSpecie: Mapper<ISpecie> = (item: any): ISpecie => {
   return {
@@ -23,9 +23,4 @@ const toSpecie: Mapper<ISpecie> = (item: any): ISpecie => {
 
 export const SpeciesFetcher = createFetcher('species', toSpecie);
 
-export function mapSpecieToRef(specie: ISpecie): IResourceRef {
-  return {
-    id: specie.id,
-    label: specie.name,
-  }
-};
+export const mapSpecieToRef: (s: ISpecie) => IResourceRef = mapToRef;

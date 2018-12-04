@@ -2,6 +2,10 @@ import { GraphQLClient } from 'graphql-request'
 import { IMovie, IResourceRef, resoureRefLabelCmp } from 'src/model';
 import { mapCharacterToRef } from '.';
 import { IFetcher, Mapper } from './FetchResource';
+import { mapPlanetToRef } from './Planet';
+import { mapSpecieToRef } from './Specie';
+import { mapStarshipToRef } from './Starship';
+import { mapVehicleToRef } from './Vehicle';
 
 const fragment = `
 {
@@ -23,13 +27,13 @@ const movieMapper: Mapper<IMovie> = (item: any): IMovie => ({
   director: item.director,
   id: `${item.id}`,
   openingCrawl: item.opening_crawl,
-  planets: item.planets,
+  planets: item.planets.map(mapPlanetToRef),
   producers: item.producers,
   releaseDate: item.release_date,
-  species: item.species,
-  starships: item.starships,
+  species: item.species.map(mapSpecieToRef),
+  starships: item.starships.map(mapStarshipToRef),
   title: item.title,
-  vehicles: item.vehicles,
+  vehicles: item.vehicles.map(mapVehicleToRef),
 });
 
 export function getMovieFetcher(graphQLClient: GraphQLClient): IFetcher<IMovie> {

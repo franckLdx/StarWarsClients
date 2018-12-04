@@ -26,7 +26,7 @@ import {
 } from '../Router';
 import {
   TableCellRefs
-} from '../shared/CellRef';
+} from '../shared/ResourceRef';
 
 type IListProps = IWithCharacterStore;
 
@@ -75,9 +75,9 @@ const Row: React.SFC<IRowProps> = ({ character }) => {
   const ref: IResourceRef = { id: character.id, label: character.name };
   return (
     <TableRow key={character.id}>
-      <TableCellRefs resourcesRef={[ref]} href={URL_CHARACTERS} />
-      <TableCellRefs resourcesRef={character.species} href={URL_SPECIES} />
-      <TableCellRefs resourcesRef={character.movies} href={URL_MOVIES} />
+      <TableCellRefs resources={[ref]} href={URL_CHARACTERS} />
+      <TableCellRefs resources={character.species} href={URL_SPECIES} />
+      <TableCellRefs resources={character.movies} href={URL_MOVIES} />
     </TableRow >
   );
 }

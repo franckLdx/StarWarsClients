@@ -10,7 +10,7 @@ export interface ICharacter {
   eyeColor: string;
   birthYear: string;
   gender: string;
-  homeworld: IResourceRef[],
+  homeworld: IResourceRef,
   movies: IResourceRef[],
   species: IResourceRef[],
   vehicles: IResourceRef[],

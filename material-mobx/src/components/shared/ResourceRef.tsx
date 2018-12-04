@@ -4,6 +4,7 @@ import {
   createStyles,
   List,
   ListItem,
+  Paper,
   StyledComponentProps,
   TableCell,
   Theme,
@@ -20,16 +21,16 @@ const Style = (theme: Theme) => createStyles({
 type StyleProps = StyledComponentProps<"item">;
 
 export interface ICellOwnProps {
-  resourcesRef: IResourceRef[],
+  resources: IResourceRef[],
   href: string
 }
 type ICellProps = ICellOwnProps & StyleProps;
 
-const TableCellRefsRaw: React.SFC<ICellProps> = ({ resourcesRef, href, classes }: ICellProps) => (
+const TableCellRefsRaw: React.SFC<ICellProps> = ({ resources, href, classes }: ICellProps) => (
   <TableCell >
     <List>
       {
-        resourcesRef.map(resourceRef => {
+        resources.map(resourceRef => {
           return (
             <ListItem className={classes!.item} key={resourceRef.id}>
               <LinkButtonRef resourceRef={resourceRef} href={href} />
@@ -47,7 +48,7 @@ interface IListRefProps {
   resources: IResourceRef[];
   href: string;
 }
-export const ResourcesList: React.SFC<IListRefProps> = ({ resources, href }) => (
+export const ListRef: React.SFC<IListRefProps> = ({ resources, href }) => (
   <List>
     {
       resources.map(resource => (
@@ -57,4 +58,18 @@ export const ResourcesList: React.SFC<IListRefProps> = ({ resources, href }) => 
       ))
     }
   </List >
+);
+
+interface IPaperRefProps {
+  resources: IResourceRef[];
+  href: string;
+}
+export const PaperRef: React.SFC<IPaperRefProps> = ({ resources, href }) => (
+  <Paper>
+    {
+      resources.map(resource => (
+        <LinkButtonRef key={resource.id} resourceRef={resource} href={href} />
+      ))
+    }
+  </Paper >
 );
