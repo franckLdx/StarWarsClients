@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { createStyles, StyledComponentProps, Theme, withStyles } from '@material-ui/core';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { IWithCharacterStore, withCharacterStore } from 'src/store';
@@ -10,35 +11,52 @@ import {
   URL_STARSHIPS,
   URL_VEHICLES
 } from '../Router';
-import { LinkButtonRef } from '../shared/LinkButtonReftsx';
+import { LinkButtonRef } from '../shared/LinkButtonRef';
 import { Record, RecordH1, RecordInfo } from '../shared/Record';
 import { PaperRef } from '../shared/ResourceRef';
+
+const Style = (theme: Theme) => createStyles({
+  simpleRef: {
+    padding: '0px',
+  },
+});
+type StyleProps = StyledComponentProps<"simpleRef">;
+
 
 interface ICharactersOwnProps {
   characterId: string
 }
 
-type CharactersProps = ICharactersOwnProps & IWithCharacterStore
-
+type CharactersProps = ICharactersOwnProps & IWithCharacterStore & StyleProps
 
 @observer
-class Character extends React.Component<CharactersProps> {
+class Character extends React.Component<CharactersProps, {}> {
   public render() {
     const character = this.character;
     if (character === undefined) {
       return null;
     }
+    const simpleRefClassName = this.props.classes!.simpleRef;
     return (
       <Record>
         <RecordH1>{character.name} -- {character.birthYear}</RecordH1><br />
         <RecordInfo>Gender: {character.gender}</RecordInfo><br />
         <RecordInfo>Species: {
-          character.species.map(s =>
-            <LinkButtonRef key={s.id} resourceRef={s} href={URL_SPECIES} />
+          character.species.map(species =>
+            <LinkButtonRef
+              className={simpleRefClassName}
+              key={species.id}
+              resourceRef={species}
+              href={URL_SPECIES}
+            />
           )}
         </RecordInfo><br />
         <RecordInfo>Homeworld:
-            <LinkButtonRef resourceRef={character.homeworld} href={URL_PLANETS} />
+          <LinkButtonRef
+            className={simpleRefClassName}
+            resourceRef={character.homeworld}
+            href={URL_PLANETS}
+          />
         </RecordInfo><br />
         <RecordInfo>Height: {character.height}</RecordInfo><br />
         <RecordInfo>Mass: {character.mass}</RecordInfo><br />
@@ -64,4 +82,4 @@ class Character extends React.Component<CharactersProps> {
 }
 
 
-export default withCharacterStore(Character);
+export default withStyles(Style)(withCharacterStore(Character));

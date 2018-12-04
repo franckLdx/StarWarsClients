@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
-import { LinkButtonRef } from 'src/components/shared/LinkButtonReftsx';
+import { LinkButtonRef } from 'src/components/shared/LinkButtonRef';
 import { IResourceRef } from 'src/model';
 import { IResourceType, Store } from 'src/store/Store';
 

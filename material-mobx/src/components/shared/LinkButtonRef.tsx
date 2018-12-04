@@ -18,14 +18,15 @@ const Style = (theme: Theme) => createStyles({
 type StyleProps = StyledComponentProps<"button">;
 
 interface IResourcesRefOwnProps {
+  className?: string;
   resourceRef: IResourceRef;
   href: string;
 }
 
 type LinkButtonRefProps = IResourcesRefOwnProps & StyleProps;
 
-const LinkButtonRefRaw: React.SFC<LinkButtonRefProps> = ({ resourceRef, href, classes }) => (
-  < LinkButton className={classes!.button} href={`${href}/${resourceRef.id}`}>
+const LinkButtonRefRaw: React.SFC<LinkButtonRefProps> = ({ resourceRef, href, classes, className }) => (
+  < LinkButton className={`${classes!.button} ${className}`} href={`${href}/${resourceRef.id}`}>
     <Typography variant="subtitle1">{resourceRef.label}</Typography>
   </LinkButton >
 );

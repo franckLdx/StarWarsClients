@@ -11,7 +11,7 @@ import {
   withStyles
 } from '@material-ui/core';
 import { IResourceRef } from 'src/model';
-import { LinkButtonRef } from './LinkButtonReftsx';
+import { LinkButtonRef } from './LinkButtonRef';
 
 const Style = (theme: Theme) => createStyles({
   item: {
@@ -33,7 +33,7 @@ const TableCellRefsRaw: React.SFC<ICellProps> = ({ resources, href, classes }: I
         resources.map(resourceRef => {
           return (
             <ListItem className={classes!.item} key={resourceRef.id}>
-              <LinkButtonRef resourceRef={resourceRef} href={href} />
+              <LinkButtonRef className={classes!.item} resourceRef={resourceRef} href={href} />
             </ListItem>
           );
         })

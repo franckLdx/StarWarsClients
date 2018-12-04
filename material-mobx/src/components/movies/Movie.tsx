@@ -17,7 +17,7 @@ interface IItemOwnProps {
   id: string
 }
 
-type IItemProps = IWithMoviesStore & IItemOwnProps;
+type MovieProps = IWithMoviesStore & IItemOwnProps;
 
 const Style = (theme: Theme) => createStyles({
   releaseDate: {
@@ -25,10 +25,10 @@ const Style = (theme: Theme) => createStyles({
   },
 });
 
-type StyleProps = StyledComponentProps<| "title" | "releaseDate">;
+type StyleProps = StyledComponentProps<"title" | "releaseDate">;
 
 @observer
-export class Movie extends React.Component<IItemProps & StyleProps, {}> {
+export class Movie extends React.Component<MovieProps & StyleProps, {}> {
 
   public render() {
     const movie = this.movie;
