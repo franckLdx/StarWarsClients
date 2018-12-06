@@ -5,17 +5,23 @@ import { IFetcher, Mapper } from './FetchResource';
 import { mapPlanetToRef } from './Planet';
 import { mapSpecieToRef } from './Specie';
 import { mapStarshipToRef } from './Starship';
+import {
+  characterResourceFragment,
+  planetsResourceFragment,
+  specieResourceFragment,
+  starshipResourceFragment,
+  vehiclesResourceFragment
+} from './Tools';
 import { mapVehicleToRef } from './Vehicle';
 
 const fragment = `
 {
   id, title, opening_crawl, director, producers, release_date
-  characters{id, name},
-  species{id, name},
-  planets{id, name},
-  starships{id, name},
-  starships{id, name},
-  vehicles{id, name},
+  ${characterResourceFragment},
+  ${specieResourceFragment},
+  ${planetsResourceFragment},
+  ${starshipResourceFragment},
+  ${vehiclesResourceFragment},
 }`;
 
 const queryFilms = () => `{ films ${fragment} }`;
@@ -26,13 +32,13 @@ const movieMapper: Mapper<IMovie> = (item: any): IMovie => ({
   characters: item.characters.map(mapCharacterToRef).sort(resoureRefLabelCmp),
   director: item.director,
   id: `${item.id}`,
+  name: item.title,
   openingCrawl: item.opening_crawl,
   planets: item.planets.map(mapPlanetToRef),
   producers: item.producers,
   releaseDate: item.release_date,
   species: item.species.map(mapSpecieToRef),
   starships: item.starships.map(mapStarshipToRef),
-  title: item.title,
   vehicles: item.vehicles.map(mapVehicleToRef),
 });
 
@@ -52,6 +58,6 @@ export function getMovieFetcher(graphQLClient: GraphQLClient): IFetcher<IMovie> 
 export function mapMovieToRef(movie: IMovie): IResourceRef {
   return {
     id: movie.id,
-    label: movie.title,
+    label: movie.name,
   }
 };

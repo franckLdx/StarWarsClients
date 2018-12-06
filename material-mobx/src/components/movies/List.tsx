@@ -81,7 +81,7 @@ const MovieItemRaw: React.SFC<IMovieItemStylePropsRaw & MovieItemStylePropsRaw> 
   return (
     <Paper>
       <Typography className={classes!.title} variant="h5">
-        {movie.id} -- {movie.title}
+        {movie.id} -- {movie.name}
         <LinkIconButton href={`/movies/${movie.id}`}>
           <InfoIcon />
         </LinkIconButton>

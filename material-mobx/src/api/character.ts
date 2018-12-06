@@ -6,17 +6,23 @@ import { IFetcher, Mapper } from './FetchResource';
 import { mapMovieToRef } from './Movie';
 import { mapPlanetToRef } from './Planet';
 import { mapStarshipToRef } from './Starship';
-import { mapToRef } from './Tools';
+import {
+  mapToRef,
+  movieRessourceFragment,
+  specieResourceFragment,
+  starshipResourceFragment,
+  vehiclesResourceFragment
+} from './Tools';
 import { mapVehicleToRef } from './Vehicle';
 
 const fragment = `
 {
   id, name, skin_color, birth_year, eye_color, gender, hair_color, height, mass,
   homeworld {id, name},
-  films {id, title},
-  species {id, name},
-  starships {id, name},
-  vehicles {id, name},
+  ${movieRessourceFragment},
+  ${specieResourceFragment},
+  ${starshipResourceFragment},
+  ${vehiclesResourceFragment},
 }`;
 
 const queryCharacters = () => `{ characters ${fragment} }`;

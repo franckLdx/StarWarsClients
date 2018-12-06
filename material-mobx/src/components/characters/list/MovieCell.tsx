@@ -12,7 +12,7 @@ interface IMovieCellOwnProps {
 
 type MovieCellProps = IMovieCellOwnProps & IWithMoviesStore;
 
-const movieMapper = (movie: IMovie) => ({ id: movie.id, label: movie.title });
+const movieMapper = (movie: IMovie) => ({ id: movie.id, label: movie.name });
 
 export const MovieCell = observer(withMovieStore(
   ({ ids, moviesStore }: MovieCellProps) =>

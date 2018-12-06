@@ -38,7 +38,7 @@ export class Movie extends React.Component<MovieProps & StyleProps, {}> {
     return (
       <Record>
         <RecordH1>
-          {movie.title} -- Episode {movie.id}
+          {movie.name} -- Episode {movie.id}
         </RecordH1>
         <RecordH2>
           Released: {movie.releaseDate}

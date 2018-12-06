@@ -2,7 +2,7 @@ import { IResourceRef } from './Tools';
 
 export interface IMovie {
   id: string;
-  title: string;
+  name: string;
   openingCrawl: string;
   director: string;
   producers: string[];
