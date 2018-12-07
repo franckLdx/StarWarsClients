@@ -13,7 +13,6 @@ import {
 } from 'mobx-react';
 import {
   ICharacter,
-  IResourceRef,
 } from 'src/model';
 import {
   IWithCharacterStore,
@@ -72,10 +71,9 @@ interface IRowProps {
   character: ICharacter;
 }
 const Row: React.SFC<IRowProps> = ({ character }) => {
-  const ref: IResourceRef = { id: character.id, label: character.name };
   return (
     <TableRow key={character.id}>
-      <TableCellRefs resources={[ref]} href={URL_CHARACTERS} />
+      <TableCellRefs resources={[character]} href={URL_CHARACTERS} />
       <TableCellRefs resources={character.species} href={URL_SPECIES} />
       <TableCellRefs resources={character.movies} href={URL_MOVIES} />
     </TableRow >

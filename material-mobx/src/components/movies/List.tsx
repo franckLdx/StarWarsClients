@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import InfoIcon from '@material-ui/icons/Info';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react'
-import { sortById } from 'src/model';
+import { cmpField } from 'src/model';
 import { IMovie } from 'src/model/Movie';
 import { IWithMoviesStore, withMovieStore } from '../../store/injectors';
 import { LinkIconButton } from '../shared/routes/LinkButton';
@@ -50,7 +50,8 @@ class List extends React.Component<IListProps, {}> {
 
   @computed
   private get byEpisodeId() {
-    return sortById(this.props.moviesStore.values);
+    const myCmp = cmpField<IMovie, keyof IMovie>('id');
+    return this.props.moviesStore.values.sort(myCmp);
   }
 }
 

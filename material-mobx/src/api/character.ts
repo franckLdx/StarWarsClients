@@ -1,19 +1,13 @@
 import { GraphQLClient } from 'graphql-request';
-import { IResourceRef, resoureRefLabelId } from 'src/model';
+import { cmpResourceName } from 'src/model';
 import { ICharacter } from 'src/model/Character';
-import { mapSpecieToRef } from '.';
 import { IFetcher, Mapper } from './FetchResource';
-import { mapMovieToRef } from './Movie';
-import { mapPlanetToRef } from './Planet';
-import { mapStarshipToRef } from './Starship';
 import {
-  mapToRef,
   movieRessourceFragment,
   specieResourceFragment,
   starshipResourceFragment,
   vehiclesResourceFragment
 } from './Tools';
-import { mapVehicleToRef } from './Vehicle';
 
 const fragment = `
 {
@@ -34,15 +28,15 @@ const characterMapper: Mapper<ICharacter> = (item: any): ICharacter => ({
   gender: item.gender,
   hairColor: item.hair_color,
   height: item.height,
-  homeworld: mapPlanetToRef(item.homeworld),
+  homeworld: item.homeworld,
   id: `${item.id}`,
   mass: item.mass,
-  movies: item.films.map(mapMovieToRef).sort(resoureRefLabelId),
+  movies: item.films.sort(cmpResourceName),
   name: item.name,
   skinColor: item.skin_color,
-  species: item.species.map(mapSpecieToRef),
-  starships: item.starships.map(mapStarshipToRef),
-  vehicles: item.vehicles.map(mapVehicleToRef),
+  species: item.species.sort(cmpResourceName),
+  starships: item.starships.sort(cmpResourceName),
+  vehicles: item.vehicles.sort(cmpResourceName),
 });
 
 export function getCharacterFetcher(graphQLClient: GraphQLClient): IFetcher<ICharacter> {
@@ -57,5 +51,3 @@ export function getCharacterFetcher(graphQLClient: GraphQLClient): IFetcher<ICha
     }
   };
 }
-
-export const mapCharacterToRef: (c: ICharacter) => IResourceRef = mapToRef;

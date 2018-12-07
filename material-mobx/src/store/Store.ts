@@ -6,9 +6,15 @@ import {
   runInAction,
 } from 'mobx';
 import { IFetcher } from 'src/api';
-import { IMovie, ISpecie } from 'src/model';
+import {
+  cmp,
+  cmpField,
+  ICharacter,
+  IMovie,
+  ISpecie,
+} from 'src/model';
 
-export interface IResourceType { id: string }
+export interface IResourceType { id: string, name: string }
 
 export class Store<T extends IResourceType> {
   @observable private resourcesMap: ObservableMap<string, T | undefined> = observable.map({});
@@ -34,9 +40,16 @@ export class Store<T extends IResourceType> {
     return Array.from(this.resourcesMap.values()).filter(t => t !== undefined) as any;
   }
 
+
+  @computed
+  public get valuesByName(): T[] {
+    const myCmp = cmpField<IResourceType, keyof IResourceType>('name');
+    return this.values.sort(myCmp);
+  }
+
   @computed
   public get ids() {
-    return Array.from(this.resourcesMap.keys());
+    return Array.from(this.resourcesMap.keys()).sort(cmp);
   }
 
   public getById(id: string): T | undefined {
@@ -63,5 +76,7 @@ export class Store<T extends IResourceType> {
 
 }
 
+
 export type MoviesStore = Store<IMovie>
+export type CharactersStore = Store<ICharacter>
 export type SpeciesStore = Store<ISpecie>

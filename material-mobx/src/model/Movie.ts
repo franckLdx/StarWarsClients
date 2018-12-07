@@ -1,4 +1,4 @@
-import { IResourceRef } from './Tools';
+import { IResourceType } from 'src/store/Store';
 
 export interface IMovie {
   id: string;
@@ -7,10 +7,10 @@ export interface IMovie {
   director: string;
   producers: string[];
   releaseDate: string;
-  planets: IResourceRef[];
-  characters: IResourceRef[];
-  species: IResourceRef[];
-  starships: IResourceRef[];
-  vehicles: IResourceRef[];
+  planets: IResourceType[];
+  characters: IResourceType[];
+  species: IResourceType[];
+  starships: IResourceType[];
+  vehicles: IResourceType[];
 }
 

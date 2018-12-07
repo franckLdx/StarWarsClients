@@ -10,7 +10,7 @@ import {
   Theme,
   withStyles
 } from '@material-ui/core';
-import { IResourceRef } from 'src/model';
+import { IResourceType } from 'src/store/Store';
 import { LinkButtonRef } from './LinkButtonRef';
 
 const Style = (theme: Theme) => createStyles({
@@ -21,7 +21,7 @@ const Style = (theme: Theme) => createStyles({
 type StyleProps = StyledComponentProps<"item">;
 
 export interface ICellOwnProps {
-  resources: IResourceRef[],
+  resources: IResourceType[],
   href: string
 }
 type ICellProps = ICellOwnProps & StyleProps;
@@ -33,7 +33,7 @@ const TableCellRefsRaw: React.SFC<ICellProps> = ({ resources, href, classes }: I
         resources.map(resourceRef => {
           return (
             <ListItem className={classes!.item} key={resourceRef.id}>
-              <LinkButtonRef className={classes!.item} resourceRef={resourceRef} href={href} />
+              <LinkButtonRef className={classes!.item} resource={resourceRef} href={href} />
             </ListItem>
           );
         })
@@ -45,7 +45,7 @@ const TableCellRefsRaw: React.SFC<ICellProps> = ({ resources, href, classes }: I
 export const TableCellRefs = withStyles(Style)(TableCellRefsRaw);
 
 interface IListRefProps {
-  resources: IResourceRef[];
+  resources: IResourceType[];
   href: string;
 }
 export const ListRef: React.SFC<IListRefProps> = ({ resources, href }) => (
@@ -53,7 +53,7 @@ export const ListRef: React.SFC<IListRefProps> = ({ resources, href }) => (
     {
       resources.map(resource => (
         <ListItem key={resource.id}>
-          <LinkButtonRef resourceRef={resource} href={href} />
+          <LinkButtonRef resource={resource} href={href} />
         </ListItem>
       ))
     }
@@ -61,14 +61,14 @@ export const ListRef: React.SFC<IListRefProps> = ({ resources, href }) => (
 );
 
 interface IPaperRefProps {
-  resources: IResourceRef[];
+  resources: IResourceType[];
   href: string;
 }
 export const PaperRef: React.SFC<IPaperRefProps> = ({ resources, href }) => (
   <Paper>
     {
       resources.map(resource => (
-        <LinkButtonRef key={resource.id} resourceRef={resource} href={href} />
+        <LinkButtonRef key={resource.id} resource={resource} href={href} />
       ))
     }
   </Paper >

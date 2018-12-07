@@ -12,7 +12,7 @@ import {
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { LinkButtonRef } from 'src/components/shared/LinkButtonRef';
-import { IResourceRef } from 'src/model';
+import { cmpResourceName } from 'src/model';
 import { IResourceType, Store } from 'src/store/Store';
 
 const Style = (theme: Theme) => createStyles({
@@ -30,19 +30,19 @@ export interface ICellItem {
 }
 
 interface ICellOwnProps {
-  items: ICellItem[]
+  resources: IResourceType[]
   href: string
 }
 type ICellProps = ICellOwnProps & StyleProps;
 
-const CellRaw: React.SFC<ICellProps> = ({ items, href, classes }: ICellProps) => (
+const CellRaw: React.SFC<ICellProps> = ({ resources, href, classes }: ICellProps) => (
   <TableCell >
     <List>
       {
-        items.map(item => {
+        resources.map(resource => {
           return (
-            <ListItem className={classes!.item} key={item.id}>
-              <LinkButtonRef resourceRef={item} href={href} />
+            <ListItem className={classes!.item} key={resource.id}>
+              <LinkButtonRef resource={resource} href={href} />
             </ListItem>
           );
         })
@@ -53,29 +53,28 @@ const CellRaw: React.SFC<ICellProps> = ({ items, href, classes }: ICellProps) =>
 const Cell = withStyles(Style)(CellRaw);
 
 export interface ICellRefProps {
-  resourceRef: IResourceRef
+  resourceRef: IResourceType
 }
 
 interface ICellMapperProps<T extends IResourceType> {
   ids: string[];
   store: Store<T>
-  mapper: (data: any) => ICellItem;
   href: string;
 }
 
 @observer
 export class CellMapper<T extends IResourceType> extends React.Component<ICellMapperProps<T>, {}> {
   public render() {
-    return <Cell items={this.items} href={this.props.href} />
+    return <Cell resources={this.resources} href={this.props.href} />
   }
 
   @computed
-  private get items(): ICellItem[] {
-    const { store, mapper, ids } = this.props;
+  private get resources(): IResourceType[] {
+    const { store, ids } = this.props;
     return ids
       .map(id => store.getById(id))
       .filter(c => c !== undefined)
-      .map(mapper)
-      .sort((i1, i2) => i1.label < i2.label ? -1 : 1);
+      .map(c => c!)
+      .sort(cmpResourceName);
   }
 }

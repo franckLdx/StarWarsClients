@@ -1,10 +1,6 @@
 import { GraphQLClient } from 'graphql-request'
-import { IMovie, IResourceRef, resoureRefLabelCmp } from 'src/model';
-import { mapCharacterToRef } from '.';
+import { cmpResourceName, IMovie } from 'src/model';
 import { IFetcher, Mapper } from './FetchResource';
-import { mapPlanetToRef } from './Planet';
-import { mapSpecieToRef } from './Specie';
-import { mapStarshipToRef } from './Starship';
 import {
   characterResourceFragment,
   planetsResourceFragment,
@@ -12,7 +8,6 @@ import {
   starshipResourceFragment,
   vehiclesResourceFragment
 } from './Tools';
-import { mapVehicleToRef } from './Vehicle';
 
 const fragment = `
 {
@@ -29,17 +24,17 @@ const queryFilm = (id: string) => `{ filmById(id:"${id}") ${fragment} }`;
 
 
 const movieMapper: Mapper<IMovie> = (item: any): IMovie => ({
-  characters: item.characters.map(mapCharacterToRef).sort(resoureRefLabelCmp),
+  characters: item.characters.sort(cmpResourceName),
   director: item.director,
   id: `${item.id}`,
   name: item.title,
   openingCrawl: item.opening_crawl,
-  planets: item.planets.map(mapPlanetToRef),
+  planets: item.planets.sort(cmpResourceName),
   producers: item.producers,
   releaseDate: item.release_date,
-  species: item.species.map(mapSpecieToRef),
-  starships: item.starships.map(mapStarshipToRef),
-  vehicles: item.vehicles.map(mapVehicleToRef),
+  species: item.species.sort(cmpResourceName),
+  starships: item.starships.sort(cmpResourceName),
+  vehicles: item.vehicles.sort(cmpResourceName),
 });
 
 export function getMovieFetcher(graphQLClient: GraphQLClient): IFetcher<IMovie> {
@@ -54,10 +49,3 @@ export function getMovieFetcher(graphQLClient: GraphQLClient): IFetcher<IMovie> 
     }
   };
 }
-
-export function mapMovieToRef(movie: IMovie): IResourceRef {
-  return {
-    id: movie.id,
-    label: movie.name,
-  }
-};

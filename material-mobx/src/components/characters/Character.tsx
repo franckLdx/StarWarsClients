@@ -46,7 +46,7 @@ class Character extends React.Component<CharactersProps, {}> {
             <LinkButtonRef
               className={simpleRefClassName}
               key={species.id}
-              resourceRef={species}
+              resource={species}
               href={URL_SPECIES}
             />
           )}
@@ -54,7 +54,7 @@ class Character extends React.Component<CharactersProps, {}> {
         <RecordInfo>Homeworld:
           <LinkButtonRef
             className={simpleRefClassName}
-            resourceRef={character.homeworld}
+            resource={character.homeworld}
             href={URL_PLANETS}
           />
         </RecordInfo><br />

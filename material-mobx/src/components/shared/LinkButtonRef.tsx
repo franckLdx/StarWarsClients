@@ -7,7 +7,7 @@ import {
   Typography,
   withStyles
 } from '@material-ui/core';
-import { IResourceRef } from 'src/model';
+import { IResourceType } from 'src/store/Store';
 import { LinkButton } from './routes/LinkButton';
 
 const Style = (theme: Theme) => createStyles({
@@ -19,15 +19,15 @@ type StyleProps = StyledComponentProps<"button">;
 
 interface IResourcesRefOwnProps {
   className?: string;
-  resourceRef: IResourceRef;
+  resource: IResourceType;
   href: string;
 }
 
 type LinkButtonRefProps = IResourcesRefOwnProps & StyleProps;
 
-const LinkButtonRefRaw: React.SFC<LinkButtonRefProps> = ({ resourceRef, href, classes, className }) => (
-  < LinkButton className={`${classes!.button} ${className}`} href={`${href}/${resourceRef.id}`}>
-    <Typography variant="subtitle1">{resourceRef.label}</Typography>
+const LinkButtonRefRaw: React.SFC<LinkButtonRefProps> = ({ resource, href, classes, className }) => (
+  < LinkButton className={`${classes!.button} ${className}`} href={`${href}/${resource.id}`}>
+    <Typography variant="subtitle1">{resource.name}</Typography>
   </LinkButton >
 );
 
