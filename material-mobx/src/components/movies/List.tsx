@@ -3,11 +3,9 @@ import * as React from 'react';
 import { createStyles, Divider, Grid, StyledComponentProps, Theme, Typography, withStyles } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import InfoIcon from '@material-ui/icons/Info';
-import { computed } from 'mobx';
 import { observer } from 'mobx-react'
-import { cmpField } from 'src/model';
 import { IMovie } from 'src/model/Movie';
-import { IWithMoviesStore, withMovieStore } from '../../store/injectors';
+import { IWithMoviesStore, withMoviesStore } from '../../store/injectors';
 import { LinkIconButton } from '../shared/routes/LinkButton';
 
 const ListStyle = (theme: Theme) => createStyles({
@@ -29,7 +27,7 @@ class List extends React.Component<IListProps, {}> {
   }
 
   public render() {
-    const movies = this.byEpisodeId;
+    const movies = this.props.moviesStore.valuesById;
     return (
       <Grid container={true} justify="center">
         {movies.map(movie => this.getItem(movie))}
@@ -47,12 +45,6 @@ class List extends React.Component<IListProps, {}> {
       <MovieItem movie={movie} />
     </Grid>
   );
-
-  @computed
-  private get byEpisodeId() {
-    const myCmp = cmpField<IMovie, keyof IMovie>('id');
-    return this.props.moviesStore.values.sort(myCmp);
-  }
 }
 
 const MovieStyles = (theme: Theme) => createStyles({
@@ -94,4 +86,4 @@ const MovieItemRaw: React.SFC<IMovieItemStylePropsRaw & MovieItemStylePropsRaw> 
 };
 const MovieItem = withStyles(MovieStyles)(MovieItemRaw);
 
-export default withStyles(ListStyle)(withMovieStore(List));
+export default withStyles(ListStyle)(withMoviesStore(List));

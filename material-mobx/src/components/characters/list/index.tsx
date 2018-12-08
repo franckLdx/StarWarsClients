@@ -15,19 +15,19 @@ import {
   ICharacter,
 } from 'src/model';
 import {
-  IWithCharacterStore,
+  IWithCharactersStore,
   withCharacterStore,
 } from 'src/store';
 import {
   URL_CHARACTERS,
   URL_MOVIES,
   URL_SPECIES,
-} from '../Router';
+} from '../../Router';
 import {
   TableCellRefs
-} from '../shared/ResourceRef';
+} from '../../shared/ResourceRef';
 
-type IListProps = IWithCharacterStore;
+type IListProps = IWithCharactersStore;
 
 @observer
 class List extends React.Component<IListProps, {}> {

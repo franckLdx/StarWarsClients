@@ -28,16 +28,16 @@ const movieStore: MoviesStore = new Store(movieFetcher);
 export interface IWithMoviesStore {
   moviesStore: MoviesStore;
 }
-export const withMovieStore = makeInjector<IWithMoviesStore>(movieStore, 'moviesStore');
+export const withMoviesStore = makeInjector<IWithMoviesStore>(movieStore, 'moviesStore');
 
 const charactersStore: CharactersStore = new Store(characterFetcher);
-export interface IWithCharacterStore {
+export interface IWithCharactersStore {
   charatersStore: CharactersStore;
 }
-export const withCharacterStore = makeInjector<IWithCharacterStore>(charactersStore, 'charatersStore');
+export const withCharacterStore = makeInjector<IWithCharactersStore>(charactersStore, 'charatersStore');
 
 const speciesStore: SpeciesStore = new Store(SpeciesFetcher);
 export interface IWithSpeciesStore {
   speciesStore: SpeciesStore;
 }
-export const withSPecieStore = makeInjector<IWithSpeciesStore>(speciesStore, 'speciesStore');
+export const withSpecieStore = makeInjector<IWithSpeciesStore>(speciesStore, 'speciesStore');

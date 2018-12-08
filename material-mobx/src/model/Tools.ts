@@ -9,4 +9,5 @@ export const cmp = <T>(s1: T, s2: T) => {
   return 0;
 }
 
+export const cmpResourceId = cmpField<IResourceType, keyof IResourceType>('id');
 export const cmpResourceName = cmpField<IResourceType, keyof IResourceType>('name');

@@ -48,6 +48,12 @@ export class Store<T extends IResourceType> {
   }
 
   @computed
+  public get valuesById(): T[] {
+    const myCmp = cmpField<IResourceType, keyof IResourceType>('id');
+    return this.values.sort(myCmp);
+  }
+
+  @computed
   public get ids() {
     return Array.from(this.resourcesMap.keys()).sort(cmp);
   }

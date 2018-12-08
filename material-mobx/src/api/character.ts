@@ -1,5 +1,4 @@
 import { GraphQLClient } from 'graphql-request';
-import { cmpResourceName } from 'src/model';
 import { ICharacter } from 'src/model/Character';
 import { IFetcher, Mapper } from './FetchResource';
 import {
@@ -31,12 +30,12 @@ const characterMapper: Mapper<ICharacter> = (item: any): ICharacter => ({
   homeworld: item.homeworld,
   id: `${item.id}`,
   mass: item.mass,
-  movies: item.films.sort(cmpResourceName),
+  movies: item.films,
   name: item.name,
   skinColor: item.skin_color,
-  species: item.species.sort(cmpResourceName),
-  starships: item.starships.sort(cmpResourceName),
-  vehicles: item.vehicles.sort(cmpResourceName),
+  species: item.species,
+  starships: item.starships,
+  vehicles: item.vehicles,
 });
 
 export function getCharacterFetcher(graphQLClient: GraphQLClient): IFetcher<ICharacter> {

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { observer } from 'mobx-react';
 import { URL_SPECIES } from 'src/components/Router';
-import { IWithSpeciesStore, withSPecieStore } from 'src/store/injectors';
+import { IWithSpeciesStore, withSpecieStore } from 'src/store/injectors';
 import { CellMapper } from './Cell';
 
 interface ISpecieCellOwnProps {
@@ -10,7 +10,7 @@ interface ISpecieCellOwnProps {
 };
 type SpecieCellProps = IWithSpeciesStore & ISpecieCellOwnProps;
 
-export const SpecieCell = observer(withSPecieStore(
+export const SpecieCell = observer(withSpecieStore(
   ({ ids, speciesStore }: SpecieCellProps) =>
     <CellMapper
       ids={ids}

@@ -3,7 +3,7 @@ import * as React from 'react'
 import { createStyles, StyledComponentProps, Theme, withStyles } from '@material-ui/core';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react';
-import { IWithCharacterStore, withCharacterStore } from 'src/store';
+import { IWithCharactersStore, withCharacterStore } from 'src/store';
 import {
   URL_MOVIES,
   URL_PLANETS,
@@ -13,7 +13,7 @@ import {
 } from '../Router';
 import { LinkButtonRef } from '../shared/LinkButtonRef';
 import { Record, RecordH1, RecordInfo } from '../shared/Record';
-import { PaperRef } from '../shared/ResourceRef';
+import { ResourcePaper } from '../shared/ResourceRef';
 
 const Style = (theme: Theme) => createStyles({
   simpleRef: {
@@ -27,7 +27,7 @@ interface ICharactersOwnProps {
   characterId: string
 }
 
-type CharactersProps = ICharactersOwnProps & IWithCharacterStore & StyleProps
+type CharactersProps = ICharactersOwnProps & IWithCharactersStore & StyleProps
 
 @observer
 class Character extends React.Component<CharactersProps, {}> {
@@ -63,13 +63,13 @@ class Character extends React.Component<CharactersProps, {}> {
         <RecordInfo>Skin color: {character.skinColor}</RecordInfo><br />
         <RecordInfo>Hair color: {character.hairColor}</RecordInfo><br />
         <RecordInfo>Movies:
-          <PaperRef resources={character.movies} href={URL_MOVIES} />
+          <ResourcePaper resources={character.movies} href={URL_MOVIES} />
         </RecordInfo><br />
         <RecordInfo>Starships:
-          <PaperRef resources={character.starships} href={URL_STARSHIPS} />
+          <ResourcePaper resources={character.starships} href={URL_STARSHIPS} />
         </RecordInfo><br />
         <RecordInfo>Vehicles:
-          <PaperRef resources={character.vehicles} href={URL_VEHICLES} />
+          <ResourcePaper resources={character.vehicles} href={URL_VEHICLES} />
         </RecordInfo>
       </Record >
     );

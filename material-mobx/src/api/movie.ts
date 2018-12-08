@@ -1,5 +1,5 @@
 import { GraphQLClient } from 'graphql-request'
-import { cmpResourceName, IMovie } from 'src/model';
+import { IMovie } from 'src/model';
 import { IFetcher, Mapper } from './FetchResource';
 import {
   characterResourceFragment,
@@ -24,17 +24,17 @@ const queryFilm = (id: string) => `{ filmById(id:"${id}") ${fragment} }`;
 
 
 const movieMapper: Mapper<IMovie> = (item: any): IMovie => ({
-  characters: item.characters.sort(cmpResourceName),
+  characters: item.characters,
   director: item.director,
   id: `${item.id}`,
   name: item.title,
   openingCrawl: item.opening_crawl,
-  planets: item.planets.sort(cmpResourceName),
+  planets: item.planets,
   producers: item.producers,
   releaseDate: item.release_date,
-  species: item.species.sort(cmpResourceName),
-  starships: item.starships.sort(cmpResourceName),
-  vehicles: item.vehicles.sort(cmpResourceName),
+  species: item.species,
+  starships: item.starships,
+  vehicles: item.vehicles,
 });
 
 export function getMovieFetcher(graphQLClient: GraphQLClient): IFetcher<IMovie> {

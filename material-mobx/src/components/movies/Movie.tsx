@@ -6,18 +6,17 @@ import {
   Theme,
   withStyles
 } from '@material-ui/core';
-import { computed } from 'mobx';
 import { observer } from 'mobx-react';
-import { IWithMoviesStore, withMovieStore } from 'src/store/injectors';
+import { IWithMoviesStore, withMoviesStore } from 'src/store/injectors';
 import { URL_CHARACTERS, URL_PLANETS, URL_SPECIES, URL_STARSHIPS, URL_VEHICLES } from '../Router';
 import { Record, RecordH1, RecordH2, RecordInfo } from '../shared/Record';
-import { PaperRef } from '../shared/ResourceRef';
+import { ResourcePaper } from '../shared/ResourceRef';
 
-interface IItemOwnProps {
+interface IMovieOwnProps {
   id: string
 }
 
-type MovieProps = IWithMoviesStore & IItemOwnProps;
+type MovieProps = IWithMoviesStore & IMovieOwnProps;
 
 const Style = (theme: Theme) => createStyles({
   releaseDate: {
@@ -31,7 +30,7 @@ type StyleProps = StyledComponentProps<"title" | "releaseDate">;
 export class Movie extends React.Component<MovieProps & StyleProps, {}> {
 
   public render() {
-    const movie = this.movie;
+    const movie = this.props.moviesStore.getById(this.props.id);
     if (movie === undefined) {
       return null;
     }
@@ -52,32 +51,27 @@ export class Movie extends React.Component<MovieProps & StyleProps, {}> {
         <br />
         <RecordH2>
           Characters:
-          <PaperRef resources={movie.characters} href={URL_CHARACTERS} />
+          <ResourcePaper resources={movie.characters} href={URL_CHARACTERS} />
         </RecordH2>
         <RecordH2>
           Planets:
-          <PaperRef resources={movie.planets} href={URL_PLANETS} />
+          <ResourcePaper resources={movie.planets} href={URL_PLANETS} />
         </RecordH2>
         <RecordH2>
           Species:
-          <PaperRef resources={movie.species} href={URL_SPECIES} />
+          <ResourcePaper resources={movie.species} href={URL_SPECIES} />
         </RecordH2>
         <RecordH2>
           Starships:
-          <PaperRef resources={movie.starships} href={URL_STARSHIPS} />
+          <ResourcePaper resources={movie.starships} href={URL_STARSHIPS} />
         </RecordH2>
         <RecordH2>
           Vehicles:
-          <PaperRef resources={movie.vehicles} href={URL_VEHICLES} />
+          <ResourcePaper resources={movie.vehicles} href={URL_VEHICLES} />
         </RecordH2>
       </Record >
     );
   }
-
-  @computed
-  private get movie() {
-    return this.props.moviesStore.getById(this.props.id);
-  }
 }
 
-export default withStyles(Style)(withMovieStore(Movie));
+export default withStyles(Style)(withMoviesStore(Movie));

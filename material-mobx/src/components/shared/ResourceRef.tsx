@@ -10,6 +10,7 @@ import {
   Theme,
   withStyles
 } from '@material-ui/core';
+import { cmpResourceName } from 'src/model';
 import { IResourceType } from 'src/store/Store';
 import { LinkButtonRef } from './LinkButtonRef';
 
@@ -30,10 +31,10 @@ const TableCellRefsRaw: React.SFC<ICellProps> = ({ resources, href, classes }: I
   <TableCell >
     <List>
       {
-        resources.map(resourceRef => {
+        resources.slice().sort(cmpResourceName).map(resource => {
           return (
-            <ListItem className={classes!.item} key={resourceRef.id}>
-              <LinkButtonRef className={classes!.item} resource={resourceRef} href={href} />
+            <ListItem className={classes!.item} key={resource.id}>
+              <LinkButtonRef className={classes!.item} resource={resource} href={href} />
             </ListItem>
           );
         })
@@ -51,7 +52,7 @@ interface IListRefProps {
 export const ListRef: React.SFC<IListRefProps> = ({ resources, href }) => (
   <List>
     {
-      resources.map(resource => (
+      resources.slice().sort(cmpResourceName).map(resource => (
         <ListItem key={resource.id}>
           <LinkButtonRef resource={resource} href={href} />
         </ListItem>
@@ -64,10 +65,10 @@ interface IPaperRefProps {
   resources: IResourceType[];
   href: string;
 }
-export const PaperRef: React.SFC<IPaperRefProps> = ({ resources, href }) => (
+export const ResourcePaper: React.SFC<IPaperRefProps> = ({ resources, href }) => (
   <Paper>
     {
-      resources.map(resource => (
+      resources.slice().sort(cmpResourceName).map(resource => (
         <LinkButtonRef key={resource.id} resource={resource} href={href} />
       ))
     }

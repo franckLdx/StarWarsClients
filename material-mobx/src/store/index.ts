@@ -7,9 +7,9 @@ export {
 
 export {
   IWithMoviesStore,
-  IWithCharacterStore,
+  IWithCharactersStore,
   IWithSpeciesStore,
-  withMovieStore,
+  withMoviesStore,
   withCharacterStore,
-  withSPecieStore
+  withSpecieStore
 } from './injectors'
