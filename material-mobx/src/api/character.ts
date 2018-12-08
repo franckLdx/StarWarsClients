@@ -19,7 +19,7 @@ const fragment = `
 }`;
 
 const queryCharacters = () => `{ characters ${fragment} }`;
-const queryCHaracter = (id: string) => `{ charactersById(id:"${id}") ${fragment} }`;
+const queryCharacter = (id: string) => `{ charactersById(id:"${id}") ${fragment} }`;
 
 const characterMapper: Mapper<ICharacter> = (item: any): ICharacter => ({
   birthYear: item.birth_year,
@@ -38,10 +38,10 @@ const characterMapper: Mapper<ICharacter> = (item: any): ICharacter => ({
   vehicles: item.vehicles,
 });
 
-export function getCharacterFetcher(graphQLClient: GraphQLClient): IFetcher<ICharacter> {
+export function getCharactersFetcher(graphQLClient: GraphQLClient): IFetcher<ICharacter> {
   return {
     async fetchResource(id: string) {
-      const payload = await graphQLClient.request<any>(queryCHaracter(id));
+      const payload = await graphQLClient.request<any>(queryCharacter(id));
       return payload ? characterMapper(payload.charactersById) : undefined;
     },
     async fetchResources() {

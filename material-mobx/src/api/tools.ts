@@ -7,6 +7,7 @@ const resourceFieldFragment = '{id,name}';
 export const movieRessourceFragment = 'films{id, name: title}';
 export const characterResourceFragment = `characters${resourceFieldFragment}`;
 export const planetsResourceFragment = `planets${resourceFieldFragment}`;
+export const homeworldResourceFragment = `homeworld${resourceFieldFragment}`;
 export const specieResourceFragment = `species${resourceFieldFragment}`;
 export const starshipResourceFragment = `starships${resourceFieldFragment}`;
 export const vehiclesResourceFragment = `vehicles${resourceFieldFragment}`;

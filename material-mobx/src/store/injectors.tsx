@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import {
-  characterFetcher,
-  movieFetcher,
-  SpeciesFetcher
+  charactersFetcher,
+  moviesFetcher,
+  speciesFetcher,
 } from 'src/api';
 import {
   CharactersStore,
@@ -24,19 +24,19 @@ const makeInjector = <S extends {}>(store: Store<any>, storeName: string) => {
   }
 }
 
-const movieStore: MoviesStore = new Store(movieFetcher);
+const movieStore: MoviesStore = new Store(moviesFetcher);
 export interface IWithMoviesStore {
   moviesStore: MoviesStore;
 }
 export const withMoviesStore = makeInjector<IWithMoviesStore>(movieStore, 'moviesStore');
 
-const charactersStore: CharactersStore = new Store(characterFetcher);
+const charactersStore: CharactersStore = new Store(charactersFetcher);
 export interface IWithCharactersStore {
   charatersStore: CharactersStore;
 }
 export const withCharacterStore = makeInjector<IWithCharactersStore>(charactersStore, 'charatersStore');
 
-const speciesStore: SpeciesStore = new Store(SpeciesFetcher);
+const speciesStore: SpeciesStore = new Store(speciesFetcher);
 export interface IWithSpeciesStore {
   speciesStore: SpeciesStore;
 }

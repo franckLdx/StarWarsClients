@@ -79,7 +79,6 @@ export class Store<T extends IResourceType> {
       this.addResources(specie);
     }
   }
-
 }
 
 

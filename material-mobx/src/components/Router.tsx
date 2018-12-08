@@ -17,9 +17,9 @@ export const Router: React.SFC<{}> = () => (
   <Switch>
     <Route path={URL_MOVIES} render={Movies} />
     <Route path={URL_CHARACTERS} render={Characters} />
-    <Route path={URL_PLANETS} render={Species} />
+    <Route path={URL_PLANETS} />
     <Route path={URL_STARSHIPS} />
-    <Route path={URL_SPECIES} />
+    <Route path={URL_SPECIES} render={Species} />
     <Route path={URL_VEHICLES} />
   </Switch>
 );

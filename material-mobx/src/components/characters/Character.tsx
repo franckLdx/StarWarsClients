@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import { createStyles, StyledComponentProps, Theme, withStyles } from '@material-ui/core';
-import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 import { IWithCharactersStore, withCharacterStore } from 'src/store';
 import {
@@ -32,7 +31,7 @@ type CharactersProps = ICharactersOwnProps & IWithCharactersStore & StyleProps
 @observer
 class Character extends React.Component<CharactersProps, {}> {
   public render() {
-    const character = this.character;
+    const character = this.props.charatersStore.getById(this.props.characterId);
     if (character === undefined) {
       return null;
     }
@@ -51,7 +50,7 @@ class Character extends React.Component<CharactersProps, {}> {
             />
           )}
         </RecordInfo><br />
-        <RecordInfo>Homeworld:
+        <RecordInfo>Homeworld:{' '}
           <LinkButtonRef
             className={simpleRefClassName}
             resource={character.homeworld}
@@ -75,10 +74,6 @@ class Character extends React.Component<CharactersProps, {}> {
     );
   }
 
-  @computed
-  private get character() {
-    return this.props.charatersStore.getById(this.props.characterId);
-  }
 }
 
 

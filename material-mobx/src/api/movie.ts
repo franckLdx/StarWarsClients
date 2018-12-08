@@ -37,7 +37,7 @@ const movieMapper: Mapper<IMovie> = (item: any): IMovie => ({
   vehicles: item.vehicles,
 });
 
-export function getMovieFetcher(graphQLClient: GraphQLClient): IFetcher<IMovie> {
+export function getMoviesFetcher(graphQLClient: GraphQLClient): IFetcher<IMovie> {
   return {
     async fetchResource(id: string) {
       const payload = await graphQLClient.request<any>(queryFilm(id));

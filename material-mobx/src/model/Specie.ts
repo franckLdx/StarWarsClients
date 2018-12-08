@@ -1,3 +1,4 @@
+import { IResourceType } from 'src/store/Store';
 
 export interface ISpecie {
   name: string,
@@ -8,9 +9,9 @@ export interface ISpecie {
   hairColors: string,
   eyeColors: string[],
   averageLifespan: string,
-  homeworld: string | null,
+  homeworld: IResourceType[],
   language: string,
-  characters: string[],
-  movies: string[],
+  characters: IResourceType[],
+  movies: IResourceType[],
   id: string
 }

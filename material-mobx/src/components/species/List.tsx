@@ -15,9 +15,12 @@ import {
   ISpecie,
 } from 'src/model';
 import {
-  IWithSpeciesStore, withSpecieStore,
+  IWithSpeciesStore,
+  withSpecieStore,
 } from 'src/store';
 import {
+  URL_CHARACTERS,
+  URL_MOVIES,
   URL_SPECIES,
 } from '../Router';
 import {
@@ -39,8 +42,8 @@ class List extends React.Component<IListProps, {}> {
       <Table>
         <TableHead>
           <TableRow>
-            <CellHeader header='Name' />
             <CellHeader header='Species' />
+            <CellHeader header='Characters' />
             <CellHeader header='Movies' />
           </TableRow>
         </TableHead>
@@ -71,8 +74,8 @@ const Row: React.SFC<IRowProps> = ({ specie }) => {
   return (
     <TableRow key={specie.id}>
       <TableCellRefs resources={[specie]} href={URL_SPECIES} />
-      {/* <TableCellRefs resources={specie.species} href={URL_SPECIES} />
-      <TableCellRefs resources={specie.movies} href={URL_MOVIES} /> */}
+      <TableCellRefs resources={specie.characters} href={URL_CHARACTERS} />
+      <TableCellRefs resources={specie.movies} href={URL_MOVIES} />
     </TableRow >
   );
 }
