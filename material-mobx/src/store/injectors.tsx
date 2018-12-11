@@ -3,11 +3,13 @@ import * as React from 'react';
 import {
   charactersFetcher,
   moviesFetcher,
+  planetsFetcher,
   speciesFetcher,
 } from 'src/api';
 import {
   CharactersStore,
   MoviesStore,
+  PlanetsStore,
   SpeciesStore,
   Store
 } from './Store';
@@ -41,3 +43,9 @@ export interface IWithSpeciesStore {
   speciesStore: SpeciesStore;
 }
 export const withSpecieStore = makeInjector<IWithSpeciesStore>(speciesStore, 'speciesStore');
+
+const planetsStore: PlanetsStore = new Store(planetsFetcher);
+export interface IWithPlanetsStore {
+  planetsStore: PlanetsStore;
+}
+export const withPlanetsStore = makeInjector<IWithPlanetsStore>(planetsStore, 'planetsStore');

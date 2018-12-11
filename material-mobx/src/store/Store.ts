@@ -13,6 +13,7 @@ import {
   IMovie,
   ISpecie,
 } from 'src/model';
+import { IPlanet } from 'src/model/Planet';
 
 export interface IResourceType { id: string, name: string }
 
@@ -85,3 +86,4 @@ export class Store<T extends IResourceType> {
 export type MoviesStore = Store<IMovie>
 export type CharactersStore = Store<ICharacter>
 export type SpeciesStore = Store<ISpecie>
+export type PlanetsStore = Store<IPlanet>

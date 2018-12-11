@@ -5,6 +5,8 @@ export const urlToId = (url: string) => {
 
 const resourceFieldFragment = '{id,name}';
 export const movieRessourceFragment = 'films{id, name: title}';
+export const getRessourceFragment = (resourceName: string) => `${resourceName}${resourceFieldFragment}`;
+
 export const characterResourceFragment = `characters${resourceFieldFragment}`;
 export const planetsResourceFragment = `planets${resourceFieldFragment}`;
 export const homeworldResourceFragment = `homeworld${resourceFieldFragment}`;

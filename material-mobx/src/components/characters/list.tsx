@@ -22,10 +22,10 @@ import {
   URL_CHARACTERS,
   URL_MOVIES,
   URL_SPECIES,
-} from '../../Router';
+} from '../Router';
 import {
   TableCellRefs
-} from '../../shared/ResourceRef';
+} from '../shared/ResourceRef';
 
 type IListProps = IWithCharactersStore;
 

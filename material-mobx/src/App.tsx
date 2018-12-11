@@ -13,7 +13,6 @@ import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import PublicIcon from '@material-ui/icons/Public';
 import HelpIcon from '@material-ui/icons/Star';
 import { configure } from "mobx";
 import { onError } from "mobx-react"
@@ -94,7 +93,7 @@ const TabBarRaw: React.SFC<TabBarStyle> = ({ classes }) => (
     <LinkTab className={classes!.linkTab} label="Movies" icon={<img src="./images/tn_Ct3.jpg" />} href={URL_MOVIES} />
     <LinkTab className={classes!.linkTab} label="Characters" icon={<img src="./icones/favicon_Boba.ico" />} href={URL_CHARACTERS} />
     <LinkTab className={classes!.linkTab} label="Species" icon={<img src="./images/ewoks.jpg" height="130" width="130" />} href={URL_SPECIES} />
-    <LinkTab className={classes!.linkTab} label="Planets" icon={<PublicIcon />} href={URL_PLANETS} />
+    <LinkTab className={classes!.linkTab} label="Planets" icon={<img src="./images/tatooine.jpg" height="130" width="130" />} href={URL_PLANETS} />
     <LinkTab className={classes!.linkTab} label="Starships" icon={<HelpIcon />} href={URL_STARSHIPS} />
     <LinkTab className={classes!.linkTab} label="Vehicles" icon={<HelpIcon />} href={URL_VEHICLES} />
   </Tabs>
