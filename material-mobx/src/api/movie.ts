@@ -1,22 +1,16 @@
 import { GraphQLClient } from 'graphql-request'
 import { IMovie } from 'src/model';
 import { IFetcher, Mapper } from './FetchResource';
-import {
-  characterResourceFragment,
-  planetsResourceFragment,
-  specieResourceFragment,
-  starshipResourceFragment,
-  vehiclesResourceFragment
-} from './Tools';
+import { getRessourceFragment } from './Tools';
 
 const fragment = `
 {
   id, title, opening_crawl, director, producers, release_date
-  ${characterResourceFragment},
-  ${specieResourceFragment},
-  ${planetsResourceFragment},
-  ${starshipResourceFragment},
-  ${vehiclesResourceFragment},
+  ${getRessourceFragment('characters')},
+  ${getRessourceFragment('species')},
+  ${getRessourceFragment('planets')},
+  ${getRessourceFragment('starships')},
+  ${getRessourceFragment('vehicles')},
 }`;
 
 const queryFilms = () => `{ films ${fragment} }`;

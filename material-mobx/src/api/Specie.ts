@@ -2,16 +2,15 @@ import { GraphQLClient } from 'graphql-request';
 import { ISpecie } from "src/model/Specie";
 import { IFetcher, Mapper } from './FetchResource';
 import {
-  characterResourceFragment,
-  homeworldResourceFragment,
+  getRessourceFragment,
   movieRessourceFragment
 } from './Tools';
 
 const fragment = `
 {
   id,name,classification,designation,average_height,average_lifespan,eye_colors,hair_colors,skin_colors,language,
-  ${homeworldResourceFragment},
-  ${characterResourceFragment},
+  ${getRessourceFragment('homeworld')},
+  ${getRessourceFragment('characters')},
   ${movieRessourceFragment}
 }`;
 

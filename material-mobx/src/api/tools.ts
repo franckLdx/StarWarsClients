@@ -5,11 +5,11 @@ export const urlToId = (url: string) => {
 
 const resourceFieldFragment = '{id,name}';
 export const movieRessourceFragment = 'films{id, name: title}';
-export const getRessourceFragment = (resourceName: string) => `${resourceName}${resourceFieldFragment}`;
 
-export const characterResourceFragment = `characters${resourceFieldFragment}`;
-export const planetsResourceFragment = `planets${resourceFieldFragment}`;
-export const homeworldResourceFragment = `homeworld${resourceFieldFragment}`;
-export const specieResourceFragment = `species${resourceFieldFragment}`;
-export const starshipResourceFragment = `starships${resourceFieldFragment}`;
-export const vehiclesResourceFragment = `vehicles${resourceFieldFragment}`;
+type ResourceName =
+  'characters' | 'residents' |
+  'planets' | 'homeworld' |
+  'species' |
+  'starships' |
+  'vehicles';
+export const getRessourceFragment = (resourceName: ResourceName) => `${resourceName}${resourceFieldFragment}`;

@@ -2,10 +2,8 @@ import { GraphQLClient } from 'graphql-request';
 import { ICharacter } from 'src/model/Character';
 import { IFetcher, Mapper } from './FetchResource';
 import {
+  getRessourceFragment,
   movieRessourceFragment,
-  specieResourceFragment,
-  starshipResourceFragment,
-  vehiclesResourceFragment
 } from './Tools';
 
 const fragment = `
@@ -13,9 +11,9 @@ const fragment = `
   id, name, skin_color, birth_year, eye_color, gender, hair_color, height, mass,
   homeworld {id, name},
   ${movieRessourceFragment},
-  ${specieResourceFragment},
-  ${starshipResourceFragment},
-  ${vehiclesResourceFragment},
+  ${getRessourceFragment('species')},
+  ${getRessourceFragment('starships')},
+  ${getRessourceFragment('vehicles')},
 }`;
 
 const queryCharacters = () => `{ characters ${fragment} }`;
