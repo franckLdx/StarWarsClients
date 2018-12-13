@@ -11,5 +11,7 @@ export {
   IWithSpeciesStore,
   withMoviesStore,
   withCharacterStore,
-  withSpecieStore
+  withSpecieStore,
+  withPlanetsStore,
+  IWithPlanetsStore
 } from './injectors'

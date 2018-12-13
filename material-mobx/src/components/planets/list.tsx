@@ -38,7 +38,7 @@ class List extends React.Component<IListProps, {}> {
         <TableHead>
           <TableRow>
             <CellHeader header='Name' />
-            <CellHeader header='Characters' />
+            <CellHeader header='Residents' />
             <CellHeader header='Movies' />
           </TableRow>
         </TableHead>
