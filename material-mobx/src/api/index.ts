@@ -3,6 +3,7 @@ import { getGraphQLClient } from './FetchResource';
 import { getMoviesFetcher } from './Movie';
 import { getPlanetsFetcher } from './Planet';
 import { getSpeciesFetcher } from './Specie';
+import { getStarshipsFetcher } from './Starship';
 
 export * from './Character';
 export * from './Specie';
@@ -15,3 +16,4 @@ export const moviesFetcher = getMoviesFetcher(graphQLClient);
 export const charactersFetcher = getCharactersFetcher(graphQLClient);
 export const speciesFetcher = getSpeciesFetcher(graphQLClient);
 export const planetsFetcher = getPlanetsFetcher(graphQLClient);
+export const starshipsFetcher = getStarshipsFetcher(graphQLClient);

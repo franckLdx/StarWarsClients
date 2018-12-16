@@ -5,12 +5,14 @@ import {
   moviesFetcher,
   planetsFetcher,
   speciesFetcher,
+  starshipsFetcher,
 } from 'src/api';
 import {
   CharactersStore,
   MoviesStore,
   PlanetsStore,
   SpeciesStore,
+  StarshipsStore,
   Store
 } from './Store';
 
@@ -49,3 +51,9 @@ export interface IWithPlanetsStore {
   planetsStore: PlanetsStore;
 }
 export const withPlanetsStore = makeInjector<IWithPlanetsStore>(planetsStore, 'planetsStore');
+
+const starshipsStore: StarshipsStore = new Store(starshipsFetcher);
+export interface IWithStarshipsStore {
+  starshipsStore: StarshipsStore;
+}
+export const withStarshipsStore = makeInjector<IWithStarshipsStore>(starshipsStore, 'starshipsStore');

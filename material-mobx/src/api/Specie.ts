@@ -15,9 +15,9 @@ const fragment = `
 }`;
 
 const querySpecies = () => `{ species ${fragment} }`;
-const querySpecie = (id: string) => `{ speciesById(id:"${id}") ${fragment} }`;
+const querySpecie = (id: string) => `{ specieById(id:"${id}") ${fragment} }`;
 
-const specieMapper: Mapper<ISpecie> = (item: any): ISpecie => {
+const specieMapper: Mapper<ISpecie> = (item: any) => {
   return {
     averageHeight: item.average_height,
     averageLifespan: item.average_lifespan,
