@@ -15,6 +15,7 @@ import {
 } from 'src/model';
 import { IPlanet } from 'src/model/Planet';
 import { IStarship } from 'src/model/Starship';
+import { IVehicle } from 'src/model/Vehicle';
 
 export interface IResourceType { id: string, name: string }
 
@@ -89,3 +90,4 @@ export type CharactersStore = Store<ICharacter>
 export type SpeciesStore = Store<ISpecie>
 export type PlanetsStore = Store<IPlanet>
 export type StarshipsStore = Store<IStarship>
+export type VehiclesStore = Store<IVehicle>

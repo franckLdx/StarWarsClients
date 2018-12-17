@@ -6,6 +6,7 @@ import {
   planetsFetcher,
   speciesFetcher,
   starshipsFetcher,
+  vehiclesFetcher,
 } from 'src/api';
 import {
   CharactersStore,
@@ -13,7 +14,8 @@ import {
   PlanetsStore,
   SpeciesStore,
   StarshipsStore,
-  Store
+  Store,
+  VehiclesStore
 } from './Store';
 
 const makeInjector = <S extends {}>(store: Store<any>, storeName: string) => {
@@ -57,3 +59,9 @@ export interface IWithStarshipsStore {
   starshipsStore: StarshipsStore;
 }
 export const withStarshipsStore = makeInjector<IWithStarshipsStore>(starshipsStore, 'starshipsStore');
+
+const vehiclesStore: VehiclesStore = new Store(vehiclesFetcher);
+export interface IWithVehiclesStore {
+  vehiclesStore: VehiclesStore;
+}
+export const withvehiclesStore = makeInjector<IWithVehiclesStore>(vehiclesStore, 'vehiclesStore');

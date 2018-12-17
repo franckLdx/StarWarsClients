@@ -14,6 +14,7 @@ import Movies from './movies';
 import Planets from './planets';
 import Species from './species';
 import Starships from './starships';
+import Vehicles from './vehicles';
 
 export const Router: React.SFC<{}> = () => (
   <Switch>
@@ -22,7 +23,7 @@ export const Router: React.SFC<{}> = () => (
     <Route path={URL_PLANETS} render={Planets} />
     <Route path={URL_STARSHIPS} render={Starships} />
     <Route path={URL_SPECIES} render={Species} />
-    <Route path={URL_VEHICLES} />
+    <Route path={URL_VEHICLES} render={Vehicles} />
   </Switch>
 );
 
