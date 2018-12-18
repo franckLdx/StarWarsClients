@@ -2,11 +2,12 @@ import { GraphQLClient } from 'graphql-request';
 import { IVehicle } from 'src/model/Vehicle';
 import { IFetcher } from '.';
 import { Mapper } from './FetchResource';
-import { movieRessourceFragment } from './Tools';
+import { getRessourceFragment, movieRessourceFragment } from './Tools';
 
 const fragment = `
   {id,name,model,vehicle_class,manufacturer,length,cost_in_credits,crew,
-    ${movieRessourceFragment}
+    ${movieRessourceFragment},
+    ${getRessourceFragment('pilots')}
 }`;
 
 const queryVehicles = () => `{ vehicles ${fragment} }`;
@@ -23,6 +24,7 @@ const vehicleMapper: Mapper<IVehicle> = (item: any) => ({
   movies: item.films,
   name: item.name,
   passengers: item.passengers,
+  pilots: item.pilots
 });
 
 export function getVehiclesFetcher(graphQLClient: GraphQLClient): IFetcher<IVehicle> {

@@ -17,6 +17,7 @@ import {
   withvehiclesStore as withVehiclesStore
 } from 'src/store/injectors';
 import {
+  URL_CHARACTERS,
   URL_MOVIES,
   URL_VEHICLES,
 } from '../Router';
@@ -41,6 +42,7 @@ class List extends React.Component<IListProps, {}> {
           <TableRow>
             <CellHeader header='Vehicles' />
             <CellHeader header='Movies' />
+            <CellHeader header='Pilots' />
           </TableRow>
         </TableHead>
         <TableBody>
@@ -71,6 +73,7 @@ const Row: React.SFC<IRowProps> = ({ vehicle }) => {
     <TableRow key={vehicle.id}>
       <TableCellRefs resources={[vehicle]} href={URL_VEHICLES} />
       <TableCellRefs resources={vehicle.movies} href={URL_MOVIES} />
+      <TableCellRefs resources={vehicle.pilots} href={URL_CHARACTERS} />
     </TableRow >
   );
 }

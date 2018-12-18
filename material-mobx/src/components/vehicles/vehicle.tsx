@@ -4,6 +4,7 @@ import { createStyles, StyledComponentProps, Theme, withStyles } from '@material
 import { observer } from "mobx-react";
 import { IWithVehiclesStore, withvehiclesStore } from 'src/store/injectors';
 import {
+  URL_CHARACTERS,
   URL_MOVIES
 } from '../Router';
 import { Record, RecordH1, RecordInfo } from '../shared/Record';
@@ -41,6 +42,9 @@ class Vehicle extends React.Component<VehiclesProps, {}> {
         <RecordInfo>Cost: {vehicle.cost}</RecordInfo><br />
         <RecordInfo>Movies:
           <ResourcePaper resources={vehicle.movies} href={URL_MOVIES} />
+        </RecordInfo><br />
+        <RecordInfo>Pilots:
+          <ResourcePaper resources={vehicle.pilots} href={URL_CHARACTERS} />
         </RecordInfo><br />
       </Record>
     );

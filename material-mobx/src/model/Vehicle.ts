@@ -11,4 +11,5 @@ export interface IVehicle {
   model: string;
   movies: IResourceType[],
   passengers: number;
+  pilots: IResourceType[],
 }
