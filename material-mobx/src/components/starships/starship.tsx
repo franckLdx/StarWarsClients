@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 import { IWithStarshipsStore } from 'src/store';
 import { withStarshipsStore } from 'src/store/injectors';
 import {
-  URL_MOVIES
+  URL_CHARACTERS, URL_MOVIES
 } from '../Router';
 import { Record, RecordH1, RecordInfo } from '../shared/Record';
 import { ResourcePaper } from '../shared/ResourceRef';
@@ -43,6 +43,9 @@ class Starship extends React.Component<StarshipsProps, {}> {
         <RecordInfo>Cost: {starship.cost}</RecordInfo><br />
         <RecordInfo>Movies:
           <ResourcePaper resources={starship.movies} href={URL_MOVIES} />
+        </RecordInfo><br />
+        <RecordInfo>Pilots:
+          <ResourcePaper resources={starship.pilots} href={URL_CHARACTERS} />
         </RecordInfo><br />
       </Record>
     );

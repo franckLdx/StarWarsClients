@@ -2,11 +2,12 @@ import { GraphQLClient } from 'graphql-request';
 import { IStarship } from 'src/model/Starship';
 import { IFetcher } from '.';
 import { Mapper } from './FetchResource';
-import { movieRessourceFragment } from './Tools';
+import { getRessourceFragment, movieRessourceFragment } from './Tools';
 
 const fragment = `
 {id,name,model,starship_class,manufacturer,cost_in_credits,length,crew,passengers,max_atmosphering_speed,hyperdrive_rating,MGLT,cargo_capacity,consumables,
-    ${movieRessourceFragment}
+    ${movieRessourceFragment},
+    ${getRessourceFragment('pilots')}
 }`;
 
 const queryStarships = () => `{ starships ${fragment} }`;
@@ -28,6 +29,7 @@ const starshipMapper: Mapper<IStarship> = (item: any) => ({
   movies: item.films,
   name: item.name,
   passengers: item.passengers,
+  pilots: item.pilots,
 });
 
 export function getStarshipsFetcher(graphQLClient: GraphQLClient): IFetcher<IStarship> {

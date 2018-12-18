@@ -7,7 +7,7 @@ const resourceFieldFragment = '{id,name}';
 export const movieRessourceFragment = 'films{id, name: title}';
 
 type ResourceName =
-  'characters' | 'residents' |
+  'characters' | 'residents' | 'pilots' |
   'planets' | 'homeworld' |
   'species' |
   'starships' |

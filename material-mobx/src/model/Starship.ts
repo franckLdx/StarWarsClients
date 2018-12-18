@@ -16,4 +16,5 @@ export interface IStarship {
   cargoCapacity: string,
   consumables: string,
   movies: IResourceType[];
+  pilots: IResourceType[];
 }
