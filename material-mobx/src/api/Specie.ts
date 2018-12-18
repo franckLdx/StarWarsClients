@@ -39,7 +39,7 @@ export function getSpeciesFetcher(graphQLClient: GraphQLClient): IFetcher<ISpeci
   return {
     async fetchResource(id: string) {
       const payload = await graphQLClient.request<any>(querySpecie(id));
-      return payload ? specieMapper(payload.speciesById) : undefined;
+      return payload ? specieMapper(payload.specieById) : undefined;
     },
     async fetchResources() {
       const payload = await graphQLClient.request<any>(querySpecies());

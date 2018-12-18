@@ -13,11 +13,11 @@ const fragment = `
   ${movieRessourceFragment},
   ${getRessourceFragment('species')},
   ${getRessourceFragment('starships')},
-  ${getRessourceFragment('vehicles')},
+  ${getRessourceFragment('vehicles')}
 }`;
 
 const queryCharacters = () => `{ characters ${fragment} }`;
-const queryCharacter = (id: string) => `{ charactersById(id:"${id}") ${fragment} }`;
+const queryCharacter = (id: string) => `{ characterById(id:"${id}") ${fragment} }`;
 
 const characterMapper: Mapper<ICharacter> = (item: any): ICharacter => ({
   birthYear: item.birth_year,
@@ -40,7 +40,7 @@ export function getCharactersFetcher(graphQLClient: GraphQLClient): IFetcher<ICh
   return {
     async fetchResource(id: string) {
       const payload = await graphQLClient.request<any>(queryCharacter(id));
-      return payload ? characterMapper(payload.charactersById) : undefined;
+      return payload ? characterMapper(payload.characterById) : undefined;
     },
     async fetchResources() {
       const payload = await graphQLClient.request<any>(queryCharacters());

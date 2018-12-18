@@ -14,7 +14,7 @@ const fragment = `
 }`;
 
 const querySpecies = () => `{ planets ${fragment} }`;
-const querySpecie = (id: string) => `{ planetsById(id:"${id}") ${fragment} }`;
+const querySpecie = (id: string) => `{ planetById(id:"${id}") ${fragment} }`;
 
 const planetMapper: Mapper<IPlanet> = (item: any): IPlanet => {
   return {
@@ -37,7 +37,7 @@ export function getPlanetsFetcher(graphQLClient: GraphQLClient): IFetcher<IPlane
   return {
     async fetchResource(id: string) {
       const payload = await graphQLClient.request<any>(querySpecie(id));
-      return payload ? planetMapper(payload.planetsById) : undefined;
+      return payload ? planetMapper(payload.planetById) : undefined;
     },
     async fetchResources() {
       const payload = await graphQLClient.request<any>(querySpecies());
