@@ -17,14 +17,14 @@ import { configure } from "mobx";
 import { onError } from "mobx-react"
 import { BrowserRouter } from 'react-router-dom'
 import {
-  Router,
+  MainRouter,
   URL_CHARACTERS,
   URL_MOVIES,
   URL_PLANETS,
   URL_SPECIES,
   URL_STARSHIPS,
   URL_VEHICLES
-} from './components/Router';
+} from './components/router';
 import LinkTab from './components/shared/routes/LinkTab';
 
 import * as _ from './css/Theme';
@@ -59,7 +59,7 @@ class App extends React.Component<AppStyleProps> {
                 <TabBar />
               </Toolbar>
             </AppBar>
-            <Router />
+            <MainRouter />
           </>
         </BrowserRouter>
       </>

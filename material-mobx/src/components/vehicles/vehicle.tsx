@@ -6,7 +6,7 @@ import { IWithVehiclesStore, withvehiclesStore } from 'src/store/injectors';
 import {
   URL_CHARACTERS,
   URL_MOVIES
-} from '../Router';
+} from '../router';
 import { Record, RecordH1, RecordInfo } from '../shared/Record';
 import { ResourcePaper } from '../shared/ResourceRef';
 

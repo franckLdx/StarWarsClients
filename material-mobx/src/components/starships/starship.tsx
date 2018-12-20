@@ -5,8 +5,9 @@ import { observer } from "mobx-react";
 import { IWithStarshipsStore } from 'src/store';
 import { withStarshipsStore } from 'src/store/injectors';
 import {
-  URL_CHARACTERS, URL_MOVIES
-} from '../Router';
+  URL_CHARACTERS,
+  URL_MOVIES
+} from '../router';
 import { Record, RecordH1, RecordInfo } from '../shared/Record';
 import { ResourcePaper } from '../shared/ResourceRef';
 

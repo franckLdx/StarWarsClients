@@ -20,7 +20,7 @@ import {
   URL_CHARACTERS,
   URL_MOVIES,
   URL_STARSHIPS,
-} from '../Router';
+} from '../router';
 import {
   TableCellRefs
 } from '../shared/ResourceRef';

@@ -8,7 +8,13 @@ import {
 } from '@material-ui/core';
 import { observer } from 'mobx-react';
 import { IWithMoviesStore, withMoviesStore } from 'src/store/injectors';
-import { URL_CHARACTERS, URL_PLANETS, URL_SPECIES, URL_STARSHIPS, URL_VEHICLES } from '../Router';
+import {
+  URL_CHARACTERS,
+  URL_PLANETS,
+  URL_SPECIES,
+  URL_STARSHIPS,
+  URL_VEHICLES
+} from '../router';
 import { Record, RecordH1, RecordH2, RecordInfo } from '../shared/Record';
 import { ResourcePaper } from '../shared/ResourceRef';
 

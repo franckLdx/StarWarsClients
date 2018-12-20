@@ -22,7 +22,7 @@ import {
   URL_CHARACTERS,
   URL_MOVIES,
   URL_SPECIES,
-} from '../Router';
+} from '../router';
 import {
   TableCellRefs
 } from '../shared/ResourceRef';

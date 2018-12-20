@@ -9,7 +9,7 @@ import {
   URL_SPECIES,
   URL_STARSHIPS,
   URL_VEHICLES
-} from '../Router';
+} from '../router';
 import { LinkButtonRef } from '../shared/LinkButtonRef';
 import { Record, RecordH1, RecordInfo } from '../shared/Record';
 import { ResourcePaper } from '../shared/ResourceRef';
@@ -23,7 +23,7 @@ type StyleProps = StyledComponentProps<"simpleRef">;
 
 
 interface ICharactersOwnProps {
-  characterId: string
+  id: string
 }
 
 type CharactersProps = ICharactersOwnProps & IWithCharactersStore & StyleProps
@@ -31,7 +31,7 @@ type CharactersProps = ICharactersOwnProps & IWithCharactersStore & StyleProps
 @observer
 class Character extends React.Component<CharactersProps, {}> {
   public render() {
-    const character = this.props.charatersStore.getById(this.props.characterId);
+    const character = this.props.charatersStore.getById(this.props.id);
     if (character === undefined) {
       return null;
     }
