@@ -3,10 +3,8 @@ import * as React from 'react';
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableRow,
-  Typography,
 } from '@material-ui/core';
 import {
   observer
@@ -21,6 +19,7 @@ import {
 import {
   TableCellRefs
 } from '../shared/resourceRef';
+import { CellHeader } from '../table/cellHeader';
 
 type IListProps = IWithPlanetsStore;
 
@@ -49,18 +48,6 @@ class List extends React.Component<IListProps, {}> {
     )
   }
 }
-
-interface ICellHeaderProps {
-  header: string;
-}
-const CellHeader: React.SFC<ICellHeaderProps> = ({ header }) =>
-  (
-    <TableCell>
-      <Typography variant="subtitle1">
-        {header}
-      </Typography>
-    </TableCell>
-  );
 
 interface IRowProps {
   planet: IPlanet;
