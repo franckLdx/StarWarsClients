@@ -1,6 +1,6 @@
 import { URL_SPECIES } from '../router';
 import { createSubRouter } from '../router/subRouter';
-import SpeciesList from './List';
+import SpeciesList from './list';
 import Specie from './specie';
 
 export default createSubRouter({

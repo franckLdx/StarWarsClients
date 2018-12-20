@@ -1,7 +1,7 @@
 import { URL_MOVIES } from '../router';
 import { createSubRouter } from '../router/subRouter';
-import MoviesList from './List';
-import Movie from './Movie';
+import MoviesList from './list';
+import Movie from './movie';
 
 export default createSubRouter({
   ListComponent: MoviesList,

@@ -1,6 +1,6 @@
 import { URL_STARSHIPS } from '../router';
 import { createSubRouter } from '../router/subRouter';
-import starshipsList from './List';
+import starshipsList from './list';
 import Starship from './starship';
 
 export default createSubRouter({

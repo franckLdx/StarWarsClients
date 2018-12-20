@@ -1,6 +1,6 @@
 import { URL_CHARACTERS } from '../router';
 import { createSubRouter } from '../router/subRouter';
-import Character from './Character';
+import Character from './character';
 import CharactersList from './list';
 
 export default createSubRouter({

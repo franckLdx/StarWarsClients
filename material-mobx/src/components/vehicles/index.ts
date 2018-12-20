@@ -1,6 +1,6 @@
 import { URL_VEHICLES } from '../router';
 import { createSubRouter } from '../router/subRouter';
-import VehiclesList from './List';
+import VehiclesList from './list';
 import Vehicle from './vehicle';
 
 export default createSubRouter({

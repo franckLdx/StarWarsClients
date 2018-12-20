@@ -10,9 +10,9 @@ import {
   URL_STARSHIPS,
   URL_VEHICLES
 } from '../router';
-import { LinkButtonRef } from '../shared/LinkButtonRef';
-import { Record, RecordH1, RecordInfo } from '../shared/Record';
-import { ResourcePaper } from '../shared/ResourceRef';
+import { LinkButtonRef } from '../shared/linkButtonRef';
+import { Record, RecordH1, RecordInfo } from '../shared/record';
+import { ResourcePaper } from '../shared/resourceRef';
 
 const Style = (theme: Theme) => createStyles({
   simpleRef: {

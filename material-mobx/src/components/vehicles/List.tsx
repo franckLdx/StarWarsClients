@@ -23,7 +23,7 @@ import {
 } from '../router';
 import {
   TableCellRefs
-} from '../shared/ResourceRef';
+} from '../shared/resourceRef';
 
 type IListProps = IWithVehiclesStore;
 

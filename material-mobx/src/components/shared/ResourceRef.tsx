@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import { cmpResourceName } from 'src/model';
 import { IResourceType } from 'src/store/Store';
-import { LinkButtonRef } from './LinkButtonRef';
+import { LinkButtonRef } from './linkButtonRef';
 
 const Style = (theme: Theme) => createStyles({
   item: {

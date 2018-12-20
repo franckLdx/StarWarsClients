@@ -10,8 +10,8 @@ import {
   URL_CHARACTERS,
   URL_MOVIES
 } from '../router';
-import { Record, RecordH1, RecordInfo } from '../shared/Record';
-import { ResourcePaper } from '../shared/ResourceRef';
+import { Record, RecordH1, RecordInfo } from '../shared/record';
+import { ResourcePaper } from '../shared/resourceRef';
 
 const Style = (theme: Theme) => createStyles({
   simpleRef: {

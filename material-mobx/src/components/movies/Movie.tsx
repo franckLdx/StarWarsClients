@@ -15,8 +15,8 @@ import {
   URL_STARSHIPS,
   URL_VEHICLES
 } from '../router';
-import { Record, RecordH1, RecordH2, RecordInfo } from '../shared/Record';
-import { ResourcePaper } from '../shared/ResourceRef';
+import { Record, RecordH1, RecordH2, RecordInfo } from '../shared/record';
+import { ResourcePaper } from '../shared/resourceRef';
 
 interface IMovieOwnProps {
   id: string
